@@ -1,0 +1,24 @@
+NCL cybersecurity gym
+
+OSINT
+	Metadata
+		sudo apt install libimage-exiftool-perl
+	DNS records
+		record for DNSSEC public key? ----------------------------- DNSKEY
+		record for mapping hostname->IPv6? ------------------------ AAAA
+		record for delegating DNS zone? --------------------------- NS (Name server)
+cryptography
+	caesar,atbash ex: qwioebq qwoienqw
+	base64: ends in '='
+	hex: 0x.......
+	morse: - .... --. / -- . -.
+	given a numerical key (1-9)
+		railfence ex: F daS-eefn  n KZ3eheadty.YI8lta oiwy-Q0. r aI2
+	given a word key (qizkwcgqbs)
+		vigenere ex: Y ln xkv lubj swlzqvkht, A vmzb pjk bbua we ddgs ILQ-GQYU-8026
+
+steganography
+	.jpg file --> strings
+	.bmp file --> Digital Invisible Ink Toolkit used to hide msg
+		(with a specific mode)
+	egyptian hieroglyphs, futurama alienese (really....)

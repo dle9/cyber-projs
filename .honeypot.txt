@@ -1,0 +1,13 @@
+https://cowrie.readthedocs.io/en/latest/INSTALL.html
+
+Step 1. dependencies
+   - add python3.10-venv
+Step 5. config file
+   - cp cowrie.cfg.dist cowrie.cfg
+   - cd into cowrie.cfg
+   - change hostname
+   - enable telnet
+Step 7. optional inbound redirect
+   - cowrie listens on port 2222
+   - on root, redirect inbound port 22 to port 2222
+Step 6. start cowrie

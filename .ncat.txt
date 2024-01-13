@@ -1,0 +1,21 @@
+https://nmap.org/ncat/guide/ncat-exec.html
+
+- create a listener with basic exec, single use server
+ncat -l --exec "/bin/echo Hello."
+
+- create a listener with lua exec, persistent server 
+ncat -l --lua-exec hello-luaexec.lua
+	- example lua script
+	function env(v)
+		print(string.format("%s %q", v, os.getenv(v)))
+	end
+	env("NCAT_REMOTE_ADDR")
+	env("NCAT_REMOTE_PORT")
+	env("NCAT_LOCAL_ADDR")
+	env("NCAT_LOCAL_PORT")
+	env("NCAT_PROTO")
+this will run the script on the client side when client connects
+
+- connect to a listener
+ncat <ip>
+

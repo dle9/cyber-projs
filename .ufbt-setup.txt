@@ -1,0 +1,17 @@
+* first, make and navigate to root project dir
+
+# fetch flipper firmware
+ufbt update --channel=dev
+
+# match Flipper's firmware with working envt. using qFlipper or 
+ufbt flash_usb
+
+# create skeleton app 
+ufbt create APPID=<name for app here>
+ufbt vscode_dist
+
+# test build
+ufbt
+
+* dist/ will contain <app name>.fap
+	- upload this onto your Flipper to test

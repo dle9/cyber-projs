@@ -1,0 +1,2 @@
+docker run -it --name wazuh-daemon -v .:/home/share ubuntu:latest
+apt update && apt install -y netcat wget curl vim net-tools iputils-ping unzip file && apt upgrade

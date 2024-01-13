@@ -1,0 +1,75 @@
+* basic homeserver with:
+	- Network storage 
+	- VPN : 70.120.8.159 
+
+========== Network storage ============
+# connect to home server through ssh
+host$ ssh <username>@<address> 
+
+# install Samba
+server$ sudo apt install samba
+
+# make a shared directory 
+server$ mkdir /home/share
+
+# change ownership
+server$ sudo chown $USER: /home/share
+
+# add created folder to samba configuration
+server$ sudo vim /etc/samba/smb.conf
+/* CODE BLOCK
+   write list = root, @lpadmin
+[share]
+   path = /home/share
+   writeable = yes
+   public = no
+*/ END CODE BLOCK
+
+# create samba password. this is used when accessing the network storage on other devices
+server$ sudo smbpasswd -a kalos 
+
+# map the network storage on host machine. open file explorer. right click "This PC" > "Map Network Drive"
+Folder: "\\<server ip>\share"
+
+============== VPN ===============
+# install it 
+sudo apt install wireguard
+
+# get pub and priv key 
+wg genkey | tee privatekey | wg pubkey > publickey
+
+# create config file 
+sudo vim /etc/wireguard/wg0.conf
+
+# populate it 
+[Interface]
+Address=10.0.0.1/8 # Make sure this private address range is not in use.
+SaveConfig=true
+PostUp=iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o <YOUR INTERFACE> -j MASQUERADE;
+PostDown=iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o <YOUR INTERFACE> -j MASQUERADE;
+ListenPort=51820 # Standard port for WireGuard
+PrivateKey=<SERVER PRIVATE KEY>
+
+# run it
+sudo wg-quick up wg0
+sudo wg
+
+*# windows vpn setup
+# install the optional openssh server feature
+# edit C:ProgramData\ssh\sshd.config
+uncomment pubkeyauthentication yes
+uncomment passwordauthentication yes, change to no
+comment last 2 lines authorizedkeysfile...
+
+# restart openssh server
+
+# on the client, create authorized_keys file under C:Users\<user>\.ssh, remove .txt extension
+
+# click disable inheritance in properties>security>advanced>convert inherited...
+
+# edit>remove adminstrators
+
+# in powershell,
+ssh-keygen
+
+# get the .pub file contents, put into authorized keys

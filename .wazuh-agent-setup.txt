@@ -1,0 +1,14 @@
+- install the agent (just do this through the GUI)
+https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html
+
+- enroll the agent
+https://documentation.wazuh.com/current/user-manual/agent-enrollment/index.html
+
+- install logstash
+docker pull docker.elastic.co/logstash/logstash:8.11.3
+
+- verify it
+wget https://artifacts.elastic.co/cosign.pub
+cosign verify --key cosign.pub docker.elastic.co/logstash/logstash:8.11.3
+
+

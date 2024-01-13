@@ -1,0 +1,26 @@
+===========================================
+$ chmod +x gdbme
+$ gdb gdbme
+(gdb) layout asm
+(gdb) break *(main+99)
+(gdb) run
+(gdb) jump *(main+104)
+==========================================
+see "call func1"?
+(gdb) break func1
+(gdb) run
+==========================================
+x/4xbi <address>
+	x: examine command
+	/4xb:
+		4: display 4 units
+		x: examine memory
+		b: displayformat as bytes
+
+   address = register?
+      $rbp
+      $eax
+      $rbp-0x4
+   address = regular?
+      0x401106
+===========================================

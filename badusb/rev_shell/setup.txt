@@ -1,0 +1,10 @@
+====== Create the powershell listener =====
+# Load the ps1 listener script into powershell session 
+* https://github.com/HarmVeenstra/Powershellisfun/blob/main/Create%20TCP%20or%20UDP%20listener/New-Portlistener.ps1
+. <ps1_listener_script.ps1>
+
+# Execute the function in the script
+New-Portlistener -TCPPort 4444
+
+# Check if the listener is working
+PortQry.exe -n localhost -e 4444 -p TCP
