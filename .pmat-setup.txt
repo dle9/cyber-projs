@@ -9,6 +9,8 @@
 - REMnux can be used to run windows based malware
 - REMnux will have an internet simulator to respond to outgoing traffic from the malware 
 
+* do not let the flarevm install in the background! leave it open, otherwise it will be slower
+
 
 # get windows 10 enterprise
 https://www.microsoft.com/en-us/evalcenter/evaluate-windows-10-enterprise
@@ -55,6 +57,9 @@ wget <install.ps1 link from the github> -UseBasicParsing -outfile C:\Users\silof
 # disable anti virus 
 https://www.windowscentral.com/how-permanently-disable-windows-defender-windows-10
 
+# get the malware as ZIP folder
+https://github.com/HuskyHacks/PMAT-labs
+
 # reboot 
 
 # run the install script
@@ -96,3 +101,5 @@ inetsim
 add remnux ip here
 
 # type in anything in the browser. it will take you to the default remnux inetsim page
+
+

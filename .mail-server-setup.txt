@@ -1,0 +1,18 @@
+* mail server with reverse dns, dkir, custom domain
+
+# create amazon ec2 ubuntu instance
+
+# add the public IP as personal DNS server. give it a name
+
+# using this name, put it as the name server for your public website
+
+# ssh into the server. install cyber panel
+https://community.cyberpanel.net/t/01-installing-cyberpanel/82
+
+admin / Silopanel$7
+[ ] remote sql
+[ ] memcache
+[ ] redis
+[x] watchdog
+
+# port 8090 for cyber panel gui
