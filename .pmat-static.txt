@@ -1,3 +1,55 @@
 * static analysis 
 
+* note that portable executable binary data will start with MZ or 4D 5A in hex. this stands for Mark Zbikowski, leading developer of DOS MZ (dos: disk-based operating system). DOS MZ executable format is used for exe files
+
 # open pmat-labs > basicstaticanalysis > unknown
+
+# unzip. do not defang. get hashes
+SHA256 - sha256sum.exe <file>
+MD5 - md5sum.exe <file>
+
+# FIRST STEP: check hashes against VT or other tools
+
+# SECOND STEP: extract strings from binary
+floss <filepath>
+strings <filepath>
+
+# THIRD STEP: Use portable executable (PE) analyzer
+pestudio
+background:
+	- .text: the executable code of a program
+	- .rdata: read-only data, e.g., strings & constants, can't be modified during runtime
+	- .data: initialized data, e.g., variables that can be modified during runtime
+	- raw-size: actual space occupied by the PE
+	- virtual-size: size of PE when loaded into memory during execution
+	- Windows API: functions provided by windows, allows user programs to interact with windows. 
+	- example: https://learn.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shellexecutew 
+	- example: https://malapi.io/winapi/GetProcAddress
+ things to note:
+	- compare raw-size and virtual-size in "sections > .text"
+	- is virtual-size significantly larger than raw-size?
+		- investigate further, is it packed?
+	- .rdata import address table in "imports"
+		- what imports stand out? ShellExecuteW
+	- view libraries. are any blacklisted?
+	- footprint = hashes
+
+# analysing packed malware
+pmatlabs > basicstatic... > packedandnotpacked
+background:
+	- say you have a piece of malware, malz.exe
+	- using packing software, e.g., UPX (ultimate packer for executables), to pack it.
+	- UPX will pack the malware code, and unpack it at runtime
+
+# view unpacked malware executable in pestudio
+	- go through the previous steps and verify it is "upacked"
+		- things to note: clear strings, virtual size, raw size, etc.
+
+# view packed malware executable
+	- see why it is packed
+		- UPX section headers, raw size !~ virtual size, small import table (even a basic clean exe will have more imports) 
+		- GetProcAddress: used to avoid calling function directly
+		- LoadLibraryA: dynamically load DLLs
+			- these are used to identify other imports at runtime...imagine scenario where AV scans a packed malware executable and finds nothing wrong. then it runs and unpacks all of this malicious code-> GG
+
+* understand that packed vs unpacked version of malware.exe functions exactly the same!

@@ -1,0 +1,25 @@
+=============== Static Analysis =================
+* Hashes
+- SHA256 92730427321A1C4CCFC0D0580834DAEF98121EFA9BB8963DA332BFD6CF1FDA8A
+- MD5 1d8562c0adcaee734d63f7baaca02f7c
+
+* Libraries
+urlmon.dll
+WININET.dll
+
+* Imports
+URLDownloadToFile
+ShellExecute
+InternetOpenUrl
+
+* Strings
+jjjj
+cmd.exe /C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del /f /q "%s"
+http://ssl-6582datamanager.helpdeskbros.local/favicon.ico
+C:\Users\Public\Documents\CR433101.dat.exe
+Mozilla/5.0
+http://huskyhacks.dev
+ping 1.1.1.1 -n 1 -w 3000 > Nul & C:\Users\Public\Documents\CR433101.dat.exe
+open
+
+=============== Dynamic Analysis =================
