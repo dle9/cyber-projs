@@ -1,0 +1,48 @@
+* also known as heuristic and behavioral
+* types of indicators:
+	- host indicators: deletes a file, installs persistence
+	- network indicators: calls out to domain, downloads a file
+
+=============================================== Malware.Unknown.exe ==================================================
+
+=== NETWORK INDICATORS
+# run inetsim and wireshark on remnux
+
+# review the strings found from static analysis of the Unknown malware. 
+
+# in wireshark, start sniffing and add query:
+http.request.full_uri contains favicon.ico
+	# favicon is the icon you see next to a browser tab title
+
+# run the malware
+
+# in wireshark, note down the discovered evidence (u should see http request with the favicon query)
+
+=== HOST INDICATORS 
+# revert to clean state
+
+# unzip the unknown malware again
+
+# open procmon
+
+# add a filter:
+Process name > is > Malware.unknown.exe
+
+# run the malware, see results
+
+# look back at static analysis. what else can you add?
+
+# add the CR.... file path as a filter
+
+# why was this file created?
+
+# recall this is the inetsim executable created from the fake internet setup. to test this, just go to fakewebsite.com/completely_safe_malware.exe, which should download that blank executable
+
+# let's take a look at more host indicators. from the static analysis, see the string: "cmd.exe /C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del /f /q "%s""
+
+# this looks like it deletes itself from disk if it can't connect to the internet. test this theory by turning off inetsim
+
+# go in procmon and search for this string
+Detail > contains > cmd... 
+
+

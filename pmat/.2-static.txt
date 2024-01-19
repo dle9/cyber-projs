@@ -2,6 +2,8 @@
 
 * note that portable executable binary data will start with MZ or 4D 5A in hex. this stands for Mark Zbikowski, leading developer of DOS MZ (dos: disk-based operating system). DOS MZ executable format is used for exe files
 
+================================================= Malware.Unknown.exe ==================================================
+
 # open pmat-labs > basicstaticanalysis > unknown
 
 # unzip. do not defang. get hashes

@@ -23,3 +23,15 @@ ping 1.1.1.1 -n 1 -w 3000 > Nul & C:\Users\Public\Documents\CR433101.dat.exe
 open
 
 =============== Dynamic Analysis =================
+See pmat3-dynamic for results
+
+========== Program execution flow ===============
+If can connect to URL:
+	- download favicon.ico,
+	- Writes to disk CR433101.dat.exe
+	- runs favicon.ico (aka CR433101.dat.exe)
+else:
+	- Delete malware exe from disk
+	- Doesn't run
+
+* Now with more information about Malware.Unknown.exe, we can rename to something like Dropper.URLDownloadToFile.exe

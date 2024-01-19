@@ -11,7 +11,6 @@
 
 * do not let the flarevm install in the background! leave it open, otherwise it will be slower
 
-
 # get windows 10 enterprise
 https://www.microsoft.com/en-us/evalcenter/evaluate-windows-10-enterprise
 
@@ -83,7 +82,7 @@ uppr addr bound: 10.0.0.254
 # start both and test connectivity
 
 # on REMnux, set up the internet simulator
-sudo nano /etc/inetsim/inetsim.conf
+sudo vim /etc/inetsim/inetsim.conf
 
 # uncomment start service dns
 # uncomment service bind addr
