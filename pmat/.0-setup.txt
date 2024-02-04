@@ -91,6 +91,7 @@ sudo vim /etc/inetsim/inetsim.conf
 
 # run it 
 inetsim
+* also try fakedns
 
 # switch to flarevm. go to remnux ip in browser
 # see how you can add "/example.exe"

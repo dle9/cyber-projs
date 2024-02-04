@@ -1,0 +1,24 @@
+# grows from high address to low addr
+
+# stores user code, temp/dynamic data, return values, function calls, etc
+
+# function calls 
+- when a function is called, space allocated on the stack for a function's local vars and more
+- stack pointer is adjusted accordingly
+
+# stack pointer
+- holds top of the stack 
+- push
+	- item is pushed on top of the stack
+	- stack pointer decremented
+- pop
+	- topmost item is removed from the stack
+	- data from the popped element may be used
+	- stack pointer incremented
+
+# stack frame 
+- block of stack memory associated with a function call
+
+# base pointer
+- references beginning of current stack frame
+- remains fixed at this position, whereas stack pointer moves dynamically

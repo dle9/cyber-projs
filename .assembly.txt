@@ -1,0 +1,58 @@
+.LFB0:
+        pushl   %ebp
+        movl    %esp, %ebp                  # setup (base pointer, stack frame stuff)
+        pushl   %ebx
+        call    __x86.get_pc_thunk.ax
+        addl    $_GLOBAL_OFFSET_TABLE_, %eax
+        movl    8(%ebp), %eax               # a = eax
+        imull   $-668203060, %eax, %edx     # multiply a by 668, store in x
+        movl    8(%ebp), %eax               # reset a to initial value
+        addl    $1, %eax                    # add 1 to a
+        imull   12(%ebp), %eax              # multiply b to a
+        leal    1039577924(%eax), %ecx      # add 103... to a, store in y
+        movl    12(%ebp), %eax              # move b to a
+        imull   %ecx, %eax                  # multiply y to a
+        addl    %eax, %edx                  # add a to x
+        movl    8(%ebp), %eax               # reset a to initial val
+        imull   %eax, %edx                  # multiply a to x
+        movl    12(%ebp), %ecx              # y=b
+        movl    8(%ebp), %eax               # reset a
+        imull   $2027837521, %eax, %eax     # multiply a by 202...
+        subl    %eax, %ecx                  # subtract a from y
+        movl    8(%ebp), %eax               # reset a
+        leal    (%eax,%eax), %ebx           # double a, store in z
+        movl    12(%ebp), %eax              # move b to a
+        addl    %ebx, %eax                  # add z to a
+        movl    %eax, %ebx                  # mov a to z
+        movl    12(%ebp), %eax              # mov b to a
+        addl    %ebx, %eax                  # add z to a
+        addl    $1357278678, %eax           # add 135.. to a
+        imull   %ecx, %eax                  # multiply y to a
+        cmpl    %eax, %edx                  # compare a to x
+        jbe     .L2                          # if |D| <= |S|, jump L2
+        movl    8(%ebp), %eax               # reset a
+        imull   $820626909, %eax, %edx      # mult 82.. to a, store in x
+        movl    8(%ebp), %eax               # reset a
+        addl    %edx, %eax                  # add x to a
+        jmp     .L3                          # jump L3
+.L2:
+        movl    8(%ebp), %eax               # L2, takes argument a
+        negl    %eax                        # gets the a var
+        movl    %eax, %edx                  # a *= -1
+        movl    8(%ebp), %eax               # mov a to x
+        subl    %eax, %edx                  # reset a
+        movl    %edx, %eax                  # sub a from x
+        addl    $1374624060, %eax           # mov x to a
+.L3:
+        popl    %ebx
+        popl    %ebp
+        ret                                 # return
+.LFE0:
+        .size   testa, .-testa
+        .section        .text.__x86.get_pc_thunk.ax,"axG",@progbits,__x86.get_pc_thunk.ax,comdat
+        .globl  __x86.get_pc_thunk.ax
+        .hidden __x86.get_pc_thunk.ax
+        .type   __x86.get_pc_thunk.ax, @function
+__x86.get_pc_thunk.ax:
+.LFB1:
+        movl    (%esp), %eax

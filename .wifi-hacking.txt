@@ -13,7 +13,7 @@ iwconfig
 # put the network adapter into Monitor mode
 sudo airmon-ng start <interface>
 
-# set frequency to 5GHz
+# set frequency to 5GHz (if can't see 5g networks)
 sudo iw wlan0 set freq 5745 80 5775
 
 # discover 5GHz wifi networks (may need to reconnect the network adapter)
