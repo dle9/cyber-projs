@@ -1,0 +1,17 @@
+# ordinal
+	- when importing a function by ordinal, the functin name never appears in the original executable
+
+# modify PE header to turn DLL to exe
+	- Wipe IMAGE_FILE_DLL(0x2000) flag from Characteristics field in IMAGE_FILE_HEADER
+		- won't run imported functions, but will run DLLMain method
+	- this can be done in cffexplorer ('Click here' popup with checkmark list, check 'Executable')
+
+# run DLL on Windows
+rundll32.exe <file.dll> <export args>
+	- ex: rundll32.exe rip.dll Install
+		- rip.dll has Install and Uninstall exports
+	- ex: rundll32.exe xyzzy.dll #5
+		- dll that has functions exported by ordinal 
+
+# unpack shit
+upx -d <packed_file>

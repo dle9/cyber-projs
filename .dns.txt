@@ -1,0 +1,24 @@
+# dns 
+- root DNS server
+	- refer requests to Top level domain (TLD) server, e.g. com, org, gov
+- TLD DNS server
+	- contains info about all domain names that share a common TLD
+- authoritative DNS server
+	- returns the actual IP of the queried domain
+- local DNS = DNS resolver
+	- requests and gathers responses from multiple DNS servers to get the final result
+	- caches mappings
+- queries
+	- Query sent > local DNS > root DNS > local DNS > TLD DNS > local DNS > authoritative DNS > local DNS 
+- records
+	- resource record (RR) format
+		- (name, value, type, ttl)
+	- type: A (address)
+		- name: <hostname>
+		- value: <IP addr>
+	- type: MX (mail exchnge.)
+		- name: <domain name>
+		- value: <mail server>
+	- type: NS
+		- name: <domain name>
+		- value: <IP addr of authoritative name server for this>

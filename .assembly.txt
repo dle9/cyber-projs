@@ -1,3 +1,75 @@
+# 8 32-bit registers
+- eax, ebx, ecx, edx
+        - can be split into sections, least significant 2 bytes can be a 16 bit register, ax
+                - least significant byte of ax can be an 8 bit register, al
+                - most significant byte of ax can be another 8 bit reg, ah
+- esi, edi
+- esp, ebp
+
+# static data declarations
+- denoted with .data precedence
+- db: 1 byte data loc
+- dw: 2 byte data loc
+- dd: 4 byte data loc
+- examples:
+.data
+var     DB 64
+var2    DB ?            # uninitialized byte
+        DB 12           # byte with no label, at position var2+1
+x       DW ?
+y       DD 30000
+z       DD 1, 2, 3      # declare three 4 byte vals. location of z+8 is 3
+str     DB 'hello',0    # 6 bytes, initializated to ASCII char vals for 'hello' and null byte
+
+# addressable memory
+- esi+eax, esi-4, esi+4*ebx
+- can only add register values
+- can only use at most 2 registers in address computation
+
+# size directives
+- mov BYTE PTR ebx, 2
+        - move 2 into single byte addr in ebx
+- mov WORD PTR ebx, 2
+        - move two-byte integer representation of 2 into 2 bytes starting at ebx address
+- mov DWORD PTR ebx, 2
+        - move four-byte int representation of 2 into 4 byets starting at ebx addr
+
+# <reg[x]> : any x bit register
+# <mem> : a memory address
+        - eax, var + 4
+        - dword ptr [eax+ebx]
+# <conx> : any x bit constant
+
+# lea : place address of source into a destination register
+
+# imul: integer multiplication
+        - imul eax, [var]
+                - multiply contents of eax by 32 bit content of memory location var
+        - imul esi, edi, 25
+                - multiply content of esi by edi*25
+
+# shl, shr: shift left, shift right
+
+# call stack
+- return addresses
+- local data storage (vars declared in functions)
+- parameter passing
+
+# suppose a function, multiply(x, y), creates 2 local variables, how would memory be allocated for these?
+- sub esp, 0x8 
+        - 0x4 + 0x4
+        - stack grows downwards, so subtracting from stack pointer allocates space
+- function params are pushed in reverse order!
+- how would you access x and y?
+        - x: ebp+8
+        - y: ebp+12
+        - parameters are pushed onto the stack before a function is called
+        - ebp+4 would be the return address
+
+# argc: argument count
+# argv: argument vector(array)
+
+# example 1 (S, D)
 .LFB0:
         pushl   %ebp
         movl    %esp, %ebp                  # setup (base pointer, stack frame stuff)
@@ -56,3 +128,8 @@
 __x86.get_pc_thunk.ax:
 .LFB1:
         movl    (%esp), %eax
+
+# example 2
+cmp     [ebp+argc], 1
+        - compare value at ebp+argc with 1
+        - checks if only one argument was passed

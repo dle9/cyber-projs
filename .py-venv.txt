@@ -1,0 +1,5 @@
+$ python3 -m venv new-virt-env
+$ source new-virt-env/bin/activate
+(new-virt-env) $ ls
+(new-virt-env) $ deactivate
+$ echo 1

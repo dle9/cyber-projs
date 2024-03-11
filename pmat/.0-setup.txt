@@ -101,5 +101,3 @@ inetsim
 add remnux ip here
 
 # type in anything in the browser. it will take you to the default remnux inetsim page
-
-

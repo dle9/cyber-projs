@@ -1,0 +1,18 @@
+# create project
+cargo new <project_name>
+
+# build
+cargo build
+
+# run 
+cargo run
+
+# assets
+~/<example_folder>/asset.mp3
+	- where source is ~/src/
+
+# fix VS build tools requirement
+- rustup toolchain install stable-x86_64-pc-windows-gnu
+- rustup default stable-x86_64-pc-windows-gnu
+
+		

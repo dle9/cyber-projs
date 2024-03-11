@@ -1,0 +1,6 @@
+https://documentation.wazuh.com/current/cloud-service/your-environment/send-syslog-data.htm
+
+# manually run it
+C:\logstash\bin\logstash.bat -f C:\logstash\config\logstash.conf
+
+# also restart wazuh agent

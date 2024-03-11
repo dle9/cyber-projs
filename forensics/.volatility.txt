@@ -1,0 +1,9 @@
+# cheat sheet
+https://book.hacktricks.xyz/generic-methodologies-and-resources/basic-forensic-methodology/memory-dump-analysis/volatility-cheatsheet
+
+# volatility3 github
+
+# python3 vol.py -h
+
+# get basic info
+python3 vol.py -f <dump path> windows.info.Info

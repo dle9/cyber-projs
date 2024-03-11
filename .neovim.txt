@@ -1,0 +1,5 @@
+# download neovim from git
+
+# download nerd fonts SourceCodePro.zip release from git
+
+# follow nvchad instructions

@@ -1,0 +1,5 @@
+# sleuthkit 
+sudo apt install sleuthkit
+
+# get partitions of image 
+mmls <image>.{001,dd,e01}

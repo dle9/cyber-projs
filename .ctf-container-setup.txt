@@ -1,2 +1,0 @@
-docker run -it --name wazuh-daemon -v .:/home/share ubuntu:latest
-apt update && apt install -y ltrace strace default-jdk netcat gcc wget wireless-tools curl vim net-tools iputils-ping gdb pip python3.10-venv unzip file ssh && apt upgrade

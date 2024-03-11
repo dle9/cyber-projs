@@ -1,0 +1,4 @@
+putty
+ida
+ghidra
+burpsuite

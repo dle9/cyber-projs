@@ -1,0 +1,10 @@
+# download neovim from git
+
+# download nerd fonts SourceCodePro.zip release from git
+
+# follow nvchad instructions
+
+# oh my posh
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+	- Gohu nerd font
+

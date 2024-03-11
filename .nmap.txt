@@ -1,0 +1,13 @@
+# IP range 
+nmap x.x.x.a-b
+	- scans a-b
+
+# OS
+nmap -O
+	- or nmap -O --fuzzy if no results
+
+# scan online machines (ping scan
+nmap -sP
+
+# port range
+nmap -p a-b

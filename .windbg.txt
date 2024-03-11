@@ -1,0 +1,7 @@
+# reading (d[x] address)
+- da: read from memory, display ASCII
+- du: 					display Unicode
+- dd: 				32-bit double word
+
+# writing (e[x] address data)
+- same as d[x]

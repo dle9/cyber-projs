@@ -1,0 +1,10 @@
+# Component Object Model
+- binary interface for software
+- allows software components to communicate with each other
+
+# Class Identifier (CLSID)
+- globally unique identifier
+- assigned to a COM class
+- represented by 128-bit values
+	- ex: {0DB7E03F-FC29-4DC6-9020-FF41B59E513A}
+		- 3D Objects, https://www.tenforums.com/tutorials/3123-clsid-key-guid-shortcuts-list-windows-10-a.html

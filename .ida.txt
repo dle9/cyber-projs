@@ -1,0 +1,31 @@
+# view all strings
+shift + f12
+
+# search
+alt + t
+
+# lpName, lpNewValue, lpX
+these are just using previously defined variable Name, NewValue, X
+
+# some pseudocode
+CoCreateInstance(&rclsid, 0, 4u, &riid, &ppv);
+	- https://learn.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance	
+	- HKLM\SOFTWARE\Classes\CLSID\{clsid}
+	- HKLM\SOFTWARE\Classes\Interface\{riid}
+
+# ida script to retrieve clsid, riid
+#include <idc.idc>
+
+static main() {}
+
+static MakeGuid(ea)
+{
+    auto string = sprintf("{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}\n", 
+        Dword(ea), Word(ea+4), Word(ea+6), Byte(ea+8), Byte(ea+9),
+        Byte(ea+10), Byte(ea+11), Byte(ea+12), Byte(ea+13), Byte(ea+14), Byte(ea+15));
+    msg(string);
+    return 0;
+}
+
+# put that into a file.idc, File > script file (alt + f7) 
+MakeGuid(rclsid)
