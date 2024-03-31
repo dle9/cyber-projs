@@ -82,12 +82,11 @@ uppr addr bound: 10.0.0.254
 # start both and test connectivity
 
 # on REMnux, set up the internet simulator
-sudo vim /etc/inetsim/inetsim.conf
-
-# uncomment start service dns
-# uncomment service bind addr
+- sudo vim /etc/inetsim/inetsim.conf
+- uncomment start service dns
+- uncomment service bind addr
 	- change to 0.0.0.0 (all interfaces)
-# uncomment, change dns default ip to REMnux 
+- uncomment, change dns default ip to REMnux 
 
 # run it 
 inetsim

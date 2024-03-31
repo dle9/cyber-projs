@@ -1,0 +1,15 @@
+# xor
+- jpg starts with FFD8h
+- XORed file starts with 3512h
+- python> 0xFF ^ 0x35 = 202d
+- python> 0xD* ^ 0x12 = 202d
+
+# py virtual env
+$ python3 -m venv new-virt-env
+$ source new-virt-env/bin/activate
+(new-virt-env) $ ls
+(new-virt-env) $ deactivate
+$ echo 1
+
+# a.txt is a shift, convert to byte, add j
+If C=DES(K,’P’), what would be DES(K,’PPPP’) in ECB mode? ‘P’ denotes a single 64-bit block plaintext.	

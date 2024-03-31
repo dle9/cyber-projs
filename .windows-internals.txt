@@ -1,0 +1,21 @@
+# modes
+- Windows OS functions in two main modes
+- user mode: where most apps and user processes operate
+	- limit access to system resources, must interact with OS through APIs
+	- isolated from eachother
+- kernel mode: unrestricted access to resources, hardware, functions
+
+# api call flow
+- example
+	- User mode
+		- user application calls ReadProcessMemory api func
+		- this request goes to kernel32
+			- NtReadVirtualMemory
+		- this request goes to NTDLL
+			- system call
+	- kernel mode
+		- syscall table
+			- contains pointer to the corresponding kernel function
+		- return from sys call
+	- user mode
+		- NTDLL > Kernel32 > User app

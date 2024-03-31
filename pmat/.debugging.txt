@@ -1,0 +1,23 @@
+# x64/x32dbg
+
+# initial
+- run the packed malware to reach entry point
+- can place first BP on return of VirtualAlloc (or API of interest) 
+	- use (Ctrl + G) to find an expression
+- step over, step over, step over, see CALL -- step into
+
+# Breakpoints
+- if you see a loop, place breakpoint after it, then F9 for run. remove the BP if  you want
+- may also BP after return operation
+- also add BP at end of loop to see where it is returning to
+- a JMP to a 401XXX address is interesting, if panel below asm code shows "Jump not taken," (with a BP on the JMP instruction) keep running until jump is taken and step into it
+
+# information 
+- if see some operations on registers, right click register on right side panel, then "Follow in [Dump]"
+- if debugger is showing unknown/blank data, right click , Analysis > Remove analysis from..., to view the original code
+
+# export
+- plugins > OllyDump > dump debug process
+	- note the entry point of the first instruction of unpacked malware
+- uncheck "Rebuild imports"
+- Import Reconstructor tool > change entry point (OEP) to the EP of the unpacked malware > AutoSearch

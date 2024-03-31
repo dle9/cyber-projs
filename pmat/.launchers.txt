@@ -1,0 +1,59 @@
+# type of malware that enables immediate or future covert execution
+
+# process injection
+- most popular
+- onjects code into a running process
+- VirtualAllocEx
+	- can allocate space in external proc memory
+- WriteProcessMemory
+	- write data to that space
+- DLL injection
+	- remote process loads malicious DLL
+	- most common
+	- once loaded, OS automatically calls DLLMain func
+	- to inject, malware must first obtain a handle on victim process
+		- CreateToolhelp32Snapshot, Process32First, Process32Next, etc
+	- next, malware retrieves PID and obtains handle with OpenProcess
+	- then, VirtualAllocEx and WriteProcessMemory are used to write malicious lib name string into mem
+	- lastly, CreateRemoteThread takes a process handle, start address of the injected thread, and parameters for that thread
+		- ex: start addr set to LoadLibrary and parameter set to malicious DLL (both must be in victim mem space)
+- Direct injection
+	- allocate and insert code into memory space of remote process
+	- directly injects malicious code
+	- for analyzing, first debug and dump memory buffers that occur before calls to WriteProcessMemory
+
+# Process replacement
+- overwrite memory space of a running process w/ malexe
+- first, create a process in suspended state (process is loaded into mem, but thread is suspended)
+- after process is created, replace victim process memory
+	- ZwUnmapViewOfSection unmaps all memory pointed to by a section passes as a param
+	- VirtualAllocEx allocates memory
+	- WriteProcessMemory writes the malware sections to victim process state (usually in loop)
+	- SetThreadContext restores victim process envt, sets entry point to point to injected code
+	- ResumeThread initiates the malware
+
+# hook injection
+- users generate events to be sent to OS
+- these messages are received and the sent to corresponding threads
+- malware intercepts messsages destined for applications
+- local hook: manipulate messages for internal proc
+- remote hook: manipulate messages for a remote proc
+	- high level: hook procedure is an exported function in a DLL
+	- low level: hook procedure contained in the process that installed the hook
+- keyloggers
+	- commonly use hook injection
+	- WH_KEYBOARD hook
+- SetWindowsHookEx
+	- principal function for remote hooking
+
+# detours
+- library developed by microsoft
+- allows simple app modification
+- can be used to import table modification, attach DLL to existing program files, and add func hooks to running processes
+	- creates a .detour section
+
+# APC injection
+- async procedure call
+- can direct a thread to execute some other code before executing its original code
+- every thread has APC queue which is processed when the thread is in an alertable state (ex: WaitFor..., Sleep)
+- if an APC is queued while the thread is alertable, thread will call it

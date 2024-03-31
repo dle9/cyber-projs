@@ -1,0 +1,5 @@
+# resources 
+- Imports > "...Resource"
+	- where resources are being used
+- Labels > .rsrc
+	- the resources found by ghidra

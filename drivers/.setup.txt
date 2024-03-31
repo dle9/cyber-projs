@@ -1,4 +1,17 @@
 # dependencies
 https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk
 
-# 
+# console
+x64 native tools command prompt for VS 2022
+
+# hello world
+https://www.youtube.com/watch?v=GTrekHE8A00
+
+# make a vm for driver dev
+- bad driver will corrupt the OS
+- get windows 11 iso, set it up in vmware
+	- windows 11 pro free git
+- install vmware tools
+- add serial port for driver debugging 
+	- use named pipe \\.\pipe\com_n
+		- n: serial port number
