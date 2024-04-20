@@ -15,7 +15,9 @@ see "call func1"?
 (gdb) break * main+323
 (gdb) run
 =================VAL @ addr====================
-x/4xbi <address>
+x/32
+x/s
+x/4xbi <address> or &<variable> 
 	x: examine command
 	/4xb:
 		4: display 4 units
@@ -28,5 +30,6 @@ x/4xbi <address>
       $rbp-0x4
    address = regular?
       0x401106
+
 ===================VIEW ASM===================
 (gef) disass main

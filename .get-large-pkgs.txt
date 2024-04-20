@@ -1,0 +1,1 @@
+dpkg-query -Wf 'Size\t\n' | sort -n | tail -n 10

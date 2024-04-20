@@ -1,0 +1,17 @@
+*https://www.msys2.org/docs/terminals/
+
+# install mysys2
+https://www.msys2.org/
+
+# upgrade pkgs 
+pacman -Syu
+
+# install packages
+pacman -S git mingw-w64-x86_64-gdb
+
+# edit settings.json 
+(right click terminal > settings > open json)
+follow msys2 docs to add to your terminal
+
+# customization
+see custom-term folder
