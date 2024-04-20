@@ -13,5 +13,8 @@ pacman -S git mingw-w64-x86_64-gdb
 (right click terminal > settings > open json)
 follow msys2 docs to add to your terminal
 
+# add the mingw binaries to path
+export PATH=$PATH:/mingw64/bin
+
 # customization
 see custom-term folder
