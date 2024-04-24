@@ -7,14 +7,14 @@ https://www.msys2.org/
 pacman -Syu
 
 # install packages
-pacman -S git mingw-w64-x86_64-gdb
+pacman -S git vim mingw-w64-x86_64-gdb mingw-w64-x86_64-rust
+
+# upgrade rust
+rustup upgrade
 
 # edit settings.json 
 (right click terminal > settings > open json)
 follow msys2 docs to add to your terminal
-
-# add the mingw binaries to path
-export PATH=$PATH:/mingw64/bin
 
 # customization
 see custom-term folder

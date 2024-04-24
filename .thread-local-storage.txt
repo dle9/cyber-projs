@@ -1,0 +1,4 @@
+# TLS callback
+- allows a Windows program to define a function that is called when the thread is created
+
+CTRL E in ida to find it

@@ -21,3 +21,6 @@
 	- note the entry point of the first instruction of unpacked malware
 - uncheck "Rebuild imports"
 - Import Reconstructor tool > change entry point (OEP) to the EP of the unpacked malware > AutoSearch
+
+# nop
+- stuck on a part of the program? nop that shit!!!!!!!!!!

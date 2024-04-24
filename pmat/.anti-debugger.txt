@@ -1,0 +1,37 @@
+# malware uses ptrace
+- dustri org ptrace fun
+cat > lib.c 
+even more fun functions
+
+gcc -fPIC -m32 -c lib.c -o lib.o
+gcc -shared -m32 lib.o -o lib.so
+
+gdb$ set exec-wrapper env 'LD_PRELOAD={full path}lib.so'
+gdb$ run
+
+wil run nops, but you need the secret. look in auth()
+
+gdb$ break auth
+gdb$ run
+
+- authlocation (0100 = 5655)
+break *0x56555b1a 
+
+- supersecret location
+x/32 0x56558120
+
+
+
+
+# tls callbacks
+- entry points that are invoked before a new thread begins execution
+- can be found with ctrl+e in IDA or exports/functions in ghidra
+- bypass?
+	- check what it's doing
+	- use plugins to change characteristics of the debugger, e.g., schyllahide
+		- Debugger hiding technique: ntuserfindwindowex to nullify API call
+	- use a different debugger
+
+
+# division by zero error,
+use shift+f9 to pass exception back to the program -- fuck you exception, i dont need that shit

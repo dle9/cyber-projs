@@ -1,0 +1,20 @@
+# download rust installer
+- choose second choice (custom install)
+
+# host triple
+x86_64-pc-windows-gnu
+
+# toolchain
+stable
+
+# profile
+default
+
+# modify PATH 
+y
+
+# change rust compiler
+- vim /c/Users/deric/.cargo/config
+[target.x86_64-pc-windows-gnu]
+linker = "C:\\msys64\\mingw64\\bin\\gcc.exe"
+ar = "C:\\msys64\\mingw64\\bin\\ar.exe"
