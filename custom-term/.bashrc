@@ -14,11 +14,17 @@
 # a patch to the msys2 mailing list.
 # User dependent .bashrc file
 
+name=$(tput setaf 67)
+path=$(tput setaf 74)
 
-export PS1="\n\[$(tput setaf 124)\][\[\e[4;38;5;47m\]$(tput setaf 240)\]\h\[$(tput setaf 0)\]\[$(tput sgr0)\]\[$(tput setaf 124)] $(tput setaf 124)\]\w \[$(tput sgr0)\]\n\[$(tput setaf 240)\]>\[$(tput setaf 255)\] "
+#export PS1="\n\[$(tput setaf 223)\][\[\e[4;38;5;47m\]$(tput setaf 66)\]\h\[$(tput setaf 0)\]\[$(tput sgr0)\]\[$(tput setaf 223)] $(tput setaf 34)\]\w \[$(tput sgr0)\]\n\[$(tput setaf 66)\]>\[$(tput setaf 255)\] "
+export PS1="\n\[${path}\][\[\e[4;38;5;47m\]${name}\]\h\[$(tput setaf 0)\]\[$(tput sgr0)\]\[${path}] ${path}\]\w\[$(tput sgr0)\]\n\[${name}\]>\[$(tput setaf 255)\] "
+
 
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
+
+alias q='vim'
 
 alias ls='ls --color=auto'
 alias lsa='ls -a --color=auto'
@@ -32,6 +38,10 @@ alias ga='git add'
 alias gc='git commit -m'
 alias gps='git push'
 alias gpl='git pull'
+
+alias can='cargo new'
+alias car='cargo run'
+alias cac='cargo check'
 
 HISTCONTROL=ignoreboth:erasedups
 

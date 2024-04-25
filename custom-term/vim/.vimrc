@@ -1,18 +1,19 @@
 " colors
 colorscheme dracula
-syntax on
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+syntax on " show the colors
 
 " vim QoL
-set mouse=a
+set mouse=a " mouse controls
 set tabstop=3
 set softtabstop=3
 set shiftwidth=3
-set number
+set number " line numbers
 set showcmd
 set ruler
-set foldmethod=indent
-set clipboard=unnamed
-set t_Co=256
+" set foldmethod=indent
+set clipboard=unnamed " allow yank to host clipboard
+set t_Co=256 " use colors
 
 " coding QoL
 set nocp
@@ -22,23 +23,3 @@ inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
 inoremap {}     {}
-
-inoremap [      []<Left>
-inoremap [<CR>  [<CR>]<Esc>O
-inoremap [[     [
-inoremap []     []
-
-inoremap (      ()<Left>
-inoremap (<CR>  ()
-inoremap ((		 (
-inoremap ()		 ()
-
-inoremap "      ""<Left>
-inoremap "<CR>  "<CR>"<Esc>O
-inoremap ""     "
-inoremap ""     ""
-
-inoremap '      ''<Left>
-inoremap '<CR>  '<CR>'<Esc>O
-inoremap ''     '
-inoremap ''     ''
