@@ -1,0 +1,28 @@
+# modes
+- Normal (esc)
+	- special vim editing mode
+- Insert (i)
+	- for normal typing
+- Visual (v)
+	- for copying/selecting
+
+# basics
+- write to file (:w)
+- write and quit (:wq)
+- quit and ignore changes (:q!)
+- go to start of file (gg)
+- go to end of file (G)
+
+# Normal mode
+- remove current line (dd)
+- remove characters (x)
+- remove character and switch to Insert (s)
+- skip to next line and switch to Insert (o)
+- tab current line left or right (shift + {<<, >>})
+
+# Insert mode
+- remove text blocks to left of cursor (ctrl + w)
+
+# Visual
+- char by char visual (v)
+- line by line visual (shift + v) 

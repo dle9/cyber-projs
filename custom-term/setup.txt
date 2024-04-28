@@ -7,7 +7,7 @@ https://www.msys2.org/
 pacman -Syu
 
 # install packages
-pacman -S git vim mingw-w64-x86_64-gdb mingw-w64-x86_64-rust
+pacman -S git vim p7zip 
 
 # upgrade rust
 rustup upgrade
@@ -18,3 +18,11 @@ follow msys2 docs to add to your terminal
 
 # customization
 see custom-term folder
+
+# other installs
+exiftools.exe > ~/tools/bin
+
+# optimize
+$ mkpasswd -l -c > /etc/passwd
+$ mkgroup -l -c > /etc/group
+- comment out db in /etc/nsswitch.conf
