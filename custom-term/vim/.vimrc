@@ -1,5 +1,5 @@
 " colors
-colorscheme dracula
+colorscheme elflord 
 autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 syntax on " show the colors
 
@@ -11,9 +11,11 @@ set shiftwidth=3
 set number " line numbers
 set showcmd
 set ruler
-" set foldmethod=indent
-set clipboard=unnamed " allow yank to host clipboard
+set clipboard=unnamedplus " allow yank to host clipboard
 set t_Co=256 " use colors
+filetype indent on
+set smartindent
+autocmd BufRead,BufWritePre *.sh normal gg=G
 
 " coding QoL
 set nocp
