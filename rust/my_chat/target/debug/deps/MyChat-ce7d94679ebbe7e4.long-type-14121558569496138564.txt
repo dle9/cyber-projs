@@ -1,0 +1,1 @@
+async_stream::async_stream::AsyncStream<Result<Message, Box<(dyn std::error::Error + Send + Sync + 'static)>>, {async block@Subscriber::into_stream::{closure#0}}>
