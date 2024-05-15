@@ -1,14 +1,23 @@
-// const SOCKET: &str = "localhost:8080";
+use tokio::io::{ AsyncReadExt,AsyncWriteExt };
 
-pub async fn main() {
-    println!("\nClient connecting...\n");
+pub async fn main(addr: &str) -> std::io::Result<()> { 
+    
+    // connect to the server
+    let mut stream = tokio::net::TcpStream::connect(addr).await?;
+    println!("\nClient connected to {}\n", addr);
 
-    // match listener.accept().await {
-    //     Ok((mut socket, addr)) => {
-    //         return Ok(());
-    //     }
-    //     Err(e) => {
-    //         return Err(e);
-    //     }
-    // }
+    // write to the server
+    let msg = b"Hello, Server!";
+    stream.write_all(msg).await?;
+
+    // read server response
+    let mut buf = vec![0; 1024];
+    let n = stream.read(&mut buf).await?;
+
+    // output server response
+    for i in 0..n {
+        print!("{}", buf[i] as char);
+    } println!();
+
+    Ok(())
 }
