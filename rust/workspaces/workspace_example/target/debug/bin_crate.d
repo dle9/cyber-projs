@@ -1,0 +1,1 @@
+/mnt/c/Users/deric/dleer/cybersecurity/lab/rust/workspaces/workspace_example/target/debug/bin_crate: /mnt/c/Users/deric/dleer/cybersecurity/lab/rust/workspaces/workspace_example/bin_crate/src/main.rs /mnt/c/Users/deric/dleer/cybersecurity/lab/rust/workspaces/workspace_example/lib_crate/src/lib.rs

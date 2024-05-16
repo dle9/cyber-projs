@@ -25,3 +25,11 @@
 # Broadcast channel
 ---
 ### Setup broadcast channel in server to see all client messages
+	- let (tx,rx)=tokio::sync::broadcast::channel()
+### send data to channel
+	- send the value 10
+	- tx.send(10).unwrap();
+### receive same data sent by transmitters
+	- rx.recv.await.unwrap()
+### add more receivers 
+	- rx = tx.subscribe
