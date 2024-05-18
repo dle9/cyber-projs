@@ -9,8 +9,14 @@ struct Cli {
 
 #[derive(Subcommand, Debug, Clone)]
 enum Commands {
-    #[clap(about = "View a value. Choose from: 'profile' or profile components.")]
-    Show{key: String},
+    #[clap(about = "Play a game. Choose from: 'dice', 'nines', 'tetris'")]
+    Play{game: String},
+
+    #[clap(about = "Enter a chatroom. Choose from: 'room1', 'room2', 'room3'")]
+    Chat{room: String},
+
+    #[clap(about = "Show a value. Choose from: 'profile', 'name', 'level', 'class'")]
+    Show{value: String},
 }
 
 fn main() {
@@ -21,13 +27,16 @@ fn main() {
 
     // loop player input
     loop {
-
         show_prompt(&player);
 
         // get user input
         let mut input = String::new();
         std::io::stdin().read_line(&mut input).expect("Failed to read line");
+
+        // trim the automatic new line
         let input = input.trim();
+
+        // automatically include initial arg
         let input = format!("{} {}", "car ", input);
 
         // split the input into args
@@ -41,7 +50,9 @@ fn main() {
             Ok(cli) => {
                 // handle the input
                 match cli.commands {
-                    Commands::Show { key } => player.handle_show(key.as_str()),
+                    Commands::Play{value} => println!("Play"),
+                    Commands::Chat{value} => println!("Chat"),
+                    Commands::Show{value} => player.handle_show(value.as_str()),
                 }
             }
             Err(e) => println!("{}", e),

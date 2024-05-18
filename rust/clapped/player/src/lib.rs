@@ -4,8 +4,8 @@ use std::io::{Write};
 pub struct Player {
     pub name: String,
     pub level: u32,
-    pub class: String,
-    pub valid_keys: Vec<&'static str>, 
+    pub coin: String,
+    pub valid_show: Vec<&'static str>, 
 }
 
 impl Player {
@@ -14,22 +14,22 @@ impl Player {
         Player {
             name: String::from("CrazyJohn123"),
             level: 1,
-            class: String::from("Peasant"),
-            valid_keys: vec!["profile", "name", "level", "class"],
+            coin: String::from("Peasant"),
+            valid_show: vec!["profile", "name", "level", "coin"],
         }
     }
 
-    pub fn handle_show(&self, key: &str) {
-        if !self.valid_keys.contains(&key) {
-            println!("\nInvalid GET key, '{}' \nValid keys are: {:?}", key, self.valid_keys);
+    pub fn handle_show(&self, value: &str) {
+        if !self.valid_show.contains(&value) {
+            println!("\nInvalid GET value, '{}' \nValid keys are: {:?}", value, self.valid_show);
             return;
         }
 
-        match key {
+        match value {
             "profile" => show_profile(self),
             "name" => println!("Name: {}", self.get_name()),
             "level" => println!("Level: {}", self.get_level()),
-            "class" => println!("Class: {}", self.get_class()),
+            "coin" => println!("coin: {}", self.get_coin()),
             _ => ()
         }
     }
@@ -46,11 +46,11 @@ impl Player {
     pub fn set_level(&mut self, other: u32) {
         self.level = other;
     }
-    pub fn get_class(&self) -> &String {
-        return &self.class;
+    pub fn get_coin(&self) -> &String {
+        return &self.coin;
     }
-    pub fn set_class(&mut self, other: String) {
-        self.class = other;
+    pub fn set_coin(&mut self, other: String) {
+        self.coin = other;
     }
 }
 
@@ -69,7 +69,7 @@ pub fn show_welcome(player: &Player) {
 }
 
 pub fn show_prompt(player: &Player) {  
-    let msg = format!("Level {}. {  }", player.level, player.class);
+    let msg = format!("Level {}. {  }", player.level, player.coin);
     let msg_length = msg.len();
 
     // the prompt
@@ -83,5 +83,5 @@ pub fn show_prompt(player: &Player) {
 pub fn show_profile(player: &Player) {
     println!("Name: {}", player.name);
     println!("Level: {}", player.level);
-    println!("Class: {}", player.class);
+    println!("Coin: {}", player.coin);
 }
