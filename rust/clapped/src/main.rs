@@ -1,5 +1,10 @@
 use clap::{Parser, Subcommand};
-use player::{Player, show_welcome, show_prompt, get_username};
+
+mod ui;
+mod player;
+mod games;
+
+// use chat::{Chat};
 
 #[derive(Parser, Debug)]
 struct Cli {
@@ -9,29 +14,31 @@ struct Cli {
 
 #[derive(Subcommand, Debug, Clone)]
 enum Commands {
-    #[clap(about = "Play a game. Choose from: 'dice', 'nines', 'tetris'")]
+    #[clap(about = "dice | impulse | tetris")]
     Play{game: String},
 
-    #[clap(about = "Enter a chatroom. Choose from: 'room1', 'room2', 'room3'")]
+    #[clap(about = "room1 | room2 | room3")]
     Chat{room: String},
 
-    #[clap(about = "Show a value. Choose from: 'profile', 'name', 'level'")]
+    #[clap(about = "profile | name | level | coin")]
     Show{value: String},
 
-    #[clap(about = "Change a value. Choose from: 'name'")]
+    #[clap(about = "name")]
     Change{option: String, value: String},
 }
 
 fn main() {
-    let name = get_username();
+    let name = ui::prompt_username();
 
     // create a new player  
-    let mut player = Player::new(name);
-    show_welcome(&player);
+    let mut player = player::Player::new(name);
+
+    // create Games instance for the player
+    let games = games::Games::new(&player);
 
     // loop player input
     loop {
-        show_prompt(&player);
+        ui::show_prompt(&player);
 
         // get user input
         let mut input = String::new();
@@ -41,7 +48,7 @@ fn main() {
         let input = input.trim();
 
         // automatically include initial arg
-        let input = format!("{} {}", "car ", input);
+        let input = format!("{} {}", "> ", input);
 
         // split the input into args
         let args = shlex::split(&input).ok_or("error: Invalid quoting").unwrap();
@@ -54,8 +61,17 @@ fn main() {
             Ok(cli) => {
                 // handle the input
                 match cli.commands {
-                    Commands::Play{game} => println!("Play"),
-                    Commands::Chat{room} => println!("Chat"),
+                    Commands::Play{game} => games.handle_play(game.as_str()),
+                    // Commands::Chat { room } => {
+                    //     // Execute the command here
+                    //     std::process::Command::new("cargo")
+                    //        .arg("run")
+                    //        .arg("--bin")
+                    //        .arg("server")
+                    //        .output()
+                    //        .expect("Failed to execute command");
+                    // },
+                    Commands::Chat { room } => (),
                     Commands::Show{value} => player.handle_show(value.as_str()),
                     Commands::Change{option, value} => player.handle_change(option.as_str(), value.as_str()),
                 }
