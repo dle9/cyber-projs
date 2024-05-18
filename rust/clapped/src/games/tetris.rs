@@ -3,5 +3,13 @@ pub struct Tetris {
 }
 
 impl Tetris {
-    
+    pub fn new() -> Self {
+        Self {
+            score: 0,
+        }
+    }
+}
+
+pub fn main() {
+    println!("inside tetris");
 }

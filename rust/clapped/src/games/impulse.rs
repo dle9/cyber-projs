@@ -5,5 +5,15 @@ pub struct Impulse {
 }
 
 impl Impulse {
-    
+    pub fn new() -> Self {
+        Self {
+            word: String::new(),
+            color: String::new(),
+            selection: String::new(),
+        }
+    }
+}
+
+pub fn main() {
+    println!("inside impulse");
 }

@@ -2,8 +2,25 @@
 name = "clapped"
 version = "0.1.0"
 edition = "2021"
+default-run = "main"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+[[bin]]
+name = "dice"
+path = "src/games/dice.rs"
+
+[[bin]]
+name = "impulse"
+path = "src/games/impulse.rs"
+
+[[bin]]
+name = "tetris"
+path = "src/games/tetris.rs"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }

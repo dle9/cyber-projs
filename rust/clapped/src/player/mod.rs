@@ -1,17 +1,12 @@
-// init valid options for
-// SHOW and CHANGE commands
-#[derive(Debug)]
-struct ValidOptions {
-    show_options: Vec<&'static str>, 
-    change_options: Vec<&'static str>, 
-}
+// use player module from main mod's
+use crate::util;
 
 #[derive(Debug)]
 pub struct Player {
     pub name: String,
     pub level: usize,
     pub coin: isize,
-    valid: ValidOptions,
+    valid: util::PlayerOptions,
 }
 
 impl Player {
@@ -25,7 +20,7 @@ impl Player {
 
             // define valid options to be used 
             // with SHOW and CHANGE
-            valid: ValidOptions {
+            valid: util::PlayerOptions {
                 show_options: vec!["profile", "name", "level", "coin"],
                 change_options: vec!["name"],
             },

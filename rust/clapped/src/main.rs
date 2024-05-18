@@ -1,10 +1,9 @@
 use clap::{Parser, Subcommand};
 
 mod ui;
+mod util;
 mod player;
 mod games;
-
-// use chat::{Chat};
 
 #[derive(Parser, Debug)]
 struct Cli {
