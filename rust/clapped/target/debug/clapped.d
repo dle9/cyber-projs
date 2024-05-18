@@ -1,1 +1,1 @@
-/mnt/c/Users/deric/dleer/cybersecurity/lab/rust/clapped/target/debug/clapped: /mnt/c/Users/deric/dleer/cybersecurity/lab/rust/clapped/player/src/lib.rs /mnt/c/Users/deric/dleer/cybersecurity/lab/rust/clapped/src/main.rs
+/home/dle/cyber-projs/rust/clapped/target/debug/clapped: /home/dle/cyber-projs/rust/clapped/player/src/lib.rs /home/dle/cyber-projs/rust/clapped/src/main.rs

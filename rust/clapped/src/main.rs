@@ -1,5 +1,5 @@
 use clap::{Parser, Subcommand};
-use player::{Player, show_welcome, show_prompt };
+use player::{Player, show_welcome, show_prompt, get_username};
 
 #[derive(Parser, Debug)]
 struct Cli {
@@ -15,14 +15,18 @@ enum Commands {
     #[clap(about = "Enter a chatroom. Choose from: 'room1', 'room2', 'room3'")]
     Chat{room: String},
 
-    #[clap(about = "Show a value. Choose from: 'profile', 'name', 'level', 'class'")]
+    #[clap(about = "Show a value. Choose from: 'profile', 'name', 'level'")]
     Show{value: String},
+
+    #[clap(about = "Change a value. Choose from: 'name'")]
+    Change{option: String, value: String},
 }
 
 fn main() {
+    let name = get_username();
 
-    // create a new player
-    let player = Player::new();
+    // create a new player  
+    let mut player = Player::new(name);
     show_welcome(&player);
 
     // loop player input
@@ -50,9 +54,10 @@ fn main() {
             Ok(cli) => {
                 // handle the input
                 match cli.commands {
-                    Commands::Play{value} => println!("Play"),
-                    Commands::Chat{value} => println!("Chat"),
+                    Commands::Play{game} => println!("Play"),
+                    Commands::Chat{room} => println!("Chat"),
                     Commands::Show{value} => player.handle_show(value.as_str()),
+                    Commands::Change{option, value} => player.handle_change(option.as_str(), value.as_str()),
                 }
             }
             Err(e) => println!("{}", e),
