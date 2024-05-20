@@ -13,7 +13,7 @@ pub struct Player {
 impl Player {
     // create new player
     pub fn new(name: String) -> Self {
-        show_welcome(name.as_str());
+        print_welcome(name.as_str());
         Self {
             name: name,
             level: 0,
@@ -38,10 +38,10 @@ impl Player {
         }
 
         match value {
-            "profile" => show_profile(self),
-            "name" => println!("Name: {}", self.get_name()),
-            "level" => println!("Level: {}", self.get_level()),
-            "coin" => println!("Coin: {}", self.get_coin()),
+            "profile" => self.print_profile(),
+            "name" => println!("\nName: {}", self.get_name()),
+            "level" => println!("\nLevel: {}", self.get_level()),
+            "coin" => println!("\nCoin: {}", self.get_coin()),
             _ => ()
         }
     }
@@ -76,17 +76,17 @@ impl Player {
     fn set_coin(&mut self, other: isize) {
         self.coin = other;
     }
+
+    fn print_profile(&self) {
+        println!("\nName: {}", self.get_name());
+        println!("Level: {}", self.get_level());
+        println!("Coin: {}", self.get_coin());
+    }
 }
 
-fn show_welcome(name: &str) {
+fn print_welcome(name: &str) {
     ui::clear_terminal();
     let msg = format!("Welcome, {}", name);
     ui::print_title(msg.as_str());
     println!("Get as much coin as you can. Good Luck!");
-}
-
-fn show_profile(player: &Player) {
-    println!("Name: {}", player.get_name());
-    println!("Level: {}", player.get_level());
-    println!("Coin: {}", player.get_coin());
 }

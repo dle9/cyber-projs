@@ -28,7 +28,7 @@ impl Games {
         }
     }
 
-    pub fn handle_play(&self, game: &str) {
+    pub fn handle_play(&mut self, game: &str) {
         if !self.valid.game_options.contains(&game) {
             println!("\nInvalid game, '{}' \nChoose from: {:?}", game, self.valid.game_options);
             return;
@@ -43,8 +43,8 @@ impl Games {
         }
     }
 
-    fn run_game(&self, game: &str) {
-        if game == "dice" { Dice::run(&self.dice); }
+    fn run_game(&mut self, game: &str) {
+        if game == "dice" { Dice::run(&mut self.dice); }
         if game == "impulse" { Impulse::run(); }
         if game == "tetris" { Tetris::run(); }
     }

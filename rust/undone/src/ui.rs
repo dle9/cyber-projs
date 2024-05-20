@@ -29,19 +29,19 @@ pub fn prompt_username() -> String {
 /// +=======================+
 /// Name | Level: 0 | Coin: 0
 /// +=======================+
-pub fn show_prompt_main(player: &Player) {  
+pub fn print_main_prompt(player: &Player) {  
     let msg = format!("{} | Level: {} | Coin: {}", player.name, player.level, player.coin);
     print_title(msg.as_str());
-    print!("> "); std::io::stdout().flush().unwrap();
+    print!("Main> "); std::io::stdout().flush().unwrap();
 }
 
 /// +=======================+
 /// Name | Level: 0 | Coin: 0
 /// +=======================+
-pub fn show_prompt_dice(round: u8, score: usize) {  
+pub fn print_dice_prompt(round: isize, score: usize) {  
     let msg = format!("Round: {} | Score: {}", round, score);
     print_title(msg.as_str());
-    print!("> "); std::io::stdout().flush().unwrap();
+    print!("Dice> "); std::io::stdout().flush().unwrap();
 }
 
 pub fn print_title(msg: &str) {

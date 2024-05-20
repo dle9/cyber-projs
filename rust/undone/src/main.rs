@@ -27,6 +27,9 @@ enum Commands {
 
     #[clap(about = "clear the terminal             ::", visible_alias = "cl")]
     Clear{},
+
+    #[clap(about = "exit the program", visible_aliases = &["q", "e"])]
+    Exit{},
 }
 
 fn main() {
@@ -35,9 +38,9 @@ fn main() {
     // create a new player  
     let mut player = player::Player::new(name);
     
-    // loop player input
+    // main loop
     loop {
-        ui::show_prompt_main(&player);
+        ui::print_main_prompt(&player);
 
         // get user input
         let mut input = String::new();
@@ -65,6 +68,7 @@ fn main() {
                     Commands::Show{value} => player.handle_show(value.as_str()),
                     Commands::Change{option, value} => player.handle_change(option.as_str(), value.as_str()),
                     Commands::Clear{} => ui::clear_terminal(),
+                    Commands::Exit{} => { println!("\nGoodbye"); break; },
                 }
             }
             Err(e) => println!("{}", e),
