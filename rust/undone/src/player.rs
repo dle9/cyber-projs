@@ -46,14 +46,17 @@ impl Player {
         }
     }
 
-    pub fn handle_change(&mut self, option: &str, value: &str) {
+    pub fn handle_change(&mut self, option: &str) {
         if !self.valid.change_options.contains(&option) {
             println!("\nInvalid option, '{}' \nChoose from: {:?}", option, self.valid.change_options);
             return;
         }
 
         match option {
-            "name" => self.set_name(value.to_string()),
+            "name" => {
+                let name = ui::prompt_username();
+                self.set_name(name);
+            },
             _ => ()
         }
     }

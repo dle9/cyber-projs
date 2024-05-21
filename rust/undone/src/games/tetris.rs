@@ -10,12 +10,17 @@ impl Tetris {
         }
     }
 
-    pub fn run() {
-        show_welcome();
+    pub fn run(&mut self) {
+        print_welcome();
+        self.main_loop();
+        self.reset();
     }
+
+    fn main_loop(&mut self) {}
+    fn reset(&mut self) {}
 }
 
-fn show_welcome() {
+fn print_welcome() {
     println!("\n=================");
     println!("Welcome to Tetris");
     println!("=================");

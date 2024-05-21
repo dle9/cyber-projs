@@ -23,7 +23,7 @@ enum Commands {
     Show{value: String},
 
     #[clap(about = "name                           ::", visible_alias = "ch")]
-    Change{option: String, value: String},
+    Change{option: String},
 
     #[clap(about = "clear the terminal             ::", visible_alias = "cl")]
     Clear{},
@@ -66,7 +66,7 @@ fn main() {
                     Commands::Play{game} => player.games.handle_play(game.as_str()),
                     Commands::Chat {room} => println!("{room}"),
                     Commands::Show{value} => player.handle_show(value.as_str()),
-                    Commands::Change{option, value} => player.handle_change(option.as_str(), value.as_str()),
+                    Commands::Change{option} => player.handle_change(option.as_str()),
                     Commands::Clear{} => ui::clear_terminal(),
                     Commands::Exit{} => { println!("\nGoodbye"); break; },
                 }

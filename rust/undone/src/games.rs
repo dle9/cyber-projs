@@ -45,7 +45,7 @@ impl Games {
 
     fn run_game(&mut self, game: &str) {
         if game == "dice" { Dice::run(&mut self.dice); }
-        if game == "impulse" { Impulse::run(); }
-        if game == "tetris" { Tetris::run(); }
+        if game == "impulse" { Impulse::run(&mut self.impulse); }
+        if game == "tetris" { Tetris::run(&mut self.tetris); }
     }
 }

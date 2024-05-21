@@ -35,22 +35,12 @@ pub fn print_main_prompt(player: &Player) {
     print!("Main> "); std::io::stdout().flush().unwrap();
 }
 
-/// +=======================+
-/// Name | Level: 0 | Coin: 0
-/// +=======================+
-pub fn print_dice_prompt(round: isize, score: usize) {  
-    let msg = format!("Round: {} | Score: {}", round, score);
-    print_title(msg.as_str());
-    print!("Dice> "); std::io::stdout().flush().unwrap();
-}
-
 pub fn print_title(msg: &str) {
-    let mut msg_length = msg.len();
-    msg_length -= 2;
+    let msg_length = msg.len();
     println!();
-    print!("+"); for _ in 0..msg_length { print!("="); } print!("+"); println!();
+    print!("+"); for _ in 0..msg_length-2 { print!("="); } print!("+"); println!();
     println!("{}", msg);
-    print!("+"); for _ in 0..msg_length { print!("="); } print!("+"); println!();
+    print!("+"); for _ in 0..msg_length-2 { print!("="); } print!("+"); println!();
 }
 
 pub fn clear_terminal() {
