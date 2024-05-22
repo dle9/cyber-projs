@@ -1,16 +1,12 @@
 use crate::ui::{print_title, clear_terminal};
 use rand::Rng;
 use colored::Colorize;
-
 use std::io::Write;
-use std::sync::{Arc, Mutex};
-use std::thread;
-use std::time::Duration;
 
 #[derive(Debug)]
 pub struct Impulse {
     round: isize,
-    remaining_time: u64, //ms
+    time_limit: u64, //ms
 }
 
 impl Impulse {
@@ -18,98 +14,97 @@ impl Impulse {
     pub fn new() -> Self {
         Self {
             round: 0,
-            remaining_time: 3000, //ms
+            time_limit: 1000000, //ms
         }
     }
     
     // run the game
     pub fn run(&mut self) {
-        print_welcome_loop();
+        self.print_welcome_loop();
         self.main_loop();
         self.reset();
     }
 
     // main input loop
     fn main_loop(&mut self) {
-        let mut _end: bool = false;
-        
         loop {
             if self.round == -1 { break; }
-
-            let (word, color) = self.print_impulse_prompt();
+            
+            // reset variableson every loop start
+            self.update_time_limit();
             let mut _command: &str = "";
-            let mut _attempted = false;
             
-            // some fancy thread stuff
-            let input = Arc::new(Mutex::new(String::new()));
-            let input_clone_for_input = Arc::clone(&input);
-            let input_clone_for_timeout = Arc::clone(&input);
+            // prompt for answer
+            let (word, color) = self.impulse_prompt();
 
-            let input_handled = Arc::new(Mutex::new(false));
-            let input_handled_clone_for_input = Arc::clone(&input_handled);
-            let input_handled_clone_for_timeout = Arc::clone(&input_handled);
+            // capture input
+            let start_time = std::time::Instant::now();
+            let mut input = String::new();
+            std::io::stdin().read_line(&mut input).expect("\nFailed to read input");
 
-            // Spawn a thread to read input
-            let input_thread = thread::spawn(move || {
-                let mut input = input_clone_for_input.lock().unwrap();
-                std::io::stdin().read_line(&mut input).expect("Failed to read line");
-                *input_handled_clone_for_input.lock().unwrap() = true;
-            });
-            
-            // Spawn a thread for timeout
-            let remaining_time = self.remaining_time;
-            let timeout_thread = thread::spawn(move || {
-                thread::sleep(Duration::from_millis(remaining_time));
-                if !*input_handled_clone_for_timeout.lock().unwrap() {
-                    let mut input = input_clone_for_timeout.lock().unwrap();
-                    *input = "times up".to_string();  // Simulate user input
-                    *input_handled_clone_for_timeout.lock().unwrap() = true;
-                }
-                clear_terminal();
-            });
+            // handle user input
+            let elapsed_time = start_time.elapsed();  
+            let time_limit = std::time::Duration::from_millis(self.time_limit);
 
-            input_thread.join().unwrap();
-            timeout_thread.join().unwrap();
-
-            let input = input.lock().unwrap();
-
-            // user press enter
-            if *input != "times up" {
-                _attempted = true;
-            } 
-            // user type help or exit
-            else {
-                // parse the input
-                let args: Vec<&str> = input.split_whitespace().collect();
-    
-                // error checking
-                match args[0] {
-                    "help" | "h" => {
-                        if args.len() <= 1 { _command = args[0]; }
-                        else { println!("\nUsage: help"); continue;}
-                    }
-                    "exit" | "q" | "e" => {
-                        if args.len() <= 1 { _command = args[0]; }
-                        else { println!("\nUsage: exit"); continue; }
-                    }
-                    _ => _end = true,
-                }
-    
-                // execute args
-                match _command {
-                    "help" | "h" => print_help(),
-                    "exit" | "q" | "e" => { println!("\nReturning to Main."); break;},
-                    _ => _end = true,
-                }
+            if elapsed_time <= time_limit {
+                input = "in time".to_string();
+            } else {
+                input = "times up".to_string();
             }
 
-            _end = self.handle_answer(_attempted, word.as_str(), color.as_str());
-            self.handle_round_end(_end);
+            let mut _end: bool = self.handle_answer(input.as_str(), word.as_str(), color.as_str());
+            self.handle_round_end(_end, elapsed_time);
         }
     }
 
-    fn print_impulse_prompt(&mut self) -> (String, String) {
-        // get a random word and color
+    fn impulse_prompt(&mut self) -> (String, String) {
+        // get a random word and color for each round
+        let (word, color) = self.get_round_info();
+
+        // print the round info
+        let msg = format!("Round: {} | {} | Time limit: {} ms", self.round, word, self.time_limit.max(0));
+        print_title(msg.as_str());
+
+        // sleep between prompt and color
+        std::thread::sleep(std::time::Duration::from_secs(1));
+        self.print_color(word, color);
+        print!("Impulse> "); std::io::stdout().flush().unwrap();
+
+        // return round word and color to main loop
+        return (word.to_string(), color.to_string());
+    }
+
+    fn handle_answer(&mut self, input: &str, word: &str, color: &str) -> bool {
+        println!("input {}", input);
+        if self.round == 0 {
+            self.round += 1;
+            return false;
+        }
+        else if input == "in time" && word == color {
+            self.round += 1;
+            return false;
+        } 
+        else if input == "times up" && word != color {
+            self.round += 1;
+            return false;
+        }
+
+        // lose on:
+        // in time , word != color
+        // times up, word == color
+        else {
+            self.round = -1;
+            return true;
+        }
+    }
+
+    fn handle_round_end(&mut self, end: bool, elapsed_time: std::time::Duration) {
+        // end from handle_answer
+        // true = end the game
+        self.print_round_end(end, elapsed_time);
+    }
+
+    fn get_round_info(&self) -> (&str, &str) {
         let mut rng = rand::thread_rng();
         let mut word: &str = "";
         let mut color: &str = "";
@@ -128,62 +123,56 @@ impl Impulse {
             _ => (),
         }
 
-        let start_time = std::time::Instant::now();
-        while self.remaining_time > 0 {
-            // let elapsed_time = std::time::Instant::now().duration_since(start_time).as_millis() as u64;
-            self.remaining_time -= 1;
-    
-            // Construct the message
-            let msg = format!("Round: {} | {} | Time: {} ms", self.round, word, self.remaining_time.max(0));
-            
-            // Print the message with a carriage return at the beginning
-            print_title(msg.as_str());
-            self.print_color(word, color);
-            
-            std::io::stdout().flush().unwrap();
-            
-            // Sleep for a short duration to reduce CPU usage (e.g., 50 ms)
-            thread::sleep(Duration::from_millis(50));
-        }
-
-        // let msg = format!("Round: {} | {} | Time: {} ms", self.round, word, self.remaining_time);
-        print!("Impulse> "); std::io::stdout().flush().unwrap();
-
-        return (word.to_string(), color.to_string());
+        return (word, color);
     }
 
-    fn handle_answer(&mut self, attempted: bool, word: &str, color: &str) -> bool {
-        if attempted && word == color {
-            self.round += 1;
-            return false;
+    fn update_time_limit(&mut self) {
+        if self.round == 1 {
+            self.time_limit = 5000; 
         } 
-        else if !attempted && word != color {
-            self.round += 1;
-            return false;
-        }
+        else if self.round == 2 {
+            self.time_limit = 3000;
+        }        
+        else if self.round == 3 {
+            self.time_limit = 2000;
+        }        
+        else if self.round == 4 {
+            self.time_limit = 1000;
+        }        
+        else if self.round == 5 {
+            self.time_limit = 800;
+        }        
         else {
-            self.round = -1;
-            return true;
+            self.time_limit -= 10;
         }
     }
 
-    fn handle_round_end(&mut self, status: bool) {
-        // clear_terminal();
-        self.print_round_end(status);
-    }
-
-    fn print_round_end(&self, end: bool) {
+    fn print_round_end(&self, end: bool, elapsed_time: std::time::Duration) {
+        // end from handle_answer
+        // true = end the game
         if !end {
-            // clear_terminal();
-            println!("Correct!");
+            if self.round == 1 {
+                println!("\nYou answered in {:?}.", elapsed_time);
+                println!("Now you try. Think carefully!");
+            } else {
+                clear_terminal();
+                println!("Correct! You answered in {:?}", elapsed_time);
+            }
         } else {
-            println!("\nIncorrect");
+            if elapsed_time > std::time::Duration::from_millis(self.time_limit) {
+                println!("\nYou ran out of time!");
+                println!("You answered in {:?}", elapsed_time);
+                println!("Returning to Main");
+            } else {
+                println!("Incorrect. You answered in {:?}", elapsed_time);
+                println!("Returning to main.");
+            }
         }
     }
 
     fn print_color(&self, word: &str, color: &str) {
         // print color w/ same width as prompt
-        let msg = format!("Round: {} | {} | Time: {} ms", self.round, word, self.remaining_time);
+        let msg = format!("Round: {} | {} | Time limit: {} ms", self.round, word, self.time_limit);
 
         match color {
             "blue" =>  {
@@ -208,33 +197,45 @@ impl Impulse {
     // reset vars
     fn reset(&mut self) {
         self.round = 0;
-        self.remaining_time = 3000; //ms
+        self.time_limit = 1000000; //ms
     }
-}
 
-fn print_welcome_loop() {
-    clear_terminal();
-
-    print_title("Welcome to Impulse");
-    println!("\nImpulse tests your reaction speed.");
-    println!("\nEach round, you will be given one of");
-    println!("three colors. Choose the correct color.");
-    print_help();
+    fn print_welcome_loop(&mut self) {
+        clear_terminal();
+    
+        print_title("Welcome to Impulse");
+        println!("\nImpulse tests your reaction speed.");
+        println!("\nEach round, you will be given one of");
+        println!("three colors. Choose the correct color.");
         
-    loop {
-        let mut input = String::new();
-        print!("\nPress {} to begin> ", "Enter".italic()); std::io::stdout().flush().unwrap();
-        std::io::stdin().read_line(&mut input).expect("Failed to read input");
+        // loop until user press enter
+        loop {
+            let mut input = String::new();
+            println!("\nPress {} to begin, or {} for the tutorial", "Enter".italic(), "t".italic()); 
+            print!("> "); std::io::stdout().flush().unwrap();
+            std::io::stdin().read_line(&mut input).expect("Failed to read input");
+            
+            // handle input 
+            match input.as_str() {
+                // skip tutorial
+                "\n" => {
+                    self.round = 1;
+                    break;
+                },  
+                // enter tutorial
+                "t\n" => {
+                    break;
+                },
+                _ => println!("\nInvalid command")
+            }
+        }
+    
+        clear_terminal();
 
-        if input == "\n" {break}
+        // tutorial
+        if self.round == 0 {
+            println!("The first round is a freebie!");
+            println!("Press {}.", "Enter".italic());
+        }
     }
-}
-
-fn print_help() {
-    println!("\nCommands: {} | help (h) | exit (q, e)", "Enter".italic());
-    print_game_help();
-}
-
-fn print_game_help() {
-    println!("\nUsage: Press {}, or ignore", "Enter".italic());
 }

@@ -13,7 +13,9 @@ pub struct Player {
 impl Player {
     // create new player
     pub fn new(name: String) -> Self {
+        
         print_welcome(name.as_str());
+        
         Self {
             name: name,
             level: 0,

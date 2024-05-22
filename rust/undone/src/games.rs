@@ -10,6 +10,7 @@ pub struct Games {
     dice: Dice,
     impulse: Impulse,
     tetris: Tetris,
+    last_game: String,
     valid: util::GameOptions,
 }
 
@@ -19,12 +20,14 @@ impl Games {
             dice: Dice::new(),
             impulse: Impulse::new(),
             tetris: Tetris::new(),
+            last_game: String::new(),
 
             // define valid options to be used 
             // with PLAY command
             valid: util::GameOptions {
                 game_options: vec!["dice", "impulse", "tetris"],
-            }
+            },
+            
         }
     }
 
@@ -35,11 +38,29 @@ impl Games {
         }
 
         match game {
-            "dice" => self.run_game(game),
-            "impulse" => self.run_game(game),
-            "tetris" => self.run_game(game),
+            "dice" => {
+                self.run_game(game);
+                self.last_game = "dice".to_string();
+            },
+            "impulse" => {
+                self.run_game(game);
+                self.last_game = "impulse".to_string();
+            },
+            "tetris" => {
+                self.run_game(game);
+                self.last_game = "tetris".to_string();
+            },
 
             _ => ()
+        }
+    }
+
+    pub fn handle_replay(&mut self) {
+        if self.last_game.len() < 1 {
+            println!("\nNo previously played game");
+        } else {
+            let mut _game = self.last_game.clone();
+            self.run_game(_game.as_str());
         }
     }
 

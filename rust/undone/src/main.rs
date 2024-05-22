@@ -15,6 +15,9 @@ struct Cli {
 enum Commands {
     #[clap(about = "dice | impulse | tetris        ::", visible_alias = "p")]
     Play{game: String},
+    
+    #[clap(about = "replay last game               ::", visible_alias = "r")]
+    Replay{},
  
     #[clap(about = "room1 | room2 | room3          ::", visible_alias = "c")]
     Chat{room: String},
@@ -64,6 +67,7 @@ fn main() {
                 // handle the input
                 match cli.commands {
                     Commands::Play{game} => player.games.handle_play(game.as_str()),
+                    Commands::Replay{} => player.games.handle_replay(),
                     Commands::Chat {room} => println!("{room}"),
                     Commands::Show{value} => player.handle_show(value.as_str()),
                     Commands::Change{option} => player.handle_change(option.as_str()),
