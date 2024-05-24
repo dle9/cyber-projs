@@ -75,7 +75,7 @@ impl Impulse {
     }
 
     fn handle_answer(&mut self, input: &str, word: &str, color: &str) -> bool {
-        println!("input {}", input);
+        // println!("input {}", input);
         if self.round == 0 {
             self.round += 1;
             return false;
@@ -142,6 +142,12 @@ impl Impulse {
         else if self.round == 5 {
             self.time_limit = 800;
         }        
+        else if self.round <= 11 { //500 ms
+            self.time_limit -= 50;
+        }
+        else if self.round <= 16 { //350 ms
+            self.time_limit -= 30;
+        }
         else {
             self.time_limit -= 10;
         }
