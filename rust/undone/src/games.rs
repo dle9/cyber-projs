@@ -3,12 +3,14 @@ use crate::util;
 
 pub mod dice; use dice::Dice;
 pub mod impulse; use impulse::Impulse;
+pub mod reaction; use reaction::Reaction;
 pub mod tetris; use tetris::Tetris;
 
 #[derive(Debug)]
 pub struct Games {
     dice: Dice,
     impulse: Impulse,
+    reaction: Reaction,
     tetris: Tetris,
     last_game: String,
     valid: util::GameOptions,
@@ -19,13 +21,14 @@ impl Games {
         Self {
             dice: Dice::new(),
             impulse: Impulse::new(),
+            reaction: Reaction::new(),
             tetris: Tetris::new(),
             last_game: String::new(),
 
             // define valid options to be used 
             // with PLAY command
             valid: util::GameOptions {
-                game_options: vec!["dice", "impulse", "tetris"],
+                game_options: vec!["dice", "reaction", "impulse", "tetris"],
             },
             
         }
@@ -41,6 +44,10 @@ impl Games {
             "dice" => {
                 self.run_game(game);
                 self.last_game = "dice".to_string();
+            },
+            "reaction" => {
+                self.run_game(game);
+                self.last_game = "reaction".to_string();
             },
             "impulse" => {
                 self.run_game(game);
@@ -66,6 +73,7 @@ impl Games {
 
     fn run_game(&mut self, game: &str) {
         if game == "dice" { Dice::run(&mut self.dice); }
+        if game == "reaction" { Reaction::run(&mut self.reaction); }
         if game == "impulse" { Impulse::run(&mut self.impulse); }
         if game == "tetris" { Tetris::run(&mut self.tetris); }
     }

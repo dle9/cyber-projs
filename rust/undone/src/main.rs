@@ -13,7 +13,7 @@ struct Cli {
 
 #[derive(Subcommand, Debug, Clone)]
 enum Commands {
-    #[clap(about = "dice | impulse | tetris        ::", visible_alias = "p")]
+    #[clap(about = "dice | reaction | impulse | tetris        ::", visible_alias = "p")]
     Play{game: String},
     
     #[clap(about = "replay last game               ::", visible_alias = "r")]
