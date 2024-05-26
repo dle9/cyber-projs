@@ -22,6 +22,7 @@ impl App {
     /// runs the application's main loop until the user quits
     pub fn run(&mut self, terminal: &mut tui::Tui) -> std::io::Result<()> {
         while !self.exit {
+            // |closure|: anonymous funcs you can pass to another func  
             terminal.draw(|frame| self.render_frame(frame))?;
             self.handle_events()?;
         }
