@@ -1,0 +1,24 @@
+use std::io::{stdout, Stdout};
+
+/// A type alias for the terminal type used in this application
+pub type Tui = ratatui::Terminal<ratatui::prelude::CrosstermBackend<Stdout>>;
+
+/// Initialize the terminal
+pub fn init() -> std::io::Result<Tui> {
+    // separate app from the terminal
+    crossterm::execute!(stdout(), crossterm::terminal::EnterAlternateScreen)?;
+
+    // disable terminal IO processing 
+    // allow you to set up your own IO handling
+    crossterm::terminal::enable_raw_mode()?;
+
+    // create crossterm backend to handle IO
+    ratatui::Terminal::new(ratatui::prelude::CrosstermBackend::new(stdout()))
+}
+
+/// Restore the terminal to its original state
+pub fn restore() -> std::io::Result<()> {
+    crossterm::execute!(stdout(), crossterm::terminal::LeaveAlternateScreen)?;
+    crossterm::terminal::disable_raw_mode()?;
+    Ok(())
+}

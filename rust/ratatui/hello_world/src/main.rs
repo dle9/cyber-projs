@@ -37,8 +37,7 @@ fn main() -> Result<()> {
         if event::poll(std::time::Duration::from_millis(16))? {
             if let event::Event::Key(key) = event::read()? {
                 if key.kind == KeyEventKind::Press
-                    && key.code == KeyCode::Char('q')
-                {
+                && key.code == KeyCode::Char('q') {
                     break;
                 }
             }
