@@ -1,22 +1,28 @@
-use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
-use ratatui::{prelude::*, symbols::border, widgets::{*, block::*}};
+use ratatui::{prelude::*};
 
 use crate::player::Player;
+use crate::screens::{intro::*, selection::*, welcome::*, settings::*};
+// use crate::screens::intro::render_intro_screen;
+// use crate::screens::selection::render_selection_screen;
+// use crate::screens::welcome::render_welcome_screen;
 
 // type alias of variable to pass to App::run()
 type Tui = ratatui::Terminal<ratatui::prelude::CrosstermBackend<std::io::Stdout>>;
 
-// the current window the user is on
-pub enum CurrentScreen {
+// all windows of the app
+#[derive(Clone)]
+pub enum Screen {
     Intro, // start, settings, exit
     Selection, // Intro::Start -> name, class, skillpoints
     Welcome, // Selection -> welcome message with Selections
-    Exiting, // Intro::Exit
+    Settings, // * -> . || . -> prev
 }
 
 pub struct App {
     player: Player,
     exit: bool,
+    pub prev_screen: Screen,
+    pub curr_screen: Screen,
 }
 
 // app main loop
@@ -26,6 +32,8 @@ impl App {
         Self {
             player: Player::new(),
             exit: false,
+            curr_screen: Screen::Intro,
+            prev_screen: Screen::Intro,
         }
     }
     
@@ -34,67 +42,23 @@ impl App {
         while !self.exit {
             // |closure|: anonymous funcs you can pass to another func  
             terminal.draw(|frame| self.render_frame(frame))?;
-            self.handle_events()?;
+            self.handle_events()?; // controls.rs
         }
+
         Ok(())
     }
 
-    // render app as a widget
+    // render app screens as widgets
     fn render_frame(&self, frame: &mut Frame) {
-        frame.render_widget(self, frame.size());
-    }
-
-    // updates the application's state based on user input
-    fn handle_events(&mut self) -> std::io::Result<()> {
-        match event::read()? {
-            // it's important to check that the event is a key press event as
-            // crossterm also emits key release and repeat events on Windows.
-            Event::Key(key_event) if key_event.kind == KeyEventKind::Press => {
-                self.handle_key_event(key_event)
-            }
-            _ => {}
-        };
-        Ok(())
-    }
-
-    // handle keyboard events
-    fn handle_key_event(&mut self, key_event: KeyEvent) {
-        match key_event.code {
-            KeyCode::Char('q') => self.exit(),
-            // KeyCode::Left => self.decrement_counter(),
-            // KeyCode::Right => self.increment_counter(),
-            _ => {}
+        match self.curr_screen {
+            Screen::Intro => render_intro_screen(frame, frame.size()),
+            Screen::Selection => render_selection_screen(frame, frame.size()),
+            Screen::Welcome => render_welcome_screen(frame, frame.size()),
+            Screen::Settings => render_settings_screen(frame, frame.size()),
         }
     }
 
-    fn exit(&mut self) {
+    pub fn exit(&mut self) {
         self.exit = true;
-    }
-}
-
-// implement widget trait for app
-// https://ratatui.rs/concepts/widgets/
-// organizes code for app rendering
-impl Widget for &App {
-    fn render(self, area: Rect, buf: &mut Buffer) {
-        let title = Title::from(" Counter App Tutorial ".bold());
-        let instructions = Title::from(Line::from(vec![
-            " Quit ".into(),
-            "<Q> ".blue().bold(),
-        ]));
-        let block = Block::default()
-            .title(title.alignment(Alignment::Center))
-            .title(
-                instructions
-                    .alignment(Alignment::Left)
-                    .position(Position::Bottom),
-            )
-            .borders(Borders::ALL)
-            .border_set(border::THICK);
-
-        Paragraph::new("What's your name?")
-            .centered()
-            .block(block)
-            .render(area, buf);
     }
 }

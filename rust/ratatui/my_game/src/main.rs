@@ -7,6 +7,8 @@ use ratatui::backend::{CrosstermBackend};
 
 mod app; use app::App;
 mod player;
+mod screens;
+mod controls;
 
 fn main() -> Result<()> {
     // (1) set up the space for the application
@@ -16,11 +18,11 @@ fn main() -> Result<()> {
     let mut tui = Terminal::new(backend)?;
 
     // (2) run the app
-    let mut app = App::new();
-    let res = app.run(&mut tui);
+    let mut app = App::new(); // create the App instance
+    let res = app.run(&mut tui); // run it
     
     // (3) restore the terminal
-    execute!(stdout(), LeaveAlternateScreen)?;
+    execute!(stdout(), LeaveAlternateScreen)?; 
     disable_raw_mode()?;
-    return res;
+    return res; // return App::run result
 }
