@@ -16,7 +16,7 @@ pub fn init() -> std::io::Result<Tui> {
 
 /// Restore the terminal to its original state
 pub fn restore() -> std::io::Result<()> {
-    crossterm::execute!(std::io::stdout(), crossterm::terminal::LeaveAlternateScreen)?;
+    crossterm::execute!(std::io::stdout(), erm::terminal::LeaveAlternateScreen)?;
     crossterm::terminal::disable_raw_mode()?;
     Ok(())
 }
