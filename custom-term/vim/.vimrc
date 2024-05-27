@@ -2,6 +2,7 @@
 colorscheme elflord 
 autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 syntax on " show the colors
+set termguicolors
 
 " vim QoL
 set mouse=a " mouse controls
