@@ -1,0 +1,9 @@
+# closures
+- |closure_var| self.another_func(closure_var)
+	- an anonymous func that captures a variable and passes it to another func
+
+# ? operator
+- used for error handling
+- function(do something)?
+	- if Err(e), return e
+	- if Ok(v), continue execution

@@ -1,0 +1,14 @@
+# build rust project for windows in wsl
+
+// add the target
+rustup target add x86_64-pc-windows-gnu
+
+// install this to build windows binaries
+sudo apt install mingw-w64
+
+// specify linker in project root/.cargo/config
+[target.x86_64-pc-windows-gnu]
+linker = "x86_64-w64-mingw32-gcc"
+
+// build for windows
+cargo build --target x86_64-pc-windows-gnu

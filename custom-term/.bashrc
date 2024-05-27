@@ -146,6 +146,8 @@ alias can='cargo new'
 alias car='cargo run'
 alias cac='cargo check'
 alias cab='cargo build'
+alias caa='cargo add'
+alias cai='cargo install'
 
 alias ru='rustup'
 alias rc='rustc'
