@@ -30,19 +30,8 @@ impl Player {
         Player {
             name: String::from("Guest"),
             class: String::from("Peasant"),
-            skill_points: 0,
+            skill_points: 3,
             skills: Skills::new(),
         }
     }
-
-    // fn display(&self) {
-    //     println!("Name: {}", self.name);
-    //     println!("Class: {}", self.class);
-    //     println!("Skill points: {}", self.skill_points);
-    //     println!("Skills:");
-    //     println!("Health: {}", self.skills.health);
-    //     println!("Strength: {}", self.skills.strength);
-    //     println!("Dexterity: {}", self.skills.dexterity);
-    //     println!("Intelligence: {}", self.skills.intelligence);
-    // }
 }

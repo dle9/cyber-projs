@@ -5,6 +5,7 @@ impl App {
     // updates the application's state based on user input
     pub fn handle_events(&mut self) -> std::io::Result<()> {
         match event::read()? {
+            // user pressed key on keyboard
             Event::Key(key_event) if key_event.kind == KeyEventKind::Press => {
                 self.handle_key_event(key_event)
             }
@@ -14,6 +15,7 @@ impl App {
     }
 
     // handle keyboard events 
+    // each screen has specific keybindings
     fn handle_key_event(&mut self, key_event: KeyEvent) {
         match self.curr_screen {
             Screen::Intro => self.handle_intro_controls(key_event),

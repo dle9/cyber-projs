@@ -38,7 +38,7 @@ impl App {
         while !self.exit {
             // |closure|: anonymous funcs you can pass to another func  
             terminal.draw(|frame| self.render_frame(frame))?;
-            self.handle_events()?; // controls.rs
+            self.handle_events()?; // src/controls.rs
         }
 
         Ok(())
