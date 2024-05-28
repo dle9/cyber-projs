@@ -17,7 +17,7 @@ impl App {
     fn handle_key_event(&mut self, key_event: KeyEvent) {
         match self.curr_screen {
             Screen::Intro => self.handle_intro_controls(key_event),
-            Screen::Selection => self.handle_selection_controls(key_event),
+            Screen::Customize => self.handle_customize_controls(key_event),
             Screen::Welcome => self.handle_welcome_controls(key_event),
             Screen::Settings => self.handle_settings_controls(key_event),
         }
@@ -32,13 +32,13 @@ impl App {
             },
             KeyCode::Enter => {
                 self.prev_screen = self.curr_screen.clone();
-                self.curr_screen = Screen::Selection;
+                self.curr_screen = Screen::Customize;
             }
             _ => {}
         }
     }
 
-    fn handle_selection_controls(&mut self, key_event: KeyEvent) {
+    fn handle_customize_controls(&mut self, key_event: KeyEvent) {
         match key_event.code {
             KeyCode::Char('q') => self.exit(),
             KeyCode::Esc => {

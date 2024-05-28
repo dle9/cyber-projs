@@ -1,10 +1,6 @@
 use ratatui::{prelude::*};
 
 use crate::player::Player;
-use crate::screens::{intro::*, selection::*, welcome::*, settings::*};
-// use crate::screens::intro::render_intro_screen;
-// use crate::screens::selection::render_selection_screen;
-// use crate::screens::welcome::render_welcome_screen;
 
 // type alias of variable to pass to App::run()
 type Tui = ratatui::Terminal<ratatui::prelude::CrosstermBackend<std::io::Stdout>>;
@@ -13,16 +9,16 @@ type Tui = ratatui::Terminal<ratatui::prelude::CrosstermBackend<std::io::Stdout>
 #[derive(Clone)]
 pub enum Screen {
     Intro, // start, settings, exit
-    Selection, // Intro::Start -> name, class, skillpoints
-    Welcome, // Selection -> welcome message with Selections
+    Customize, // Intro::Start -> name, class, skillpoints
+    Welcome, // Customize -> welcome message with Selections
     Settings, // * -> . || . -> prev
 }
 
 pub struct App {
-    player: Player,
-    exit: bool,
+    pub player: Player,
     pub prev_screen: Screen,
     pub curr_screen: Screen,
+    exit: bool,
 }
 
 // app main loop
@@ -31,9 +27,9 @@ impl App {
     pub fn new() -> Self {
         Self {
             player: Player::new(),
-            exit: false,
             curr_screen: Screen::Intro,
             prev_screen: Screen::Intro,
+            exit: false,
         }
     }
     
@@ -51,10 +47,10 @@ impl App {
     // render app screens as widgets
     fn render_frame(&self, frame: &mut Frame) {
         match self.curr_screen {
-            Screen::Intro => render_intro_screen(frame, frame.size()),
-            Screen::Selection => render_selection_screen(frame, frame.size()),
-            Screen::Welcome => render_welcome_screen(frame, frame.size()),
-            Screen::Settings => render_settings_screen(frame, frame.size()),
+            Screen::Intro => self.render_intro_screen(frame, frame.size()),
+            Screen::Customize => self.render_customize_screen(frame, frame.size()),
+            Screen::Welcome => self.render_welcome_screen(frame, frame.size()),
+            Screen::Settings => self.render_settings_screen(frame, frame.size()),
         }
     }
 
