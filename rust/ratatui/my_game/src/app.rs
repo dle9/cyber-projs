@@ -1,7 +1,7 @@
 use ratatui::{prelude::*};
 
 use crate::player::Player;
-use crate::input::{Input, InputMode};
+use crate::util::input::{Input, InputMode};
 
 // type alias of variable to pass to App::run()
 type Tui = ratatui::Terminal<ratatui::prelude::CrosstermBackend<std::io::Stdout>>;

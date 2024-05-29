@@ -1,7 +1,7 @@
 use ratatui::{prelude::*, widgets::{*, block::{*, Position}}};
 
 use crate::app::App;
-use crate::colors;
+use crate::util::colors;
 
 impl App {
     pub fn render_exit_screen(&self, frame: &mut Frame, area: Rect) {

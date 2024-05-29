@@ -1,8 +1,8 @@
 use ratatui::{prelude::*, widgets::{*, block::{*, Position}}};
 
 use crate::app::App;
-use crate::input::InputMode;
-use crate::colors;
+use crate::util::input::InputMode;
+use crate::util::colors;
 
 impl App {
     pub fn render_customize_screen(&self, frame: &mut Frame, area: Rect) {
@@ -73,7 +73,7 @@ impl App {
         
         // top and bottom of the block
         let title = Line::from(Span::styled(
-            "Editing your character",
+            "Editing",
             Style::default().fg(colors::MAIN).add_modifier(Modifier::BOLD),
         ));
         let controls = Title::from(Line::from(vec![
