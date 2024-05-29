@@ -1,6 +1,7 @@
 use ratatui::{prelude::*};
 
 use crate::player::Player;
+use crate::input::{Input, InputMode};
 
 // type alias of variable to pass to App::run()
 type Tui = ratatui::Terminal<ratatui::prelude::CrosstermBackend<std::io::Stdout>>;
@@ -12,12 +13,14 @@ pub enum Screen {
     Customize, // Intro::Start -> name, class, skillpoints
     Welcome, // Customize -> welcome message with Selections
     Settings, // * -> . || . -> prev
+    Exit,
 }
 
 pub struct App {
     pub player: Player,
     pub prev_screen: Screen,
     pub curr_screen: Screen,
+    pub input: Input,
     exit: bool,
 }
 
@@ -29,6 +32,7 @@ impl App {
             player: Player::new(),
             curr_screen: Screen::Intro,
             prev_screen: Screen::Intro,
+            input: Input::new(),
             exit: false,
         }
     }
@@ -51,6 +55,15 @@ impl App {
             Screen::Customize => self.render_customize_screen(frame, frame.size()),
             Screen::Welcome => self.render_welcome_screen(frame, frame.size()),
             Screen::Settings => self.render_settings_screen(frame, frame.size()),
+            Screen::Exit => self.render_exit_screen(frame, frame.size()),
+        }
+    }
+
+    pub fn toggle_input_mode(&mut self) {
+        if matches!(self.input.mode, InputMode::Normal) {
+            self.input.mode = InputMode::Editing
+        } else {
+            self.input.mode = InputMode::Normal
         }
     }
 

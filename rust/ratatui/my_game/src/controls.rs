@@ -1,5 +1,6 @@
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use crate::app::{App, Screen};
+use crate::input::InputMode;
 
 impl App {
     // updates the application's state based on user input
@@ -13,7 +14,7 @@ impl App {
         };
         Ok(())
     }
-
+    
     // handle keyboard events 
     // each screen has specific keybindings
     fn handle_key_event(&mut self, key_event: KeyEvent) {
@@ -22,42 +23,78 @@ impl App {
             Screen::Customize => self.handle_customize_controls(key_event),
             Screen::Welcome => self.handle_welcome_controls(key_event),
             Screen::Settings => self.handle_settings_controls(key_event),
+            Screen::Exit => self.handle_exit_controls(key_event),
         }
     }
 
     fn handle_intro_controls(&mut self, key_event: KeyEvent) {
         match key_event.code {
-            KeyCode::Char('q') => self.exit(),
-            KeyCode::Esc => {
+            KeyCode::Char('q') => {
                 self.prev_screen = self.curr_screen.clone();
-                self.curr_screen = Screen::Settings;
+                self.curr_screen = Screen::Exit;
             },
             KeyCode::Enter => {
                 self.prev_screen = self.curr_screen.clone();
                 self.curr_screen = Screen::Customize;
-            }
+            },
             _ => {}
         }
     }
 
     fn handle_customize_controls(&mut self, key_event: KeyEvent) {
-        match key_event.code {
-            KeyCode::Char('q') => self.exit(),
-            KeyCode::Esc => {
-                self.prev_screen = self.curr_screen.clone();
-                self.curr_screen = Screen::Settings;
+        match self.input.mode {
+            InputMode::Normal => {
+                match key_event.code {
+                    KeyCode::Char('q') => {
+                        self.prev_screen = self.curr_screen.clone();
+                        self.curr_screen = Screen::Exit;
+                    },
+                    KeyCode::Esc => {
+                        self.prev_screen = self.curr_screen.clone();
+                        self.curr_screen = Screen::Settings;
+                    },
+                    KeyCode::Enter => {
+                        self.prev_screen = self.curr_screen.clone();
+                        self.curr_screen = Screen::Welcome;
+                    },
+                    KeyCode::Tab => {
+                        self.player.name = self.input.display_with_cursor();
+                        self.toggle_input_mode();
+                    },
+                    _ => {}
+                }
             },
-            KeyCode::Enter => {
-                self.prev_screen = self.curr_screen.clone();
-                self.curr_screen = Screen::Welcome;
+            InputMode::Editing => {
+                match key_event.code {
+                    KeyCode::Char(c) => {
+                        self.player.name = self.input.enter_char(c);
+                    }
+                    KeyCode::Backspace => {
+                        self.player.name = self.input.delete_char();
+                    }
+                    KeyCode::Left => {
+                        self.player.name = self.input.move_cursor_left();
+                    }
+                    KeyCode::Right => {
+                        self.player.name = self.input.move_cursor_right();
+                    }
+                    KeyCode::Tab => {
+                        self.player.name = self.input.remove_cursor();
+                        self.toggle_input_mode();
+                    },
+                    KeyCode::Enter => self.input.submit_message(),
+                    _ => {}
+                }
             }
-            _ => {}
         }
     }
 
     fn handle_welcome_controls(&mut self, key_event: KeyEvent) {
         match key_event.code {
-            KeyCode::Char('q') => self.exit(),
+            KeyCode::Char('q') => {
+                self.prev_screen = self.curr_screen.clone();
+                self.curr_screen = Screen::Exit;
+            },
             KeyCode::Esc => {
                 self.prev_screen = self.curr_screen.clone();
                 self.curr_screen = Screen::Settings;
@@ -67,6 +104,15 @@ impl App {
     }
 
     fn handle_settings_controls(&mut self, key_event: KeyEvent) {
+        match key_event.code {
+            KeyCode::Esc => {
+                self.curr_screen = self.prev_screen.clone();
+            },
+            _ => {}
+        }
+    }
+    
+    fn handle_exit_controls(&mut self, key_event: KeyEvent) {
         match key_event.code {
             KeyCode::Char('q') => self.exit(),
             KeyCode::Esc => {

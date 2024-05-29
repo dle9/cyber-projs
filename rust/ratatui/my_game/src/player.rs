@@ -1,4 +1,4 @@
-struct Skills {
+pub struct Skills {
     level: u32,
     health: u32,
     strength: u32,

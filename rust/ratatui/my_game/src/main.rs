@@ -5,10 +5,15 @@ use crossterm::terminal::{enable_raw_mode, disable_raw_mode};
 use ratatui::Terminal;
 use ratatui::backend::{CrosstermBackend};
 
+// main
 mod app; use app::App;
-mod player;
 mod screens;
+mod player;
+
+// util
 mod controls;
+mod colors;
+mod input;
 
 fn main() -> Result<()> {
     // (1) set up the space for the application

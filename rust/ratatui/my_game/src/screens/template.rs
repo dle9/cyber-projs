@@ -1,31 +1,47 @@
-use ratatui::{prelude::*, symbols::border, widgets::{*, block::*}};
+use ratatui::{prelude::*, layout::*, symbols::border, widgets::{*, block::{*, Position}}};
 
 use crate::app::App;
+use crate::colors;
 
 impl App {
-    pub fn render_template_screen(&self, frame: &mut Frame, area: Rect) {
-        let title = Title::from(" Template title ".bold());
+    pub fn render_intro_screen(&self, frame: &mut Frame, area: Rect) {
+        // partition the frame
+        let chunks = Layout::default()
+            .direction(Direction::Vertical)
+            .constraints([
+                Constraint::Percentage(60),
+                Constraint::Min(9),
+                Constraint::Percentage(40),
+            ]).split(area);
+        
+        // top and bottom of the block
+        let title = Line::from(Span::styled(
+            "Template title",
+            Style::default().fg(colors::main).add_modifier(Modifier::BOLD),
+        ));
         let controls = Title::from(Line::from(vec![
-            " Settings ".into(),
-            "<Esc>".blue().bold(),
-            " Continue ".into(),
-            "<Enter> ".blue().bold(),
+            Span::from("Quit"),
+            Span::styled("<q>", Style::default().fg(colors::highlight).add_modifier(Modifier::BOLD)),
         ]));
-        
+
+        // create the block (container)
         let block = Block::default()
-            .title(title.alignment(Alignment::Left))
-            .title(
-                controls
-                    .alignment(Alignment::Left)
-                    .position(Position::Bottom),
-            )
+            .title(title)
+            .title(controls.position(Position::Bottom))
             .borders(Borders::ALL)
-            .border_set(border::THICK);
-        
-        let paragraph = Paragraph::new("")
-            .centered()
-            .block(block);
-        
-        frame.render_widget(paragraph, area);
+            .style(Style::default());
+
+        // text inside the block
+        let msg = vec![
+            Line::from(vec![Span::from("")]),
+            Line::from(vec![Span::from("")]),
+            Line::from(vec![Span::from("")]),
+            Line::from(vec![
+                Span::styled("Template message", Style::default().add_modifier(Modifier::ITALIC)),
+            ]),
+        ];
+
+        // render the intro msg into the second chunk
+        frame.render_widget(Paragraph::new(msg).block(block).alignment(Alignment::Center), chunks[1]);
     }
 }
