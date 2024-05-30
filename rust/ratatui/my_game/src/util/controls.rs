@@ -59,6 +59,7 @@ impl App {
                     },
                     KeyCode::Enter => {
                         self.prev_screen = self.curr_screen.clone();
+                        self.init_customize_screen();
                         self.curr_screen = Screen::Customize;
                     },
                     _ => {}
@@ -97,7 +98,7 @@ impl App {
             },
             KeyCode::Enter => {
                 self.prev_screen = self.curr_screen.clone();
-                self.curr_screen = Screen::Customize;
+                self.curr_screen = Screen::Welcome;
             },
             KeyCode::Left => self.menus.customize.items.unselect(),
             KeyCode::Down => self.menus.customize.items.next(),
