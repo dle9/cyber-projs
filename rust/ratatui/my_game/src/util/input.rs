@@ -23,20 +23,20 @@ impl Input {
     pub fn move_cursor_left(&mut self) -> String {
         let cursor_moved_left = self.cursor_index.saturating_sub(1);
         self.cursor_index = self.clamp_cursor(cursor_moved_left);
-        self.display_with_cursor()
+        self.insert_cursor()
     }
 
     pub fn move_cursor_right(&mut self) -> String {
         let cursor_moved_right = self.cursor_index.saturating_add(1);
         self.cursor_index = self.clamp_cursor(cursor_moved_right);
-        self.display_with_cursor()
+        self.insert_cursor()
     }
 
     pub fn enter_char(&mut self, new_char: char) -> String {
         let index = self.byte_index();
         self.input.insert(index, new_char);
         self.move_cursor_right();
-        return self.display_with_cursor();
+        return self.insert_cursor();
     }
 
     /// Returns the byte index based on the character position.
@@ -73,7 +73,7 @@ impl Input {
 
         }
         
-        return self.display_with_cursor();
+        return self.insert_cursor();
     }
 
     pub fn clamp_cursor(&self, new_cursor_pos: usize) -> usize {
@@ -90,7 +90,7 @@ impl Input {
         self.reset_cursor();
     }
 
-    pub fn display_with_cursor(&self) -> String {
+    pub fn insert_cursor(&self) -> String {
         let mut display_string = self.input.clone();
         let cursor_position = self.byte_index();
         display_string.insert(cursor_position, '|');

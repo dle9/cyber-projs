@@ -39,7 +39,7 @@ impl App {
             Line::from(vec![Span::from("")]),
             Line::from(vec![Span::from("")]),
             Line::from(vec![
-                Span::styled("Confirming exit...", Style::default().add_modifier(Modifier::ITALIC)),
+                Span::styled("Confirm exit?", Style::default().add_modifier(Modifier::ITALIC)),
             ]),
         ];
 

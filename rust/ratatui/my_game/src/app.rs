@@ -2,6 +2,7 @@ use ratatui::{prelude::*};
 
 use crate::player::Player;
 use crate::util::input::{Input, InputMode};
+use crate::screens::customize::Customize;
 
 // type alias of variable to pass to App::run()
 type Tui = ratatui::Terminal<ratatui::prelude::CrosstermBackend<std::io::Stdout>>;
@@ -9,11 +10,23 @@ type Tui = ratatui::Terminal<ratatui::prelude::CrosstermBackend<std::io::Stdout>
 // all windows of the app
 #[derive(Clone)]
 pub enum Screen {
-    Intro, // start, settings, exit
-    Customize, // Intro::Start -> name, class, skillpoints
-    Welcome, // Customize -> welcome message with Selections
-    Settings, // * -> . || . -> prev
+    Intro, 
+    Identify, // Intro -> name
+    Customize, // Identify -> class, skillpoints
+    Welcome, // Customize -> welcome message
+    Settings,
     Exit,
+}
+
+pub struct Menus {
+    pub customize: Customize,
+}
+
+#[derive(Clone)]
+pub enum Editing {
+    Name,
+    Class,
+    Skills,
 }
 
 pub struct App {
@@ -21,6 +34,8 @@ pub struct App {
     pub prev_screen: Screen,
     pub curr_screen: Screen,
     pub input: Input,
+    pub editing: Option<Editing>,
+    pub menus: Menus,
     exit: bool,
 }
 
@@ -28,11 +43,15 @@ pub struct App {
 // each iteration draws one frame
 impl App {
     pub fn new() -> Self {
-        Self {
+        Self {  
             player: Player::new(),
             curr_screen: Screen::Intro,
             prev_screen: Screen::Intro,
             input: Input::new(),
+            editing: None,
+            menus: Menus {
+                customize: Customize::new(),
+            },
             exit: false,
         }
     }
@@ -49,9 +68,11 @@ impl App {
     }
 
     // render app screens as widgets
-    fn render_frame(&self, frame: &mut Frame) {
-        match self.curr_screen {
+    fn render_frame(&mut self, frame: &mut Frame) {
+        match self.curr_screen { 
+            // src/screens/render_*_screen.rs
             Screen::Intro => self.render_intro_screen(frame, frame.size()),
+            Screen::Identify => self.render_identify_screen(frame, frame.size()),
             Screen::Customize => self.render_customize_screen(frame, frame.size()),
             Screen::Welcome => self.render_welcome_screen(frame, frame.size()),
             Screen::Settings => self.render_settings_screen(frame, frame.size()),
