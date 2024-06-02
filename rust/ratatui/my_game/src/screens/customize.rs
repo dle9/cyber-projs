@@ -20,6 +20,7 @@ impl App {
     pub fn render_customize_screen(&mut self, frame: &mut Frame, area: Rect) {
 
         // set up the screen container layout
+        // split up into 3 vertical sections
         let vertical = Layout::vertical([
             Constraint::Min(0),
             Constraint::Percentage(50),
@@ -28,10 +29,11 @@ impl App {
         let [top_area, content_container, bottom_area] = vertical.areas(area);
 
         let content = Layout::vertical([
-            Constraint::Min(4),
+            Constraint::Min(2),
             Constraint::Percentage(100),
+            Constraint::Min(2),
         ]);
-        let [nil, content_area] = content.areas(content_container);
+        let [nil1, content_area, nil2] = content.areas(content_container);
 
         let chunks = Layout::default()
             .direction(Direction::Horizontal)
@@ -39,6 +41,7 @@ impl App {
                 Constraint::Min(1),
                 Constraint::Percentage(45),
                 Constraint::Percentage(45),
+                Constraint::Min(1),
             ])
             .split(content_area);
         let left_content_area = chunks[1];
@@ -83,19 +86,32 @@ impl Customize {
 
 impl Customize {
     pub fn render_player_classes(&mut self, frame: &mut Frame, area: Rect) {
-        let block = Block::default()
-            .borders(Borders::ALL)
-            .style(Style::default());
-
+        let title = Line::from(Span::styled(
+            "Classes",
+            Style::default().add_modifier(Modifier::BOLD),
+        ));
+        
+        // Create a List from all list items and highlight the currently selected one
         let player_classes: Vec<ListItem> = self.items.items
             .iter()
             .enumerate()
             .map(|(i, todo_item)| todo_item.to_list_item(i))
             .collect();
 
-        // Create a List from all list items and highlight the currently selected one
+        let text_block = Block::default()
+            .borders(Borders::ALL)
+            .style(Style::default());
+        let title_block = Block::default()
+            .title(title)
+            .title_alignment(Alignment::Center)
+            .style(Style::default());
+
+        let outer_info_area = area;
+        let inner_info_area = text_block.inner(outer_info_area);
+
+        let title = Paragraph::new("").block(title_block).alignment(Alignment::Center);
         let player_classes = List::new(player_classes)
-            .block(block)
+            .block(text_block)
             .highlight_style(
                 Style::default()
                     .add_modifier(Modifier::BOLD)
@@ -105,31 +121,43 @@ impl Customize {
             .highlight_symbol(">")
             .highlight_spacing(HighlightSpacing::Always);
 
-        // render the top half (player classes)
-        frame.render_widget(player_classes, area);
+        frame.render_widget(title, outer_info_area);
+        frame.render_widget(player_classes, inner_info_area);
     }
 
     pub fn render_class_desc(&mut self, frame: &mut Frame, area: Rect) {
         // We get the info depending on the item's state.
+        let title = Line::from(Span::styled(
+            "Skills",
+            Style::default().add_modifier(Modifier::BOLD),
+        ));
+
         let desc = if let Some(i) = self.items.state.selected() {
             format!("{}", self.items.items[i].desc)
         } else {
             "".to_string()
         };
-
-        let block = Block::default()
+        
+        let text_block = Block::default()
+            .borders(Borders::ALL)
+            .style(Style::default());
+        let title_block = Block::default()
+            .title(title)
+            .title_alignment(Alignment::Center)
             .style(Style::default());
 
         // This is a similar process to what we did for list. outer_info_area will be used for
         // header inner_info_area will be used for the list desc.
         let outer_info_area = area;
-        let inner_info_area = block.inner(outer_info_area);
+        let inner_info_area = text_block.inner(outer_info_area);
 
+        let title = Paragraph::new("").block(title_block).alignment(Alignment::Center);
         let info_paragraph = Paragraph::new(desc)
-            .block(block)
+            .block(text_block)
             .fg(TEXT_COLOR)
             .wrap(Wrap { trim: false });
 
+        frame.render_widget(title, outer_info_area);
         frame.render_widget(info_paragraph, inner_info_area);
     }
 
