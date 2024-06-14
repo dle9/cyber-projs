@@ -1,1 +1,0 @@
-tokio_stream::stream_ext::next::Next<'_, impl Stream<Item = Result<Message, Box<(dyn std::error::Error + Send + Sync + 'static)>>>>
