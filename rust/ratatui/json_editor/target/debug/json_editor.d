@@ -1,1 +1,0 @@
-/home/dle/cyber-projs/rust/ratatui/json_editor/target/debug/json_editor: /home/dle/cyber-projs/rust/ratatui/json_editor/src/app.rs /home/dle/cyber-projs/rust/ratatui/json_editor/src/main.rs /home/dle/cyber-projs/rust/ratatui/json_editor/src/ui.rs
