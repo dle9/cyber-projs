@@ -1,5 +1,0 @@
-cargo:rustc-check-cfg=cfg(no_qt)
-cargo:rerun-if-env-changed=SLINT_NO_QT
-cargo:rustc-cfg=no_qt
-cargo:warning=Could not find a Qt installation. The Qt backend will not be functional. See https://github.com/slint-ui/slint/blob/master/docs/install_qt.md for more info
-cargo:warning=    qmake returned with error:\nqmake: could not exec \'/usr/lib/qt5/bin/qmake\': No such file or directory\n\n

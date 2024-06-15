@@ -1,3 +1,0 @@
-cargo:rustc-cfg=free_unix
-cargo:rustc-cfg=x11_platform
-cargo:rustc-cfg=wayland_platform
