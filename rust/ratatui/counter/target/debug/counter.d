@@ -1,1 +1,0 @@
-/home/dle/cyber-projs/rust/ratatui/counter/target/debug/counter: /home/dle/cyber-projs/rust/ratatui/counter/src/app.rs /home/dle/cyber-projs/rust/ratatui/counter/src/main.rs /home/dle/cyber-projs/rust/ratatui/counter/src/tui.rs
