@@ -1,1 +1,0 @@
-/mnt/c/Users/deric/dleer/cybersecurity/lab/rust/ratatui/counter/target/x86_64-pc-windows-gnu/debug/counter.exe: /mnt/c/Users/deric/dleer/cybersecurity/lab/rust/ratatui/counter/src/app.rs /mnt/c/Users/deric/dleer/cybersecurity/lab/rust/ratatui/counter/src/main.rs /mnt/c/Users/deric/dleer/cybersecurity/lab/rust/ratatui/counter/src/tui.rs
