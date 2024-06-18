@@ -1,65 +1,64 @@
+// file operations
 use std::fs::File;
 use std::io::prelude::*;
-use std::path::{Path, PathBuf};
+use std::path::Path;
+
+use futures::{stream, StreamExt};
+use reqwest::Client;
 
 pub struct Wordlist {
     pub subdomain_count: usize,
     pub total_time: std::time::Duration,
 }
 
-pub async fn fetch_records(target: String) -> Result<(), Box<dyn std::error::Error>> {
+const CONCURRENT_REQUESTS: usize = 2;
+
+pub async fn fetch_records(target: String) {
+    println!("Starting brute force search with wordlist");
+
     let start_time = std::time::Instant::now();
-    let mut records: Vec<String> = Vec::new();
 
-    // // iterate through wordlist and attempt to connect
-    // let client = reqwest::Client::new();
+    // get path of wordlist
+    let this_path = Path::new(file!());
+    let wordlist_path = this_path.with_file_name("wordlist.txt");
+    let display = wordlist_path.display();
 
-    // let path = Path::new(path_name);
+    // open the wordlist for reading
+    let mut file = match File::open(&wordlist_path) {
+        Err(why) => panic!("Couldn't open {}: {}", display, why),
+        Ok(file) => file,
+    };
 
-    // let display = path.display();
-    // let mut file = match File::open(&path) {
-    //     Err(why) => panic!("Couldn't open {}: {}", display, why),
-    //     Ok(file) => file,
-    // };
-
-    // // read file into a string
-    // let mut subdomain_file_content = String::new();
-    // match file.read_to_string(&mut subdomain_file_content) {
-    //     Err(why) => panic!("Couldn't read {}: {}", display, why),
-    //     Ok(_) => print!("Successfully read from {}", display),
-    // }
-
-    // println!("starting wordlist");
-    // for domain in subdomain_file_content.split_whitespace().collect::<Vec<&str>>() {
-    //     // let url = format!("https://{}.spglobal.com", domain);
-    //     println!("{domain}");
-    //     // let response = client.get(url).send().await.unwrap(); 
-        
-    //     // // parse response
-    //     // let body = response.text().await.unwrap(); 
-    //     // let json: Value = serde_json::from_str(&body).unwrap(); 
-    
-    //     // // get data
-    //     // if let Some(answers) = json["Answer"].as_array() {
-    //     //     for answer in answers {
-    //     //         if let Some(data) = answer["data"].as_str() {
-    //     //             records.push(data.to_string());
-    //     //         }
-    //     //     }
-    //     // }
-    // }
-    // println!("ending wordlist");
-
-    println!("{:?}", std::env::current_dir());
-    Ok(())
-}
-
-impl Wordlist {
-    pub fn get_total_subdomains(&self) -> usize {
-        return self.subdomain_count;
+    // read file into a string
+    let mut wordlist_content = String::new();
+    match file.read_to_string(&mut wordlist_content) {
+        Err(why) => panic!("Couldn't read {}: {}", display, why),
+        Ok(_) => (),
     }
 
-    pub fn get_total_time(&self) -> std::time::Duration {
-        return self.total_time;
-    }
+    // start enumerating the wordlist and making concurrent requests
+    let client = Client::new();
+    let records: Vec<String> = Vec::new();
+    let bodies = stream::iter(wordlist_content.split_whitespace().collect::<Vec<&str>>())
+        .map(|word| {
+            let url = format!("https://{}.{}", word, target);
+            let client = &client;
+            async move {
+                let resp = client.get(url.clone()).send().await?;
+
+                // returns to bodies to be iterated through 
+                // for status after this code block
+                return Ok(url.clone());
+            }
+        })
+        .buffer_unordered(CONCURRENT_REQUESTS);
+
+    bodies
+        .for_each(|result: Result<std::string::String, Box<dyn std::error::Error>>| async {
+            match result {
+                Ok(url)=> println!("Successful connection to {}", url),
+                Err(_) => (),
+            }
+        })
+    .await;
 }

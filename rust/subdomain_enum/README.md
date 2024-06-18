@@ -23,3 +23,6 @@ subdomain_source/: code for source of subdomain data
 output/: output of formatted results
 ```
 
+###  todo
+- remove dns dependencies in main
+

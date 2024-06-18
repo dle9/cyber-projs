@@ -2,20 +2,21 @@ use std::io::Write;
 
 // ========================== PROMPTS =============================
 
-pub fn target_domain() -> String {
+pub fn prompt_target_domain() -> String {
+    println!();
     let mut target = String::new();
-    
+
     loop {
-        print_prompt("Enter target domain".to_string());
+        print_prompt("Enter target domain (exclude https:// and www.)".to_string());
         print!("> "); std::io::stdout().flush().unwrap();
         std::io::stdin().read_line(&mut target).expect("\nFailed to read target");
         let target = target.trim();
-        
+
         if valid_target(target) {   
             break;
         }   
     }
-    
+
     return target.trim().to_string();
 }
 
@@ -37,7 +38,7 @@ pub fn print_prompt(msg: String) {
 
 pub fn format_title(title: String, msg: String) -> String {
     let mut result = String::new();
-    
+
     result.push('\n');
     result.push('+');
     for _ in 0..6 {
@@ -51,10 +52,10 @@ pub fn format_title(title: String, msg: String) -> String {
     }
     result.push('+');
     result.push('\n');
-    
+
     result.push_str(&msg);
     result.push('\n');
-    
+
     let bottom_length = 6 + 1 + title.len() + 1 + 6;
     result.push('+');
     for _ in 0..bottom_length {
@@ -62,7 +63,7 @@ pub fn format_title(title: String, msg: String) -> String {
     }
     result.push('+');
     result.push('\n');
-    
+
     result
 }
 
@@ -70,7 +71,7 @@ pub fn display_title(title: &str, msg: String) {
     print!("\n+"); for _ in 0..6 { print!("="); } 
     print!(" {title} ");
     for _ in 0..6 { print!("="); } print!("+\n");
-    
+
     let bottom_length = 6 + 1 + title.len() + 1 + 6;
     println!("{}", msg);
     print!("+"); for _ in 0..bottom_length { print!("="); } print!("+\n"); 
