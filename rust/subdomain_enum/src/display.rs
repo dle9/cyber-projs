@@ -20,20 +20,20 @@ pub fn prompt_target_domain() -> String {
     return target.trim().to_string();
 }
 
-fn valid_target(target: &str) -> bool {
-    if target.len() < 1 {
-        println!("\nInvalid target");
-        return false;
-    }   
-    return true;
-}
-
 // ======================== HELPER FUNCTIONS ========================
 
 pub fn print_prompt(msg: String) {
     print!("\n+"); for _ in 0..msg.len()-2 { print!("="); } print!("+\n");
     println!("{}", msg);
     print!("+"); for _ in 0..msg.len()-2 { print!("="); } print!("+\n");
+}
+
+fn valid_target(target: &str) -> bool {
+    if target.len() < 1 {
+        println!("\nInvalid target");
+        return false;
+    }   
+    return true;
 }
 
 pub fn format_title(title: String, msg: String) -> String {

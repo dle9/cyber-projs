@@ -1,41 +1,28 @@
-mod display;
-mod subdomain_source;
+mod subdomain_source; // code pulls subdomains from these sources
+use crate::subdomain_source::{SubdomainSource, dns::DnsRecords, wordlist::Wordlist, certificate::Certificate}; 
 
-type DnsRecord = (Result<(Vec<String>, std::time::Duration), Box<dyn std::error::Error + 'static>>);
+mod display; // stdout ops: prompts, result formatting, summary, etc
 
 #[tokio::main]
 async fn main() {
+    // get domain to target/enumerate/scan
     let target = display::prompt_target_domain();
 
-    // // start dns tasks
-    // let a_handle = tokio::task::spawn(subdomain_source::dns::fetch_records(target.clone(), "A"));
-    // let ns_handle = tokio::task::spawn(subdomain_source::dns::fetch_records(target.clone(), "NS"));
-    // let mx_handle = tokio::task::spawn(subdomain_source::dns::fetch_records(target.clone(), "MX"));
+    // start subdomain enumeration tasks
+    let dns_records = DnsRecords::run(target.clone()).await;
+    let wordlist_records = Wordlist::run(target.clone()).await;
+    let certificate_records = Certificate::run(target.clone()).await;
 
-    // // wait for dns threads to finish, join the threads
-    // let (a_records, ns_records, mx_records) = tokio::join!(a_handle, ns_handle, mx_handle);
-    let (a_records, ns_records, mx_records): (DnsRecord, DnsRecord, DnsRecord) = subdomain_source::dns::fetch_records(target.clone()).await;
-
-    // start subdomain wordlist enumeration
-    let wordlist_records: Vec<&str> = subdomain_source::wordlist::fetch_records(target.clone()).await;
-    
-    // handle result
-    let domains = subdomain_source::SubdomainSource {
-        dns_records: subdomain_source::dns::DnsRecords {
-            a_records: a_records.unwrap(),
-            ns_records: ns_records.unwrap(),
-            mx_records: mx_records.unwrap(),
-        },
-        wordlist: subdomain_source::wordlist::Wordlist {
-            subdomain_count: 1,
-            total_time: std::time::Duration::from_secs(1),
-        },
+    // populate subdomain enumeration results
+    let domains = SubdomainSource {
+        dns_records: dns_records,
+        wordlist: wordlist_records,
+        certificate: certificate_records,
     };
 
     // write results to src/output/
-    domains.write_subdomains();
+    domains.write_all_results();
 
-    // display time taken, subdomains found, etc
+    // display time taken, subdomains found, etc at a high level
     domains.display_summary();
-
 }
