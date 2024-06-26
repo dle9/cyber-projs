@@ -1,0 +1,25 @@
+
++====== DNS - A Records (1) ======+
+20.190.249.200
++=================================+
+
++====== DNS - NS Records (6) ======+
+a14-64.akam.net.
+a1-134.akam.net.
+a5-66.akam.net.
+a18-67.akam.net.
+a7-64.akam.net.
+a12-67.akam.net.
++==================================+
+
++====== DNS - MX Records (9) ======+
+va06msg6003.spglobal.com.
+nj12msg6003.spglobal.com.
+va06msg6005.spglobal.com.
+va06msg6002.spglobal.com.
+va06msg6004.spglobal.com.
+nj12msg6002.spglobal.com.
+nj12msg6004.spglobal.com.
+nj12msg6005.spglobal.com.
+va06msg6001.spglobal.com.
++==================================+

@@ -1,0 +1,5 @@
+
++====== Successful wordlist connections (2) ======+
+https://sphere.spglobal.com
+https://careers.spglobal.com
++=================================================+

@@ -1,0 +1,10 @@
+[package]
+name = "main"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.38.0", features = ["full"] }
+subdomain_source = { path = "../subdomain_source" }
+vulnerability_scan = { path = "../vulnerability_scan" }
+util = { path = "../util" }
