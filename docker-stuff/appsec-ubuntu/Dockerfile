@@ -6,13 +6,12 @@ COPY install/* /install/
 
 # install packages
 RUN /install/util.sh \
-
     ### java stuff
-    && /install/java.sh 8 \
+    && /install/java.sh 8 \ 
     #&& /install/maven.sh 3.9.7 \
     #&& /install/gradle.sh 8.7 \ 
     # scala, sbt
-    && /install/scala.sh
+    && /install/scala.sh 3.4.1 1.9.9
 
     ### node, npm stuff
     #&& /install/node.sh 21.x \
@@ -28,9 +27,7 @@ RUN /install/util.sh \
     #&& /install/ruby.sh 3.1.2  
 
     ### go
-    && /install/go.sh \
-
-    ### scala, sbt
+    #&& /install/go.sh 
 
 
 # test installations

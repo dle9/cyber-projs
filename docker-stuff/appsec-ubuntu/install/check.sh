@@ -1,5 +1,6 @@
 #!/bin/bash
 
+exec /bin/bash
 echo "Installed package versions:"
 
 echo "java: $(java -version 2>&1 | awk -F '"' '/version/ {print $2}')"
@@ -16,9 +17,9 @@ echo "poetry: $(poetry --version 2>&1 | awk '{print $3}')"
 echo "ruby: $(ruby -v | awk '{print $2}')"
 echo "rbenv: $(rbenv -v | awk '{print $2}')"
 echo "ruby-build: $(ruby-build --version | awk '{print $2}')"
-#echo "go: $(go version | awk '{print $3}')"
-#echo "scala: $(scala -version 2>&1 | awk -F ' ' '/version/ {print $4}')"
-#echo "sbt: $(sbt sbtVersion 2>&1 | grep '[info] *' | awk '{print $2}')"
+echo "go: $(go version | awk '{print $3}')"
+echo "scala: $(scala -version 2>&1 | awk -F ' ' '/version/ {print $5}')"
+echo "sbt: $(sbt --script-version 2>&1)"
 #echo "php: $(php -v | head -n 1 | awk '{print $2}')"
 #echo "composer: $(composer --version | awk '{print $3}')"
 #echo "php plugins: $(php -m)"
