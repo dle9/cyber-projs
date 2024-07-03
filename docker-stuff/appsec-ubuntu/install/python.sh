@@ -7,7 +7,7 @@ apt remove python3.12 -y \
 
 # install python 3.9
 apt-get update -y \
-&& apt install software-properties-common -y \
+&& apt-get install software-properties-common -y \
 && add-apt-repository ppa:deadsnakes/ppa -y \
 && apt-get install -y python3.9
 
