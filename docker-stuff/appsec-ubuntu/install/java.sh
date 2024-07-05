@@ -3,7 +3,7 @@
 JAVA_VERSION=${1:-8}
 
 # install
-apt-get update \
+apt-get update -y \
 && apt-get install -y openjdk-$JAVA_VERSION-jdk \
 && apt-get clean
 

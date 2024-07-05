@@ -1,15 +1,15 @@
 #!/bin/bash
 
-MAVEN_VERSION=${1:-3.9.7}
+MAVEN_VERSION=${1:-3.8.8}
 INSTALL_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
 # install
-apt-get -y update && \
-mkdir -p /usr/share/maven /usr/share/maven/ref && \
-curl -fsSL -o /tmp/apache-maven.tar.gz ${INSTALL_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+apt-get -y update \
+&& mkdir -p /usr/share/maven /usr/share/maven/ref \
+&& curl -fsSL -o /tmp/apache-maven.tar.gz ${INSTALL_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz
 
 # extract
-tar --no-same-owner -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 && \
+tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1
 
 # clean up and finish
 rm -f /tmp/apache-maven.tar.gz && \

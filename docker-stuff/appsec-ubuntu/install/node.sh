@@ -6,7 +6,7 @@ NODE_VERSION=${1:-21.x}
 curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION} -o /tmp/nodesource.sh | bash /tmp/nodesource.sh
 
 # install
-apt-get update \
+apt-get update -y \
 && apt-get install -y nodejs \
 && apt-get install -y npm
 

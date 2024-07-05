@@ -1,7 +1,7 @@
 #!/bin/bash
 
-YARN_VERSION=${1:-1.22.10}
-BOWER_VERSION=${2:-1.8.10}
+YARN_VERSION=${1:-1.21.1}
+BOWER_VERSION=${2:-1.8.14}
 
 # install
 npm install -hg npm@latest
