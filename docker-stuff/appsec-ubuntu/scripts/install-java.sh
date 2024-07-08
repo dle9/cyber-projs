@@ -1,4 +1,5 @@
 #!/bin/bash
+su $APPSEC_USER
 
 JAVA_VERSION=${1:-8}
 
@@ -6,6 +7,8 @@ JAVA_VERSION=${1:-8}
 apt-get update -y \
 && apt-get install -y openjdk-$JAVA_VERSION-jdk \
 && apt-get clean
+
+# update certs
 
 # env vars
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/" >> $HOME/.bashrc
