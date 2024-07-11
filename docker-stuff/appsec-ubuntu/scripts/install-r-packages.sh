@@ -3,4 +3,4 @@
 PACKRAT_VERSION=${1:-0.9.0}
 
 # install packrat
-R -e "install.packages('packrat')"
+sudo R -e "install.packages('packrat')"

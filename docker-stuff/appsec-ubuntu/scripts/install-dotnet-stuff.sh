@@ -2,12 +2,12 @@
 
 PAKET_VERSION=${1:-8.0.0}
 
-# setup
-dotnet tool install --global Paket --version $PAKET_VERSION
+# install
+sudo dotnet tool install --global Paket --version $PAKET_VERSION
 
-# finish
-echo "export PATH=$PATH:/root/.dotnet/tools" >> $HOME/.bashrc
-exec /bin/bash
+# config
+sudo mv /root/.dotnet $HOME/.dotnet
+sudo chown -R $APPSEC_USER:$APPSEC_GROUP $HOME/.dotnet
 
 # nuget is already in dotnet sdk
 # ex: dotnet add package <nuget package>

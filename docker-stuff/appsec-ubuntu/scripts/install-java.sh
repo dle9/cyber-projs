@@ -1,14 +1,15 @@
 #!/bin/bash
-su $APPSEC_USER
 
 JAVA_VERSION=${1:-8}
 
 # install
-apt-get update -y \
-&& apt-get install -y openjdk-$JAVA_VERSION-jdk \
-&& apt-get clean
+sudo apt-get update -y \
+&& sudo apt-get install -y openjdk-$JAVA_VERSION-jdk \
+&& sudo apt-get clean
 
 # update certs
+sudo apt-get install -y ca-certificates-java \
+&& sudo update-ca-certificates
 
 # env vars
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/" >> $HOME/.bashrc

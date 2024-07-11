@@ -1,6 +1,8 @@
 #!/bin/bash
 
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/.dotnet/tools" >> $HOME/.bashrc
 exec /bin/bash
+
 echo "Installed package versions:"
 
 echo "java: $(java -version 2>&1 | awk -F '"' '/version/ {print $2}')"
@@ -13,7 +15,7 @@ echo "gradle: $(gradle -v 2>&1 | awk '/Gradle/ {print $2}')"
 echo "python3.9: $(python3.9 --version 2>&1 | awk '{print $2}')"
 echo "pip: $(pip --version | awk '{print $2}')"
 echo "pipenv: $(pipenv --version 2>&1)"
-echo "poetry: $(poetry --version 2>&1 | awk '{print $3}')"
+echo "poetry: $(poetry --version 2>&1 | awk '{print $3}' | sed 's/.$//')"
 echo "ruby: $(ruby -v | awk '{print $2}')"
 echo "rbenv: $(rbenv -v | awk '{print $2}')"
 echo "ruby-build: $(ruby-build --version | awk '{print $2}')"
@@ -25,9 +27,7 @@ echo "composer: $(composer --version | awk '{print $3}')"
 echo "php plugins: $(php -m)"
 echo "cocoapods: $(pod --version)"
 echo "R: $(R --version | head -n 1 | awk '{print $3}')"
-echo "packrat: $(R -e "packageVersion('packrat')" | grep -o '[0-9]*\.[0-9]*\.[0-9]*')"
-echo "paket: $(mono paket.exe --version)"
+echo "packrat: $(R -e "packageVersion('packrat')" | grep -o '[0-9]*\.[0-9]*\.[0-9]*' | sed -n '2p')" 
 echo "dotnet-sdk: $(dotnet --version)"
-echo "dotnet cli: $(dotnet --list-sdks | tail -1 | awk '{print $1}')"
-echo "nuget: $(nuget help | grep -o '[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*')"
-echo "cargo: $(cargo --version | awk '{print $2}')"a
+echo "paket: $(paket --version)"
+echo "cargo: $(cargo --version | awk '{print $2}')"

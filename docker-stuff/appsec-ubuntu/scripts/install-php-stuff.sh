@@ -3,6 +3,7 @@
 COMPOSER_VERSION=${1:-2.6.6}
 
 # get installer
+cd /tmp
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 
 # verify
@@ -12,7 +13,7 @@ php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b3
 php composer-setup.php --version=$COMPOSER_VERSION
 
 # make it global
-mv composer.phar /usr/local/bin/composer
+sudo mv composer.phar /usr/local/bin/composer
 
 # clean
 php -r "unlink('composer-setup.php');"

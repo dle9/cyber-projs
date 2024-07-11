@@ -1,5 +1,4 @@
 #!/bin/bash
-su $APPSEC_USER
 
 CARGO_VERSION=${1:-1.70.0}
 
