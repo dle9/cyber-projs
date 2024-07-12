@@ -40,3 +40,7 @@ echo "packrat: $(R -e "packageVersion('packrat')" | grep -o '[0-9]*\.[0-9]*\.[0-
 echo "dotnet-sdk: $(dotnet --version)"
 echo "paket: $(paket --version | awk '{print $3}')"
 echo "cargo: $(cargo --version | awk '{print $2}')"
+
+# cleanup
+rm -rf $HOME/tmp
+sudo rm -rf /scripts

@@ -62,5 +62,3 @@ RUN /scripts/init.sh \
 
 # set the path, show versions of installations
 RUN /scripts/finish.sh
-
-# cleanup
