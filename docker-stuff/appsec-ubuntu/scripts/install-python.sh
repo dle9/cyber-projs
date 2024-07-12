@@ -2,19 +2,17 @@
 
 # install python 3.9
 sudo apt-get update -y \
-&& sudo apt-get install -y pip \
 && sudo apt-get install software-properties-common -y \
 && sudo add-apt-repository ppa:deadsnakes/ppa -y \
 && sudo apt-get install -y python3.9
 
-# remove python 3.12
-sudo apt remove python3.12 -y \
-&& sudo apt purge python3.12 -y \
-&& sudo apt autoremove -y
+# force link 3.9 to python3 command
+sudo ln -sf /usr/bin/python3.9 /usr/bin/python3
 
-# link it up
-sudo ln -s /usr/bin/python3.9 /usr/bin/python3
+# install pip for 3.9
+cd $HOME/tmp
+sudo apt-get install -y python3.9-distutils
+sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py 
 
-# clean
-rm get-pip.py
-exec /bin/bash
+sudo rm get-pip.py

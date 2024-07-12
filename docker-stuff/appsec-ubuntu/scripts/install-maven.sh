@@ -22,7 +22,10 @@ sudo apt-get -y update \
 && sudo apt-get install -y maven
 
 # env vars
-echo "export MAVEN_HOME=/usr/share/maven" >> $HOME/.bashrc
+# echo "export MAVEN_HOME=/usr/share/maven" >> $HOME/.bashrc
+echo "export MAVEN_HOME=$APPSEC_TOOL_DIR/maven" >> $HOME/.bashrc
 echo "export MAVEN_CONFIG=$HOME/.m2" >> $HOME/.bashrc 
-echo "export PATH=$PATH:$MAVEN_HOME/bin" >> $HOME/.bashrc
 exec /bin/bash
+
+# config
+sudo chown -R $APPSEC_USER:$APPSEC_GROUP $APPSEC_TOOL_DIR/maven

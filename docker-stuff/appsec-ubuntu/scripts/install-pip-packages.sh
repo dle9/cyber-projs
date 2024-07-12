@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# poetry
-cd /tmp
-curl -sSL https://install.python-poetry.org | python3 -
+# pipenv
+$HOME/.local/bin/pip install pipenv
 
-# finish
-echo "export PATH=$PATH:$HOME/.local/bin" >> $HOME/.bashrc
-exec /bin/bash
+# poetry
+cd $HOME/tmp
+sudo curl -sSL https://install.python-poetry.org | python3 -
+

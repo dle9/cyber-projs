@@ -3,8 +3,8 @@
 NODE_VERSION=${1:-21.x}
 
 # setup
-cd /tmp
-curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION} -o /tmp/nodesource.sh | bash /tmp/nodesource.sh
+cd $HOME/tmp
+sudo curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION} -o nodesource.sh | bash -
 
 # install
 sudo apt-get update -y \
@@ -12,4 +12,5 @@ sudo apt-get update -y \
 && sudo apt-get install -y npm
 
 # cleanup
-rm -f /tmp/nodesource.sh
+sudo rm -f nodesource.sh
+    

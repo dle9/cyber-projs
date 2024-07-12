@@ -6,10 +6,13 @@ SBT_VERSION=${2:-1.9.0}
 # get scala installer, coursier (cs)
 # includes latest versions of scala, sbt, scalac
 sudo apt-get update -y
-curl -Ls https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz -o cs.gz 
+
+# get installer
+cd $HOME/tmp
+sudo curl -Ls https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz -o cs.gz 
 
 # extract
-gzip -d cs.gz \
+sudo gzip -d cs.gz \
 && sudo chmod +x cs \
 && yes | ./cs setup
 
@@ -18,6 +21,5 @@ sudo $HOME/.local/share/coursier/bin/cs install scala:$SCALA_VERSION \
 && sudo $HOME/.local/share/coursier/bin/cs install scalac:$SCALA_VERSION \
 && sudo $HOME/.local/share/coursier/bin/cs install sbt:$SBT_VERSION
 
-# finish
-echo "export PATH=$PATH:$HOME/.local/share/coursier/bin" >> $HOME/.bashrc
-exec /bin/bash
+sudo chown -R $APPSEC_USER:$APPSEC_GROUP $HOME/.local/share/coursier
+sudo mv $HOME/.local/share/coursier $APPSEC_TOOL_DIR
