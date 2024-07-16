@@ -12,5 +12,5 @@ sudo apt-get install -y ca-certificates-java \
 && sudo update-ca-certificates
 
 # env vars
-echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/" >> $HOME/.bashrc
+echo "export JAVA_HOME=/usr/lib/jvm/java-$JAVA_VERSION-openjdk-amd64/" >> $HOME/.bashrc
 exec /bin/bash

@@ -7,6 +7,7 @@ $APPSEC_TOOL_DIR/maven/bin:\
 $APPSEC_TOOL_DIR/coursier/bin:\
 $HOME/.dotnet/tools:\
 $HOME/.local/bin:\
+$HOME/.rbenv/bin:\
 $HOME/.cargo/bin" >> $HOME/.bashrc
 # JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 # MAVEN_HOME=$APPSEC_TOOL_DIR/maven
@@ -29,12 +30,12 @@ echo "poetry: $(poetry --version 2>&1 | awk '{print $3}' | sed 's/.$//')"
 echo "ruby: $(ruby -v | awk '{print $2}')"
 echo "rbenv: $(rbenv -v | awk '{print $2}')"
 echo "ruby-build: $(ruby-build --version | awk '{print $2}')"
+echo "cocoapods: $(pod --version)"
 echo "go: $(go version | awk '{print $3}')"
 echo "scala: $(scala -version 2>&1 | awk -F ' ' '/version/ {print $5}')"
 echo "sbt: $(sbt --script-version 2>&1)"
 echo "php: $(php -v | head -n 1 | awk '{print $2}')"
 echo "composer: $(composer --version | awk '{print $3}')"
-echo "cocoapods: $(pod --version)"
 echo "R: $(R --version | head -n 1 | awk '{print $3}')"
 echo "packrat: $(R -e "packageVersion('packrat')" | grep -o '[0-9]*\.[0-9]*\.[0-9]*' | sed -n '2p')" 
 echo "dotnet-sdk: $(dotnet --version)"
@@ -45,5 +46,5 @@ echo "cargo: $(cargo --version | awk '{print $2}')"
 rm -rf $HOME/tmp
 sudo rm -rf /scripts
 
-sudo apt autoremove -y
-sudo apt clean -y
+sudo dnf autoremove
+sudo dnf clean all
