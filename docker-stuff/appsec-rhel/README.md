@@ -1,8 +1,8 @@
 ### build
-podman build --tag ubuntu:spgl-appsec .
+podman build --tag rhel:spgl-appsec .
 
 ### run
-podman run -it ubuntu:spgl-appsec bash
+podman run -it rhel:spgl-appsec bash
 
-### remove images
+### remove builds   
 podman rmi -a -f

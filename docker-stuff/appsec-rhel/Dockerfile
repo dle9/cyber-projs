@@ -9,13 +9,12 @@ ENV APPSEC_USER=appsec-user
 ENV APPSEC_USER_HOME=/home/${APPSEC_USER}
 ENV APPSEC_TOOL_DIR=${APPSEC_USER_HOME}/tools
 
-# initialize,configure environment
+# configure environment
 RUN /scripts/config.sh
 USER ${APPSEC_USER}
 WORKDIR ${APPSEC_USER_HOME}
 
-# build the container
-# init utilities and directories
+# initialize environment; build the container
 RUN /scripts/init.sh \
     ### java
     && /scripts/install-java.sh 1.8.0 \

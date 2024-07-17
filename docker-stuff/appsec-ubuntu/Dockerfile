@@ -51,12 +51,12 @@ RUN /scripts/init.sh \
     # paket, <more dotnet stuff here>
     && /scripts/install-dotnet-stuff.sh 8.0.0 \
 
-    ## python, pip, pipenv
+    ### python, pip, pipenv
     && /scripts/install-python.sh \
     # poetry <more pip packages here>
     && /scripts/install-pip-packages.sh \ 
 
-    ## cargo
+    ### cargo
     && /scripts/install-cargo.sh 1.70.0
 
 # set the path, show versions of installations
