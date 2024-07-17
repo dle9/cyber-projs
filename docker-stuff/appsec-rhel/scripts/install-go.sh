@@ -4,7 +4,7 @@ GO_VERSION=${1:-1.21.5}
 
 # install
 cd $HOME/tmp
-sudo dmf update -y
+sudo dnf update -y
 sudo curl -Ls https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz -o go.tar.gz
 
 # extract
