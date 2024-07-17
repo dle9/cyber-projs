@@ -19,7 +19,8 @@ MAVEN_VERSION=${1:-3.8.8}
 
 # install it
 sudo apt-get -y update \
-&& sudo apt-get install -y maven
+&& sudo apt-get install -y maven \
+&& sudo apt-get clean
 
 # env vars
 # echo "export MAVEN_HOME=/usr/share/maven" >> $HOME/.bashrc

@@ -9,7 +9,8 @@ sudo curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION} -o nodesource.s
 # install
 sudo apt-get update -y \
 && sudo apt-get install -y nodejs \
-&& sudo apt-get install -y npm
+&& sudo apt-get install -y npm \
+&& sudo apt-get clean
 
 # cleanup
 sudo rm -f nodesource.sh

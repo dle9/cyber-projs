@@ -3,7 +3,8 @@
 CARGO_VERSION=${1:-1.70.0}
 
 # setup
-sudo apt-get update -y
+sudo apt-get update -y \
+&& sudo apt-get clean
 
 # install
 cd $HOME/tmp

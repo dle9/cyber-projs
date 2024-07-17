@@ -5,7 +5,8 @@ SBT_VERSION=${2:-1.9.0}
 
 # get scala installer, coursier (cs)
 # includes latest versions of scala, sbt, scalac
-sudo apt-get update -y
+sudo apt-get update -y \
+&& sudo apt-get clean
 
 # get installer
 cd $HOME/tmp
