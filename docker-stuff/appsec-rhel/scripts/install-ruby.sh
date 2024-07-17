@@ -5,6 +5,7 @@ RUBY_VERSION=${1:-3.1.6}
 # setup
 sudo dnf update -y \
 && sudo dnf install gcc make redhat-rpm-config -y \
+&& sudo dnf clean all
 
 # install rbenv
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv

@@ -43,8 +43,10 @@ echo "paket: $(paket --version | awk '{print $3}')"
 echo "cargo: $(cargo --version | awk '{print $2}')"
 
 # cleanup
-rm -rf $HOME/tmp
-sudo rm -rf /scripts
-
-sudo dnf autoremove
-sudo dnf clean all
+rm -rf $HOME/tmp \
+&& rmdir $HOME/tmp \
+&& sudo mv /scripts/check_versions.sh $HOME/ \
+&& sudo rm -rf /scripts \
+&& sudo rmdir /scripts \
+&& sudo dnf autoremove \
+&& sudo dnf clean all

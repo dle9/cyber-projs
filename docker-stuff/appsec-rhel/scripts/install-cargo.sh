@@ -3,7 +3,8 @@
 CARGO_VERSION=${1:-1.70.0}
 
 # setup
-sudo dnf update -y
+sudo dnf update -y \
+&& sudo dnf clean all
 
 # install
 cd $HOME/tmp

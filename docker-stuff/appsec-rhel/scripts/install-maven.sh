@@ -3,9 +3,12 @@
 MAVEN_VERSION=${1:-3.8.8}
 INSTALL_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
-# install
+# setup
 sudo dnf -y update \
-&& sudo mkdir -p /usr/share/maven /usr/share/maven/ref \
+&& sudo dnf clean all
+
+# install
+sudo mkdir -p /usr/share/maven /usr/share/maven/ref \
 && sudo curl -fsSL -o $HOME/tmp/apache-maven.tar.gz ${INSTALL_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz
 
 # extract

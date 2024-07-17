@@ -62,6 +62,3 @@ RUN /scripts/init.sh \
 
 # set the path, show versions of installations
 RUN /scripts/finish.sh
-
-COPY check_versions.sh $APPSEC_USER_HOME/check_versions.sh
-RUN sudo chmod +x $APPSEC_USER_HOME/check_versions.sh

@@ -5,7 +5,8 @@ SBT_VERSION=${2:-1.9.0}
 
 # get scala installer, coursier (cs)
 # includes latest versions of scala, sbt, scalac
-sudo dnf update -y
+sudo dnf update -y \
+&& sudo dnf clean all
 
 # get installer
 cd $HOME/tmp

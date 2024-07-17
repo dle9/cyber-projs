@@ -2,7 +2,8 @@
 
 # setup
 dnf update -y \
-&& dnf install -y sudo
+&& dnf install -y sudo \
+&& dnf clean all
 
 # create group and user
 groupadd ${APPSEC_GROUP}
