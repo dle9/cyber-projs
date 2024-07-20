@@ -156,4 +156,7 @@ export GREP_COLORS='sl=49;39:cx=49;39:mt=49;31;1:fn=49;32:ln=49;33:bn=49;33:se=1
 
 export LS_COLORS='di=1;48;5;238'
 
-export PATH=$PATH:/c/Users/deric/.cargo/bin:/mingw64/bin:/c/Users/deric/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/c/Lab/globals
+export GOROOT=~/tools/programming/go/go
+export GOPATH=~/tools/programming/go
+export PATH=$PATH:/c/Users/deric/.cargo/bin:/mingw64/bin:/c/Users/deric/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/c/Lab/globals:$GOROOT/bin:$GOPATH/bin
+

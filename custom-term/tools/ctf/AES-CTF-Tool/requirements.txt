@@ -1,2 +1,0 @@
-pwntools==4.9.0
-pycryptodome==3.17
