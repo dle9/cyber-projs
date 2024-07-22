@@ -1,0 +1,6 @@
+wsl --shutdown
+diskpart
+select vdisk file="C:\Users\deric\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc\LocalState\ext4.vhdx"
+attach vdisk readonly
+compact vdisk
+detatch vdisk
