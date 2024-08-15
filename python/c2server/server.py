@@ -6,16 +6,19 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-# server config
+#####################
+#   server config   #
+#####################
 IP = "127.0.0.1" 
 PORT = 9999
 BUF = 1024
-
-# concurrency
 server_threads = []
 stop_server = threading.Event()
 
-# get user input port
+
+#####################
+#  user input port  #
+#####################
 if len(sys.argv) == 2:
     PORT = int(sys.argv[1])
 
@@ -53,6 +56,9 @@ def close_server(signal_received, frame):
     logging.info("Server closed")
     sys.exit(0)
 
+#####################
+# main server loop #
+#####################
 # SIGINT signal is caught and handled by close_server()
 signal.signal(signal.SIGINT, close_server)
 
@@ -71,7 +77,7 @@ while not stop_server.is_set():
         t.start()
 
     # handle SIGINT signal
-    except socket.error as e:
+    except Exception as e:
         if stop_server.is_set():
             break
 
