@@ -1,0 +1,52 @@
+### browser
+- buy domain
+- create ec2 instance
+	- create rsa pem key
+	- enable http, https
+
+### ec2 instance
+chmod 400 <your_key.pem>
+ssh -i <your_key.pem> ubuntu@<instance_ip>
+sudo apt update -y
+
+### apache website
+sudo apt install apache2 -y
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod rewrite
+
+### add it to apache
+sudo vim /etc/apache2/sites-available/dericle.conf
+```
+<VirtualHost *:80>
+    ServerName dericle.com
+    ServerAlias www.dericle.com
+    DocumentRoot /var/www/dericle
+    
+    <Directory /var/www/dericle>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/dericle-error.log
+    CustomLog ${APACHE_LOG_DIR}/dericle-access.log combined
+</VirtualHost>
+```
+sudo mkdir -p /var/www/dericle/
+sudo cp -r /path/to/project/dist/* /var/www/dericle/
+sudo chown -R www-data:www-data /var/www/dericle
+sudo chmod -R 755 /var/www/dericle
+sudo a2ensite dericle.conf
+sudo a2dissite 000-default.conf
+sudo vim /var/www/dericle/.htaccess
+```
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+```
+sudo systemctl restart apache2
