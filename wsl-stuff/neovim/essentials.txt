@@ -1,0 +1,11 @@
+# syntax highlighting 
+	- :TSINSTALL <lang>
+# open project file search
+  - SPACE ff
+# open active file search
+  - SPACE fb
+# open terminal 
+  - SPACE h
+# change theme
+  - SPACE th
+
