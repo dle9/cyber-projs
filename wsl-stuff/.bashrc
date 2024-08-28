@@ -153,6 +153,7 @@ alias rc='rustc'
 alias showmenu='xfce4-terminal --show-menubar'
 alias hidemenu='xfce4-terminal --hide-menubar'
 alias xbps='xbps-install'
+alias firefox='firefox >/dev/null 2>&1 &'
 
 alias sshdle='ssh -i ~/undone-key.pem ubuntu@3.130.20.170'
 export GREP_COLORS='sl=49;39:cx=49;39:mt=49;31;1:fn=49;32:ln=49;33:bn=49;33:se=1;36'
