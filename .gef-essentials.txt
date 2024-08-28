@@ -1,0 +1,17 @@
+# recon
+	- checksec
+	- elf-info
+	- vmmap
+	- xinfo <reg>
+		- dump it: dduf <func>
+	- info functions
+		- i fun
+	- info registers
+		- i r
+	- disass <func>
+
+# enter
+	- start
+	- continue: c
+	- run: r
+	- step: u

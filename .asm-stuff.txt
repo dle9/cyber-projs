@@ -1,0 +1,2 @@
+invoke system call
+	- int 0x80 

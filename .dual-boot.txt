@@ -1,0 +1,9 @@
+# create partition
+	- diskmgmt.msc
+	- shrink volume
+# download distro iso
+# download rufus usb tool
+	- burn iso to your usb
+# bios settings
+	- disable secure boot, fast boot
+	- clear security keys
