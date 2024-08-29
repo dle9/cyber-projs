@@ -21,3 +21,20 @@ sudo vim /etc/modprobe.d/nouveau.conf
 sudo depmod -a
 sudo grub-mkconfig --output=/boot/efi/EFI/<name>/grub.cfg
 sudo reboot
+
+# better touchpad controls
+sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf
+```
+Section "InputClass"
+	Identifier "libinput touchpad catchall"
+	MatchIsTouchpad "on"
+	MatchDevicePath "/dev/input/event*"
+	Driver "libinput"
+	Option "Tapping" "on"
+	Option "NaturalScrolling" "true"
+	Option "ClickMethod" "clickfinger"
+	Option "TappingButtonMap" "lrm"
+	Option "DisableWhileTyping" "true"
+EndSection
+
+```
