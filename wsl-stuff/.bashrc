@@ -9,7 +9,7 @@ case $- in
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
+
 HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
@@ -120,7 +120,7 @@ name=$(tput setaf 67)
 path=$(tput setaf 74)
 
 #export PS1="\n\[$(tput setaf 223)\][\[\e[4;38;5;47m\]$(tput setaf 66)\]\h\[$(tput setaf 0)\]\[$(tput sgr0)\]\[$(tput setaf 223)] $(tput setaf 34)\]\w \[$(tput sgr0)\]\n\[$(tput setaf 66)\]>\[$(tput setaf 255)\] "
-export PS1="\n\[${path}\][\[\e[4;38;5;47m\]${name}\]\h\[$(tput setaf 0)\]\[$(tput sgr0)\]\[${path}] ${path}\]\w\[$(tput sgr0)\]\n\[${name}\]>\[$(tput setaf 255)\] "
+export PS1="\n\[${path}\][\[\e[4;38;5;47m\]${name}\]\u@\h\[$(tput setaf 0)\]\[$(tput sgr0)\]\[${path}] ${path}\]\w\[$(tput sgr0)\]\n\[${name}\]>\[$(tput setaf 255)\] "
 
 
 alias ls='ls --color=auto'
@@ -150,6 +150,10 @@ alias cai='cargo install'
 
 alias ru='rustup'
 alias rc='rustc'
+alias showmenu='xfce4-terminal --show-menubar'
+alias hidemenu='xfce4-terminal --hide-menubar'
+alias xbps='xbps-install'
+alias firefox='firefox >/dev/null 2>&1 &'
 
 alias sshdle='ssh -i ~/undone-key.pem ubuntu@3.130.20.170'
 export GREP_COLORS='sl=49;39:cx=49;39:mt=49;31;1:fn=49;32:ln=49;33:bn=49;33:se=1;36'

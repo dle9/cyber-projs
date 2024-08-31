@@ -1,0 +1,40 @@
+# set up network
+nmcli connection add \
+  type wifi \
+  connection.id PROFILE_NAME \
+  wifi.ssid SSID \
+  wifi.mode infrastructure \
+  wifi-sec.key-mgmt wpa-eap \
+  802-1x.eap peap \
+  802-1x.identity IDENTITY \
+  802-1x.phase2-auth mschapv2
+
+# partition+filesystem
+- 1 gb: type:efi, filesys: vfat on /boot/efi	
+- x gb: type:linux, filesys:ext4
+
+# disable nvidia shit
+sudo vim /etc/default/grub
+	+ GRUB_CMDLINE_LINUX="module_blacklist=nouveau"
+sudo vim /etc/modprobe.d/nouveau.conf
+	+ blacklist nouveau
+sudo depmod -a
+sudo grub-mkconfig --output=/boot/efi/EFI/<name>/grub.cfg
+sudo reboot
+
+# better touchpad controls
+sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf
+```
+Section "InputClass"
+	Identifier "libinput touchpad catchall"
+	MatchIsTouchpad "on"
+	MatchDevicePath "/dev/input/event*"
+	Driver "libinput"
+	Option "Tapping" "on"
+	Option "NaturalScrolling" "true"
+	Option "ClickMethod" "clickfinger"
+	Option "TappingButtonMap" "lrm"
+	Option "DisableWhileTyping" "true"
+EndSection
+
+```
