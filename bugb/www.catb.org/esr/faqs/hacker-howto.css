@@ -1,0 +1,10 @@
+/* Hacker HOWTO File stylesheet */
+
+/* for the jargon file itself */
+div.caption	{text-align: center; font-weight: bold;}
+.mediaobject	{text-align: center;}
+
+/* handles translation of <center> by tidy */
+h1, h2, h3	{font-family: Helvetica, Univers, sans-serif}
+h1.c1		{text-align: center;}
+p.c2		{font-weight: bold}

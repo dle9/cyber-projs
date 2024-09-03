@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta description='Refactoring your way to wizardliness'><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>How To Learn Hacking</title><link rel="stylesheet" type="text/css" href="hacker-howto.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /></head><body><div class="article"><div class="titlepage"><div><div><h2 class="title"><a id="index"></a>How To Learn Hacking</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Eric</span> <span class="othername">Steven</span> <span class="surname">Raymond</span></h3><div class="affiliation"><span class="orgname"><a class="ulink" href="http://catb.org/~esr/" target="_top">
+    Thyrsus Enterprises</a><br /></span><div class="address"><p><br />
+    <code class="email">&lt;<a class="email" href="mailto:esr@thyrsus.com">esr@thyrsus.com</a>&gt;</code><br />
+    </p></div></div></div></div><div><p class="copyright">Copyright © 2014 Eric S. Raymond</p></div><div><div class="revhistory"><table style="border-style:solid; width:100%;" summary="Revision History"><tr><th align="left" valign="top" colspan="3"><strong>Revision History</strong></th></tr><tr><td align="left">Revision 1.2</td><td align="left">2014-11-30</td><td align="left">esr</td></tr><tr><td align="left" colspan="3">
+	 New section on being original.
+      </td></tr><tr><td align="left">Revision 1.1</td><td align="left">2014-11-23</td><td align="left">esr</td></tr><tr><td align="left" colspan="3">
+	 Incorporated feedback from G+, including good suggestions by
+	 Peter da Silva and John D. Bell.
+      </td></tr><tr><td align="left">Revision 1.0</td><td align="left">2014-11-21</td><td align="left">esr</td></tr><tr><td align="left" colspan="3">
+	 Initial version.
+      </td></tr></table></div></div></div><hr /></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="sect1"><a href="#intro">What Is Hacking?</a></span></dt><dt><span class="sect1"><a href="#idm45418026902272">Stages of Learning How To Hack</a></span></dt><dt><span class="sect1"><a href="#idm45418026893328">The Incremental-Hacking Cycle</a></span></dt><dt><span class="sect1"><a href="#idm45418026864704">Developing Your Design Sense</a></span></dt><dt><span class="sect1"><a href="#idm45418022175776">Being original</a></span></dt></dl></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="intro"></a>What Is Hacking?</h2></div></div></div><p>The <span class="quote">“<span class="quote">hacking</span>”</span> we'll be talking about in this
+document is exploratory programming in an open-source environment.  If
+you think <span class="quote">“<span class="quote">hacking</span>”</span> has anything to do with computer
+crime or security breaking and came here to learn that, you can go
+away now.  There's nothing for you here.</p><p>Translations of this document are available in:
+<a class="ulink" href="http://www.forallworld.com/hogyan-kell-tanulni-hacker/" target="_top">Hungarian</a>
+</p><p>Hacking is primarily<a href="#ftn.idm45418026495008" class="footnote" id="idm45418026495008"><sup class="footnote">[1]</sup></a> a style of programming,
+and following the recommendations in this document can be an effective
+way to acquire general-purpose programming skills.  This path is not
+guaranteed to work for everybody; it appears to work best for those
+who start with an above-average talent for programming and a fair
+degree of mental flexibility.  People who successfully learn this
+style tend to become generalists with skills that are not strongly
+tied to a particular application domain or language.</p><p>Note that one can be doing <span class="emphasis"><em>hacking</em></span> without
+being a <span class="emphasis"><em>hacker</em></span>. <span class="quote">“<span class="quote">Hacking</span>”</span>, broadly
+speaking, is a description of a method and style;
+<span class="quote">“<span class="quote">hacker</span>”</span> implies that you hack, and are also attached to
+a particular <a class="ulink" href="http://catb.org/~esr/faqs/hacker-howto.html" target="_top">culture</a> or
+historical tradition that uses this method. Properly,
+<span class="quote">“<span class="quote">hacker</span>”</span> is an honorific bestowed by other hackers.</p><p>Hacking doesn't have enough formal apparatus to be a
+full-fledged methodology in the way the term is used in software
+engineering, but it does have some characteristics that tend to set it
+apart from other styles of programming.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p><span class="emphasis"><em>Hacking is done on open source.</em></span> Today,
+hacking skills are the individual micro-level of what is called
+<span class="quote">“<span class="quote">open source development</span>”</span> at the social
+macro-level. <a href="#ftn.idm45418026909600" class="footnote" id="idm45418026909600"><sup class="footnote">[2]</sup></a> A programmer working in the hacking style
+expects and readily uses peer review of source code by others to
+supplement and amplify his or her individual ability.</p></li><li class="listitem"><p><span class="emphasis"><em>Hacking is lightweight and exploratory.</em></span>
+Rigid procedures and elaborate a-priori specifications have 
+no place in hacking; instead, the tendency is try-it-and-find-out with 
+a rapid release tempo.</p></li><li class="listitem"><p><span class="emphasis"><em>Hacking places a high value on modularity and reuse.</em></span>
+In the hacking style, you try hard never to write a piece of code that
+can only be used once.  You bias towards making general tools or
+libraries that can be specialized into what you want by freezing some
+arguments/variables or supplying a context.</p></li><li class="listitem"><p><span class="emphasis"><em>Hacking favors scrap-and-rebuild over
+patch-and-extend.</em></span> An essential part of hacking is ruthlessly
+throwing away code that has become overcomplicated or crufty, no
+matter how much time you have invested in it.</p></li></ul></div><p>The hacking style has been closely associated with the technical
+tradition of the Unix operating system<a href="#ftn.idm45418026904272" class="footnote" id="idm45418026904272"><sup class="footnote">[3]</sup></a></p><p>Recently it has become evident that hacking blends well with the
+<span class="quote">“<span class="quote">agile programming</span>”</span> style.  Agile techniques such as pair
+programming and feature stories adapt readily to hacking and
+vice-versa.  In part this is because the early thought leaders of
+agile were influenced by the open source community. But there has
+since been traffic in the other direction as well, with open-source
+projects increasingly adopting techniques such as test-driven
+development.</p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm45418026902272"></a>Stages of Learning How To Hack</h2></div></div></div><p>Learning to compose music has three stages.  First, you have to
+learn the basic mechanical technique of an instrument — fingering and
+how to play scales.  Then you have to train your ear to understand
+musical patterns.  Finally, you must learn how to recombine musical
+patterns into original creations.  Hacking is similar.</p><p>The hacking equivalent of fingering is learning the
+capabilities of programming languages, and the mechanics of using
+tools like editors, interpreters, and compilers. (If you don't
+understand these terms, see <a class="ulink" href="http://www.tldp.org/HOWTO/Unix-and-Internet-Fundamentals-HOWTO/index.html" target="_top">
+The Unix and Internet Fundamentals HOWTO</a>.)  We won't cover
+those mechanics here as they vary too much according to what language
+you're using.  Tutorials for all the languages you might want to use
+are available on the Web; use a search engine.</p><p>The equivalent of playing scales is writing small programs,
+alone.  Unfortunately, playing scales (a) doesn't teach you anything
+about music, and (b) is boring as hell.  Similarly, writing toy
+programs doesn't tend to teach you much about hacking, and (b) will
+tend to de-motivate you unless the program immediately solves a
+problem you care about.</p><p>Most formal programming instruction gets to playing scales and stops.
+Thus, it tends to produce coders who are poor at collaborating with each other
+and have the equivalent of no ear for music — a poor feel for
+software design and architecture.</p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm45418026893328"></a>The Incremental-Hacking Cycle</h2></div></div></div><p>There is a better way to learn. I call it the
+incremental-hacking cycle.</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>First, pick a program that does something you are interested in.
+Ideally, it should be a program you use regularly and have opinions
+about.  The next best thing is a program you don't normally use, but
+that does something you think is interesting.  For this learning
+method to work, you should avoid trying to hack on code that bores
+you.</p><p>The program you choose doesn't have to do anything serious. 
+Many programmers have honed their skills by improving games that they
+enjoyed. The only drawback to this is that modern games are often
+quite large and complicated, and may be beyond the grasp of a
+raw beginner.  For this reason, you may want to investigate one 
+of the classic text-oriented games that still survive; nethack 
+is a prime example, and there are many others.</p></li><li class="step"><p>If you don't already know the program, learn how to
+use it.  Read the documentation.  Develop a mental model of how
+it works.</p></li><li class="step"><p>Pick a small feature to change or add.</p></li><li class="step"><p>Search the code until you find the part you need to modify.</p><p>Note: you should specifically <span class="emphasis"><em>not</em></span> try to
+read the entire program.  You will just exhaust and frustrate
+yourself if you do that. Instead, use the module structure of the code
+to zero in on just the part you need to understand.  Along the way,
+you will learn things about how the whole program fits
+together.</p><p>It's a good exercise to add explanatory comments and notes to
+the code as you figure out things about it.  This will help your
+memory, and will help you organize your thoughts as well.</p></li><li class="step"><p>Make, test, debug, and <span class="emphasis"><em>document</em></span> your change.</p><p>Documenting your change is important. If you develop the habit
+of doing this early, you'll produce much higher-quality work.</p></li><li class="step"><p>Send your change as a patch to the program maintainers. See the
+<a class="ulink" href="http://www.tldp.org/HOWTO/Software-Release-Practice-HOWTO/index.html" target="_top">Software
+Release Practice HOWTO</a> for tips on how to do this in an
+effective and polite way.</p><p>I originally described this as an optional step; a wise friend
+pointed out that probably I shouldn't have. Solitary noodling on your
+instrument is all very well for practice, but music is completed and
+validated when the creativity in it is heard by other people. Solitary
+noodling on your computer is similarly good for practice, but hacking
+is completed when other people <span class="emphasis"><em>use what you
+wrote</em></span>. That real-world test is important.</p><p>Sometimes (oftener when you are just starting) your patches will
+be rejected.  You need to learn to cope with this.  It doesn't mean
+you're doomed to fail in your quest; usually what it does mean is that
+you have not read the code carefully enough, or (just as usually) you
+have missed something important aboout the culture and practices of
+the developmemt group you are trying to contribute to.  These mistakes
+can be repaired.</p></li><li class="step"><p>Now, ask yourself: do I understand this entire program?</p><p>If yes, you're done.  If no, go back to step 3.  This time, pick a
+different and perhaps slightly more difficult thing to change.</p></li></ol></div><p>The point of this exercise is to learn how to sneak up on the
+problem of understanding a program, rather than trying to tackle all
+of the complexity at once.  As you go through this loop several times,
+you will gradually develop a more complete representation in your mind
+of the way the whole program fits together.  At some point you will
+reach a threshold where you understand it all — or anyway enough
+of it for whatever your final purpose is.</p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm45418026864704"></a>Developing Your Design Sense</h2></div></div></div><p>To train yourself, start small.  If possible, first do the
+incremental-hacking cycle as an exercise on very small programs or
+scripts, 10-50 lines.  These may be hard to find, as most programs of
+any use are larger than this.  Most programs this small are scripts in
+shell, Perl, Python, or Tcl; that's a trait to look for when trawling
+the Web for them.</p><p>When you have done the incremental-hacking cycle on several very
+small programs (or if you are unlucky enough to not find any suitable
+very small ones), try it on slightly larger programs.  Look for
+codebases in the range of 100-500 lines.</p><p>When you master that level, go to the order of magnitude, 1000-5000
+lines.  By the time you master the 1K-5K level, you will have entered the
+bottom end of the capability range of what is usually considered a skilled
+programmer.</p><p>At or before the 1K-5K level, you should occasionally begin to
+notice that you are having itches to change the
+<span class="emphasis"><em>structure</em></span> or <span class="emphasis"><em>organization</em></span> of
+a program, not just its features.  You may find yourself thinking
+<span class="quote">“<span class="quote">This code is ugly</span>”</span> and having feelings about making it
+prettier and cleaner.</p><p>When this happens, <span class="emphasis"><em>pay attention</em></span>.  This is
+your design sense trying to wake up.  Don't rush to patch in another
+feature.  Instead, start to explore the program that gives you this
+itch at a higher level.  <span class="emphasis"><em>Now</em></span> might be a good time
+to try to read all the code, but don't be too concerned if you can't; most
+programs are just too big and messy for gulping them down all at once
+to work.  Just try to get a grip on what you need to know to clean
+things up.</p><p>You are now entering the intermediate portion of learning to
+hack.  This involves not merely changing surface-visible features but
+doing what is called <span class="quote">“<span class="quote">refactoring</span>”</span> — reorganizing the
+code internally so that it is cleaner and has better architecture
+(better hiding of data, narrower interfaces between different parts,
+more functional separation among modules).</p><p>Once your design sense (your equivalent of musical ear) is
+activated, you'll often find that you start refactoring each program
+you work on as rapidly as the third or fourth time around the
+incremental-hacking cycle.</p><p>In fact, this is exactly how skilled hackers normally approach
+learning the code of large programs — by tinkering and refactoring
+and rewriting until they grok what is going on. You make small changes
+in order to learn how to make large ones.</p><p>If you successfully refactor three or four large systems, you will
+not just develop strong programming skills, you will be on your way to
+something much more rare and powerful: becoming a software architect,
+one who can do original design of large software systems.</p><p>This is the <span class="emphasis"><em>only way I know of</em></span> for fledgling
+software architects to train their design sense.  It may be the only
+way there is.</p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm45418022175776"></a>Being original</h2></div></div></div><p>In my analogy with music, I said that you eventually need to
+learn how to recombine musical patterns (which you have learned by
+listening to music and practicing performance) into original
+compositions. I chose that way of describing creativity carefully,
+because it applies to software even more than it does to music.</p><p>Before you have read and absorbed the lessons of a lot of code,
+you will probably not have in your head the pattern library you need
+to be creative on scales larger than very small ones. One purpose of
+doing the incremental-hacking cycle is to immerse yourself in a lot of
+code — at increasing complexity scales — under
+circumstances that provide you with motivation to keep reading.</p><p>Eventually you will lead group projects and do entirely original
+work. Do not feel you have to rush this or force it; if you give your
+skills time to mature, your first original composition will be better
+for it.  By contributing effectively to existing open-source projects
+you will learn the skills (including the communications skills) that
+you need to run your own projects.</p></div><div class="footnotes"><br /><hr style="width:100; text-align:left;margin-left: 0" /><div id="ftn.idm45418026495008" class="footnote"><p><a href="#idm45418026495008" class="para"><sup class="para">[1] </sup></a>It is certainly possible to
+hack things other than software, and people in the maker culture do
+it.  But the <span class="emphasis"><em>term</em></span> <span class="quote">“<span class="quote">hacking</span>”</span>
+originated among people who tinkered with software and still radiates
+out from there. Besides, the author is not really qualified to write
+about learning other kinds.</p></div><div id="ftn.idm45418026909600" class="footnote"><p><a href="#idm45418026909600" class="para"><sup class="para">[2] </sup></a>In former times, people hacked on closed source,
+when they could, because there was no alternative. Things have changed
+for the better.</p></div><div id="ftn.idm45418026904272" class="footnote"><p><a href="#idm45418026904272" class="para"><sup class="para">[3] </sup></a>Before 1983 or
+so the association between hacking and Unix was less strong, but the
+details of how that changed are now mainly relevant only to
+historians.</p></div></div></div></body></html>

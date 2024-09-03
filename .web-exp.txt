@@ -1,0 +1,7 @@
+- see all files the site uses
+- remove param going to the server
+- view page source
+- apache servers use .htacess --> domain.com/.htaccess
+	- domain.com/.DS_Store for stupid mac
+- uses xml?
+	- xxe

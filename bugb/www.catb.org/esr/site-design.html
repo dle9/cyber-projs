@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rev="made" href="mailto:esr@snark.thyrsus.com" />
+<link rel="stylesheet" href="http://www.catb.org/~esr/sitestyle.css" type="text/css" />
+<meta name="description" content="Why this website looks the way it does" />
+<meta name="keywords" content="" />
+<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+<title>Notes on the Design of This Site</title>
+</head>
+<body>
+
+<div id="Header">
+<table width="100%" cellpadding="0" summary="Canned page header">
+<tr>
+<td>Notes on the Design of This Site</td>
+<td align="right">
+<script language="JavaScript" src="../~esr/datestamp.js" type='text/javascript'></script>
+</td>
+</tr>
+</table>
+</div>
+
+<div id="Menu">
+	<hr/>
+	<a href="http://www.catb.org/~esr" title="My home page">Home Page</a><br />
+	<a href="http://www.catb.org/~esr/sitemap.html" title="Map of the site">Site Map</a><br />
+	<a href="http://www.catb.org/~esr/software.html" title="Software I maintain">Software</a><br />
+	<a href="http://www.catb.org/~esr/projects.html" title="My projects">Projects</a><br />
+	<a href="http://www.catb.org/~esr/faqs/" title="My FAQ documents">HOWTOs</a><br />
+	<a href="http://www.catb.org/~esr/writings/" title="Essays and ruminations">Essays</a><br />
+	<a href="http://www.catb.org/~esr/personal.html" title="Portrait of the author">Personal</a><br />
+	<a href="http://www.ibiblio.org/esrblog/">Weblog</a><br/>	
+	<a href="http://www.catb.org/~esr/netfreedom/">Freedom!</a><br />
+	<a href="http://www.catb.org/~esr/guns/">Firearms!</a><br />
+	<hr/>
+</div>
+
+<div id="Content">
+
+<h1>Standards compliance</h1>
+
+<p><a href="http://www.anybrowser.org/campaign/"> <img
+src="graphics/w3c_ab.png" align="right" alt="viewable with any
+browser" border="0"/> </a>This site is a proud member of the <a
+href="http://www.anybrowser.org/campaign/">Viewable With Any
+Browser</a> campaign.</p>
+
+<p>I have made a concerted effort to keep the HTML on this site
+standard, clean, and portable.  These pages use <strong>no</strong>
+Netscape- or Internet Explorer-specific tags, and the few bits of
+JavaScript are ECMA-compliant.</p>
+
+<p>This site uses JavaScript only to generate the last-modified dates 
+at the upper-right-hand of each new-style page.  You can disable JavaScript
+without missing much, therefore.</p>
+
+<p>The HTML has been designed to degrade gracefully in a non-CSS-aware
+browser.  The contents of the left menu bars should appear before main 
+text.</p>
+
+<p>Almost all the HTML is XHTML (4.0.1 transitional) that has been
+validated.</p>
+
+<p>If you see broken images, get a
+<a href="http://www.libpng.org/pub/png/pngapbr.html">browser that
+can view PNGs</a>. <img src="http://www.catb.org/esr/graphics/pngnow.png" align="right" width="98"
+height="31" alt="PNG NOW! image" /> This is a GIF-free site.  The GIF
+patents are expired everywhere now, but PNG has better quality per 
+compressed byte and I feel cleaner when I use it..</p>
+
+<p>This site uses no Flash, Shockwave, or other such proprietary garbage.</p>
+
+<h1>Reporting problems</h1>
+
+<p>There are two kind of bugs that can cause this website to render badly
+in your browser.  One is problems in my HTML/CSS/JavaScript; the other
+is bugs in your browser, including failures to comply with W3C
+standards.</p>
+
+<p>I am quite willing to repair broken code on my site.  But my willingness
+to `fix' the site to accommodate every crappy browser ever written is
+limited. Consider this incentive to get a browser that actually
+works.  On the other hand, if you point out where I'm not
+standards-conformant it will generally be fixed quickly.</p>
+
+<p>In practice, this means that you may trip over some of the
+semi-infinite number of bugs in Internet Explorer or Opera, especially
+older versions like IE 3. I test with the Linux versions of Mozilla
+and Konqueror, and occasionally with the Mac port of Netscape 4.x.</p>
+
+<p>If you trip over an apparent bug, try to find out if it replicates
+under a browser that isn't broken.  Then try making a copy of the page 
+and removing stuff until it renders. I'd do this myself, but I don't
+have a Windows box to test with.  And don't want to.</p>
+
+<p>Reports of broken links are always welcome.</p>
+
+<h1>Design philosophy</h1>
+
+<p>This site is designed to convey information, not show off browser tricks
+or impress anyone with my graphic artistry.  You'll encounter three styles
+of page here:</p>
+
+<ul> 
+<li><p>High-style pages like this one and my home page.  These
+use CSS, and tend to be either link collections or lightweight
+text.</p></li>
+
+<li><p>Longer essays generated from DocBook-XML masters. You can spot
+these by the revision histories and contents pages up front.</p></li>
+
+<li><p>Old-style HTML. Spot these by the canned header and footer with
+links to my home page and the sitemap in it.  Sometimes I'll convert these
+to high style if you prod me. Sometimes I won't; some pages look better
+in running Times-Roman style without a title or nav bar.</p></li>
+</ul>
+
+<p>For extended discussion of the principles behind this site design, see
+<a href='http://www.catb.org/~esr/html-hell.html'>The HTML Hell Page</a>.</p>
+
+</div>
+
+</body>
+</html>
+
+<!--
+Local Variables:
+compile-command: "(cd ~/WWW; upload site-design.html)"
+End:
+-->
+

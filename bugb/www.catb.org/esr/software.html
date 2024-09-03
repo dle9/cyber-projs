@@ -1,0 +1,664 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<link rev="made" href="mailto:esr@snark.thyrsus.com" />
+<link rel="stylesheet" href="sitestyle.css" type="text/css" media='all'/>
+<link rel="stylesheet" href="http://www.catb.org/esr/sitestyle-print.css" type="text/css" media='print'/>
+<meta name="description" content="The open-source software I maintain" />
+<title>Eric Raymond's Open-Source Works</title>
+</head>
+<body>
+
+<div id="Header">
+    <div class="HeaderInner" id="left"><h2>Eric Raymond's Open-Source Works</h2></div>
+    <div class="HeaderInner" id="right"><h2><script src="http://www.catb.org/esr/datestamp.js" type='text/javascript'></script></h2></div>
+</div>
+
+<div id="Menu">
+	<hr/>
+	<a href="http://www.catb.org/~esr" title="My home page">Home Page</a><br />
+	<a href="http://www.catb.org/~esr/whatsnew.html" title="What's new on this site">What's New</a><br />
+	<a href="http://www.catb.org/~esr/sitemap.html" title="Map of the site">Site Map</a><br />
+	<a href="http://www.catb.org/~esr/software.html" title="Software I maintain">Software</a><br />
+	<a href="http://www.catb.org/~esr/projects.html" title="My projects">Projects</a><br />
+	<a href="http://www.catb.org/~esr/faqs/" title="My FAQ documents">HOWTOs</a><br />
+	<a href="http://www.catb.org/~esr/writings/" title="Essays and ruminations">Essays</a><br />
+	<a href="http://www.catb.org/~esr/personal.html" title="Portrait of the author">Personal</a><br />
+	<a href="http://www.ibiblio.org/esrblog/">Weblog</a><br/>	
+	<a href="http://www.catb.org/~esr/netfreedom/">Freedom!</a><br />
+	<a href="http://www.catb.org/~esr/guns/">Firearms!</a><br />
+	<hr/>
+</div>
+<div id="Content">
+
+<h1 align="center"></h1>
+
+<p>For years before open source went mainstream, I was one of the few
+full-time open-source hackers. I was one of the original GNU
+contributors back in the mid-1980s, and I've been at it ever
+since.</p>
+
+<p>This directory contains sources for standalone open-source
+packages I have either originated or now maintain.</p>
+
+<p>All of this stuff is Unix sources unless explicitly noted
+otherwise.</p>
+
+<h1>Communications and Internet</h1>
+
+<h2><a href='http://ntpsec.org'>NTPsec</a></h2>
+
+<p>A stripped down-security-hardened and generally improved version of
+the NTP reference code. Features code bulk reduced by a factor of 4, better
+monitoring and diagnostic tools, and Network Time Security.</p>
+
+<h2><a href='http://www.catb.org/gpsd/'>gpsd</a></h2>
+
+<p>gpsd is a service daemon that monitors a GPS attached to a serial or
+USB port, decodes the position/velocity/time information it sends,
+and republishes in a simple uniform format on an IANA-designated
+TCP/IP port.  This enables multiple applications to read from a GPS
+without contention.  The distribution also provides C and Python
+libraries to encapsulate the client side of talking with gpsd.</p>
+
+<h2><a href='http://www.catb.org/esr/cvs-fast-export'>cvssync</a></h2>
+
+<p>Shipped with rcs-fast-export, this a wrapper around rsync that can
+be used to mirror CVS repositories.  It knows about the access
+conventions of important hosting sites.</p>
+
+<h2><a href='http://www.catb.org/esr/irker'>irker</a></h2>
+
+<p>A message-relaying daemon useful for broadcasting efficiently to
+IRC channels.  The intended use case is for shipping commit
+notifications from version-control systems, and the distribution
+includes a hook script to do that.</p>
+
+<h2><a href='http://www.catb.org/esr/sshexport'>sshexport</a></h2>
+
+<p>A handy little Python tool for managing ssh credentials on remote
+sites.  Copes with all the fiddly bits like getting permissions right.
+(formerly ssh-installkeys)</p>
+
+<h2><a href='http://www.catb.org/esr/shipper'>shipper</a></h2>
+
+<p>A tool that builds on freecode-submit &mdash; an intelligent 
+shipping agent that knows how to deliver software releases to
+both private channels such as your hosted website and public channels 
+such as SourceForge</p>
+
+<h2><a href='http://www.catb.org/esr/coverity-submit'>coverity-submit</a></h2>
+
+<p>This is a tool for shipping static-checking requests to the
+Coverity public server. Handles all the details of running the
+Coverity front-end tool. bundling up the analysis results, shipping 
+them, and submitting a job card.  Supports multiple projects.</p>
+
+<h2><a href="http://sourceforge.net/projects/giflib/">giflib</a></h2>
+
+<p>The ubiquitous service library for rendering GIFs. I handed off the
+project 1994 to avoid problems with the U.S. patent system, but
+accepted back the lead in 2012. This code had the odd effect of making
+me virtually omnipresent; it seems nobody has ever bothered to write a
+replacement, and it's now ubiquitous in web browsers, cellphones and
+gaming consoles.  In a nicely ironic touch, it earned me an appearance
+in the credits of the Microsoft XBox.</p>
+
+<h2><a href="http://www.catb.org/esr/gif2png/">gif2png</a></h2>
+
+<p>This handy little converter turns GIF files into PNG files. With
+the distribution you get a Python script that can be used to
+convert an entire website, not only changing GIFs to PNGs but also
+patching HTML and PHP pages appropriately.  GIFs no longer have 
+dangerous patent problems, but PNG is still a better format.</p>
+
+<h2><a href="http://sng.sourceforge.net/">sng</a></h2>
+
+<p>This tool enables you to decompile PNGs into an
+information-preserving .sng text format that you can hack with a
+text editor. Then you can recompile the .sng back to a .png &mdash;
+handy if you need to add or edit some obscure ancillary PNG chunk
+that your graphics tools don't understand. Also handy if you want
+to generate PNGs programmatically using text tools.</p>
+
+<h2><a href="http://www.catb.org/esr/imgsizer/">imgsizer</a></h2>
+
+<p>This is a nifty little HTML authoring tool that will generate
+correct Netscape-style WIDTH and HEIGHT parameters for each of your
+IMG tags on an HTML page. This will allow the text portions of the
+page to load much faster. Requires that you have either identify(1)
+or a recent file(1) and rdjpegcom(1) installed. The RPM is
+architecture-independent. Requires Python.</p>
+
+<h2><a href="http://www.catb.org/esr/sitemap/">sitemap</a></h2>
+
+<p>A little Python script that makes a site map (HTML index page)
+from all HTML pages with META DESCRIPTION tags below the current
+directory. To see what the output looks like, browse <a
+href="http://www.catb.org/~esr/sitemap.html">my site map</a>. The RPM is
+architecture-independent.</p>
+
+<h1>Defenestration Tools</h1>
+
+<h2><a href="http://www.catb.org/esr/lookout/">lookout</a></h2>
+
+<p>This little Python script converts Outlook 97 addressbook export
+files to the KAB format used by KDE addressbooks. See the project
+page for details.</p>
+
+<h1>Documentation Tools</h1>
+
+<h2><a href="http://www.catb.org/esr/doclifter/">doclifter</a></h2>
+
+<p>They said it was impossible. They said I was mad! Well, they
+were right about the second part, but it really is possible to do
+automated conversion from troff markups like man, ms, and me to
+SGML/XML. BWAHAHAHA!</p>
+
+<h2><a href="http://www.catb.org/esr/xmlif/">xmlif</a></h2>
+
+<p>xmlif is a tool that interprets certain processing instructions in XML
+documents to support conditional emission of specified sections of the
+document.  It is intended to be used as a stage in an XML toolchain.
+Note: if you have Tim Waugh's xmlto(1) installed, you already have xmlif.
+</p>
+
+<h1>Useful Languages</h1>
+
+<h2><a href="http://www.catb.org/esr/cml2/">CML2</a></h2>
+
+<p>I wrote a language for solving configuration problems.  It has
+an embedded truth maintenance system and can handle a fairly
+rich constraint language.</p>
+
+<h1>Useless Languages</h1>
+
+<p>Implementing compilers for languages no one else is insane
+enough to touch with a ten-foot pole is a hobby of mine. Here are
+some of the sickest jokes in the history of language design &mdash; one
+intentional, the others unintentional. Both include documentation
+and chrestomathies of code in their source languages.</p>
+
+<h2><a href="http://www.catb.org/esr/intercal/">INTERCAL</a></h2>
+
+<p>The most perverse language of all time. I didn't design
+INTERCAL, nor did I write the classic and hilarious manual included
+here, but I revived the language with this compiler, which also
+features the first implementation of COME FROM with malice
+aforethought. It works by generating and then compiling C. Requires
+lex or flex and either bison or yacc.</p>
+
+<h2><a href="http://www.catb.org/esr/ieee-pilot/">IEEE Pilot</a></h2>
+
+<p>This weekend hack is a modern implementation of IEEE 1154-1991,
+the standard for the PILOT language. The design of PILOT is
+horrifyingly bad, and the PILOT standard hardly an exemplar of good
+practice, but this implementation was fun and includes some tricks
+that may be of interest to serious compiler writers. Most notably,
+it is both an interpreter for PILOT <em>and</em> a PILOT compiler.
+Requires lex and yacc.</p>
+
+<h2><a href="http://www.catb.org/esr/cupl/">CUPL</a></h2>
+
+<p>Another hideous old design, CUPL &mdash; Cornell University
+Programming Language. It looks something like a really archaic
+BASIC with linear-algebra builtins. I reverse-engineered this
+interpreter from the manual, written in 1966; the
+language-description parts of the manual are included in the docs.
+In 1.1 I added support for CUPL's immediate ancestor language,
+CORC. If you want to know what programming was like before
+interactive time-sharing, build this and find out. Requires either
+lex or flex, and bison or yacc.</p>
+
+<h2><a href="http://www.catb.org/esr/mad/">MAD</a></h2>
+
+<p>This program is a work of reconstructive archeology, a compiler for
+the Michigan Algorithmic Decoder (MAD) language from 1962.  It first
+translates MAD code into C, then uses the local C compiler to make an
+executable binary.  You will need Python and David Beazley's PLY
+module installed to run it.  A complete transcription of the 1962 MAD
+manual is included.</p>
+
+<p>If this sort of thing interests you, I keep other intriguingly
+horrible languages at the <a
+href="http://www.catb.org/retro/">Retrocomputing Museum</a>.</p>
+
+<h1>Programming Tools</h1>
+
+<h2><a href='http://www.catb.org/esr/tapview/'>tapview</a></h2>
+
+A tiny, zero-dependency viewer/filter for (TAP) Test Anything
+Protocol written in pure POSIX shell. Designed to be lightewiight
+enough that you can just embed it ib yiur project's test directory.
+
+<h2><a href='http://www.catb.org/esr/netdiff/'>netdiff</a></h2>
+
+Perform diff across network links. Takes two arguments which may be
+host:path pairs in the style of ssh/scp, makes temporary local copies
+as needed, applies diff(1). All options are passed to diff(1).
+Especially usefukl for comparing configuration durectories across
+machines.
+
+<h2><a href='http://www.catb.org/esr/ifdex/'>ifdex</a></h2>
+
+<p>Find configuration macros used in #ifdex/#ifndef/#elif lines.
+ Searches a C or C++ code tree attempting to report a list of
+ configuration macros - that is, symbols set by autoconf or some other
+ confoguration-management and/or build system during compiles.  Also
+ useful for catching stray and broken guard symbols.</p>
+
+<h2><a href='http://www.catb.org/esr/deheader/'>deheader</a></h2>
+
+<p>deheader analyzes C and C++ files to determine which header
+inclusions can be removed while still allowing them to compile.  This
+may result in substantial improvements in compilation time, especially
+on large C++ projects; it also sometimes exposes dependencies and
+cohesions of which developers were unaware.</p>
+
+<h2><a href='http://www.catb.org/esr/reposurgeon/'>reposurgeon</a></h2>
+
+<p>reposurgeon enables risky operations that version-control systems
+don't want to let you do, such as editing past comments and metadata
+and removing commits.  It works with any version control system that
+can export and import git fast-import streams, including git and hg
+and bzr.</p>
+
+<h2><a href='http://www.catb.org/esr/git-weave/'>git-weave</a></h2>
+
+<p> git-weave takes a tarball sequence and a metadata file and synthesizes
+a live repository. It can invert this, explode git repositories into
+sequences of per-commit tarballs. The DAG is expressed as a metadata file
+with mailbox-like entries.</a>
+
+<h2><a href='http://www.catb.org/esr/cvs-fast-export/'>cvs-fast-export</a></h2>
+
+<p>rcs-fast-export assembles changesets from the per-file changes in a CVS
+repository and can either report on them for human eyes or ship the
+history as a git fast-import stream.  Originally by Keith Packard
+around 2002; I took over in 2012, adding --fast-export mode and
+later a test suite.</p>
+
+<h2><a href='http://www.catb.org/esr/rcs-fast-import/'>rcs-fast-import</a></h2>
+
+<p>rcs-fast-import unpacks a git fast-import stream into an RCS file tree
+I wrote this as a prod at more recent and putatively more advanced
+version-control systems that don't have .fi importers yet.  If crufty
+old RCS can import these streams, why can't yours?</p>
+
+<h2><a href='http://www.catb.org/esr/src/'>SRC</a></h2>
+
+<p>Simple Revision Control is RCS reloaded - a file-oriented
+version-control system for cases where you have lots of single-file
+projects like HOWTOs or small scripts living in a single directory
+but don't want to commingle their histories.  This time it has 
+a decent modern UI resembling those of Subversion/git/Mercurial. 
+Also features integer sequential version numbering, embedded
+self-documentation, and very few switches :-).</p>
+
+<h2><a href='http://www.catb.org/esr/ctopy/'>ctopy</a></h2>
+
+<p>ctopy automates the parts of translating C source code to Python
+source code that are difficult for a human but easy for a
+machine. This allows a human programmer to concentrate on the
+nontrivial parts of the translation.</p>
+
+<h2><a href='http://www.catb.org/esr/loccount/'>loccount</a></h2>
+
+<p>Count source lines of code (SLOC) and logical lines of code (LLOC)
+in a sourve tree. Started out as a faster reimplementation of David
+Wheeler's sloccount, but now supports a richer feature set and an
+absurdly large number of languages.</p>
+
+<h2><a href='http://www.catb.org/esr/comparator/'>comparator</a></h2>
+
+<p>This program finds common code segments in large source trees very 
+quickly.  It may be useful as a plagiarism or copyright-infringement
+detector.</para>
+
+<h2><a href='http://www.catb.org/esr/ascii/'>ascii</a></h2>
+
+<p>My utility for displaying alternate names and notations of a
+given ASCII character, sort of an interactive reference chart. Also
+handy as a quick base converter for byte values. There is a <a
+href="http://www.english.w3.pl/ascii-2.6.pl.tar.gz">Polish
+version</a>.</p>
+
+<h2><a href="http://www.catb.org/esr/cstrings/">cstrings</a></h2>
+
+<p>My handy little tool for internationalization. Extracts string
+constants from C sources and generates in constant names,
+prepending an appropriate set of #defines to the C source. Good
+support for incrementally trying out conversions until you get what
+you want.</p>
+
+<h2><a href="http://www.catb.org/esr/hexd/">hexd</a></h2>
+
+<p>Everybody's favorite stupid utility, a hex dumper. This one
+mimics CP/M's and MS/DOS's dump format, either options to do lots
+of other semi-interesting things. Unusual of its kind in that it
+handles EBCDIC (I needed this capability once for reasons I've
+mercifully forgotten). Now with internationalization.  (Formerly
+just known as &lsquo;hex&rsquo; and later &lsquo;hexdump&rsquo; 
+because I didn't know of the BSD utility.)</p>
+
+<h2><a href="http://www.catb.org/esr/sccs2rcs/">sccs2rcs</a></h2>
+
+<p>A conversion script that takes SCCS version histories and maps
+them into RCS histories (change comments included). Requires the
+sccs(1) utility supported under BSD and SVr4, also csh. I didn't
+write this, but I fixed some portability bugs in it and added a
+useful option.</p>
+
+<h2><a href="http://www.exactcode.de/site/open_source/minised/">sed</a></h2>
+
+<p>This is the fast, small sed originally distributed in the GNU
+toolkit and still distributed with Minix. The GNU people ditched it
+when they built their own sed around an enhanced regexp package &mdash;
+but it's still better for some uses (in particular, faster and less
+memory-intensive). Now maintained by Ren&eacute; Rebe at Exactcode.</p>
+
+<h2><a href="http://www.catb.org/esr/semex/">semex</a></h2>
+
+<p>Once upon a time, I decided I needed to understand the System V
+semaphore features. I wrote this exerciser to help me. Use it to
+learn, or as a semaphore access method for shellscripts.</p>
+
+<h2><a href="http://www.catb.org/esr/showkey/">showkey</a></h2>
+
+<p>All this program does is read keystrokes and spit them back at you
+in a simple, printable form. This is one of these silly little
+utilities that you never think you'll need until some unexpected
+situation pops up and you have to have it. Then you get to be
+mugged by the details of tty-interface code, yippee. Never again!</p>
+
+<h2><a href="http://www.catb.org/esr/yacchack/">yacchack</a></h2>
+
+<p>My package for YACC parser encapsulation. Permits multiple YACC
+parsers in a single program.  Obsolete. really; Bison does this
+better.</p>
+
+<h2><a href='http://www.catb.org/esr/pytogo/'>pytogo</a></h2>
+
+<p>pytogo is a fast, crude, incomplete Python-to-Go translator meant to
+assist a human programmer in translating large volumes of Python to
+idiomatic Go, preserving comments and structure. It does the
+mechanical things that are easy for software but hard for humans,
+leaving a human free to concentrate on the hard parts like type
+annotations.</p>
+
+<h2><a href='http://www.catb.org/esr/blamecount/'>pytogo</a></h2>
+
+<p> A wrapper around git blame that shows lines-last-toched statistics
+for every contributor.  Optionally, generate a report that can be
+used in an Emacs compilation buffer to step through contribution
+bands for all users or for a specified user. </p>
+
+<h1>Device Drivers</h1>
+
+<h2>speaker-1.4 &#160;&#160;&#160;&#160;&#160;<a href="http://www.catb.org/esr/speaker-1.4.tar.gz">(source)</a></h2>
+
+<p>My speaker device driver for 386/486 boxes &mdash; permits you to
+play tunes on a PC-clone console speaker under UNIX. An older
+version was included with the NetHack distribution. This one has
+(untested) portability patches contributed by people who ported 1.3
+to 386bsd and Linux. The speaker driver used in
+FreeBSD/NetBSD/OpenBSD is a descendant of this code.</p>
+
+<h1>Games I've Written</h1>
+
+<h2><a href="http://www.catb.org/esr/ski/">ski</a></h2>
+
+<p>Imagine you are skiing down an infinite slope, facing such hazards as
+trees, ice, bare ground, and the man-eating Yeti!  Unfortunately,
+you have put your jet-powered skis on backwards, so you can't see
+ahead where you are going; only behind where you have been.  However,
+you can turn to either side, jump or hop through the air, teleport
+through hyperspace, launch nuclear ICBMs, and cast spells to call the
+Fire Demon.  And since the hazards occur in patches, you can
+skillfully outmaneuver them.  A fun and very silly game that proves
+you don't need fancy graphical user interfaces to have a good time.
+Originally by Mark Stevans in FORTAN; I ported it from C and added color.</p>
+
+<h2><a href="http://www.catb.org/esr/galaxis/">galaxis</a></h2>
+
+<p>My clone of Christian Franz's nifty little Macintosh game. Find
+the lifeboats adrift in interstellar space. Now with mouse support
+if you're using ncurses under xterm.</p>
+
+<h2><a href="http://www.catb.org/esr/wumpus/">wumpus</a></h2>
+
+<p>A piece of retrocomputing archeology &mdash; my exact clone of the
+classic Hunt The Wumpus game, exactly as it first appeared in 1974.
+Also includes an original but strangely similar game,
+superhack.</p>
+
+<h1>Games I've Hacked On</h1>
+
+<p>I often hack on existing games to improve them. Here's a
+selection of my favorites, customized in various ways.</p>
+
+
+<h2><a href="http://www.catb.org/esr/open-adventure/">bs</a></h2>
+
+<p>The classic Colossal Cave Adventure, shipped under an open-sourcer
+license with the approval of the game's original authors.  This is the
+2.5 version fromn 1995, sometimws called "430-point Adventure" -
+the last version the original authors released. It plays exactly like
+the original but has been extensively refactored and improved under
+the hood.</p>
+
+<h2>xlife-5.0 &#160;&#160;&#160;&#160;&#160;<a href="http://litwr2.atspace.eu/xlife.php">(source)</a></h2>
+
+<p>A full-featured X laboratory for the game of Life. This version
+has many features added since 3.0. Not least of these is my support
+for up to 8-state automata with arbitrary, editable transition
+tables and color used to display the states. Includes extensive
+pattern libraries for both Life and the Codd 8-state automaton.</p>
+
+<p>Note that this link now points offsite.  I haven't had enough time
+to maintain this code, and have handed it off to Vol Litwr.</p>
+
+<h2><a href="http://www.catb.org/esr/bs/">bs</a></h2>
+
+<p>My rewrite, with vastly improved screen interface, of Bruce
+Holloway's Battleships game. Not a very interesting game at that,
+the optimal strategy is too obvious &mdash; I just couldn't stand to
+leave the interface as mal-designed as it was.</p>
+
+<h2><a href="http://www.catb.org/esr/bluemoon/">bluemoon</a></h2>
+
+<p>My rewrite for ncurses of Tim Lister's enjoyable little Blue Moon
+solitaire. Has much better screen support. If you have a sufficiently
+recent version of ncurses on an Intel box, it will even display the
+IBM card-suit glyphs. (This used to be called just
+&ldquo;blue&rdquo;)</p>
+
+<h2><a href="http://www.catb.org/esr/vms-empire/">vms-empire</a></h2>
+
+<p>This is Chuck Simmons's C translations of VMS FORTRAN Empire, a
+solitaire version. Nobody seems to be maintaining it any more. I've
+colorized it and updated it for ANSI/POSIX C, and this version works
+with ncurses. The 1.2 version adds some speedups and corrects errors
+in the victory-odds table on the man page. 1.3 adds some GN U C
+cleanup. 1.4 adds an option to set the savefile name. I've renamed the
+project to "vms-empire" so it won't be confused with the several other
+empire projects out there, which are mostly elaborate multiplayer
+network games with X interfaces.</p>
+
+<h2><a href="http://www.catb.org/esr/greed/">greed</a></h2>
+
+<p>I added color support and some polish to Matt Day's game. He
+dropped out of sight, so I maintain it. Version 3.3 adds modern
+packaging.</p>
+
+<h2><a href="http://www.catb.org/esr/tetrix/">tetrix</a></h2>
+
+<p>This game was originally Quentin Neill's UNIX port of an Amiga
+tetris. I colorized it and cleaned up some portability problems.
+This version works with Linux ncurses.</p>
+
+<h2><a href='http://www.catb.org/esr/super-star-trek'>Super Star Trek</a></h2>
+
+<p>The classic ancient FORTRAN game from the days of mainframes and
+minicomputers, reloaded &mdash; retains considerable play value
+even today.</p>
+
+<h1>Miscellanea</h1>
+
+<h2><a href="http://www.catb.org/esr/morse/">morse</a></h2>
+<p>morse is a Morse-code training program for aspiring radio hams.  It
+can generate random tests or simulated QSOs resembling those used in
+the ARRL test (a QSO generator is included).  There are a plethora of
+options to vary the training method.  In one of the simpler modes,
+this program will take text from standard input and render it as
+Morse-code beeps.</p>
+
+<h2><a href="http://www.catb.org/esr/deal/">deal</a></h2>
+
+<p>A little program that computes tables of non-replacement
+probabilities (as in, card draws from a Magic: The Gathering deck).
+The mathematical guts are from Jeremy York's `cardprobs', but this
+has a vastly improved interface and (gasp!) documentation. Version
+2.0 adds more capabilities.</p>
+
+<h2><a href="http://www.catb.org/esr/xve/">xve</a></h2>
+
+<p>X Video Explorer, help for people trying to configure video
+timings for XFree86. You'll need the Hitchhiker's Guide To X386
+Video Timing to use this. It's pretty obsolete; use <a
+href="http://without.netpedia.net/kvideogen/">kvideogen</a>
+instead.</p>
+
+<h2><a href="http://www.catb.org/esr/letterize/">letterize</a></h2>
+
+<p>This program helps you find letter mnemonics for phone numbers
+by filtering them for pronounceability. Typically, it gives you
+only the best few hundred of nineteen-thousand-odd
+possibilities.</p>
+
+<h2><a href="http://www.catb.org/esr/mstrans/">mstrans</a></h2>
+
+<p>A tool for cleaning up files transferred from MS-DOS; it can
+strip CRs, remove trailing ^Z characters, etc. With an option, it
+will put in CRs for files that need to go in the other direction.
+It can also strip meta bits, in case your file was a WordStar
+document. Finally, it can do appropriate filename mapping.</p>
+
+<h2>pmtools &#160;&#160;&#160;&#160;&#160;<a
+href="http://www.catb.org/esr/pmtools.shar.gz">(source)</a></h2>
+
+<p>A set of modem-management tools, written in Expect, for the
+Livingston Portmaster terminal server. What these help you do is
+gang-program the modems, or gang-dump their register settings for
+comparison. One of them, pmpersist, can be used while your PM is
+active; it keeps looping through your list of modems re-programming
+idle ones until all have been touched. These tools can handle
+multiple modem types.</p>
+
+<h1>Other peoples' software</h1>
+
+<p>I have a lot of stuff in <strong>Emacs</strong>, including the
+<strong>VC mode</strong> that front-ends for RCS/SCCS/CVS and the
+<strong>Grand Unified Debugger</strong> mode that lets you drive
+GNU gdb and other symbolic debuggers from within Emacs. According
+to RMS's credit list, I appear to have more Emacs Lisp code in the
+standard Emacs distribution than anyone else but him.</p>
+
+<p>I have contributed substantial code and documentation to the
+standard environment of the <a href="http://www.python.org">Python</a>
+language. The post-1.5.1 versions of the standard
+<strong>rfc822.py</strong>, <strong>cmd.py</strong>,
+<strong>sendmail.py</strong>, and <strong>multifile.py</strong>
+modules have my work in them. I wrote <strong>shlex.py</strong>, and
+<strong>netrc.py</strong> outright. I have also contributed to the <a
+href="http://www.pythonware.com/library/pil/handbook/">Python Image
+Library</a>; my <strong>pildriver</strong> image-calculator script is
+included in it. In July 2000 I was given write access to the Python
+CVS repository, and am now officially a co-developer of the
+language.</p>
+
+<p>I've contributed to <a href="http://www.gnome.org">GNOME</a>.
+The <strong>NETLoad</strong> applet code was mine; I also taught
+<strong>gnome-card</strong> how to do categories, and added the
+Super-Safe option to <strong>gnobots</strong> and
+<strong>gnobotsII</strong>.</p>
+
+<p>I've contributed to <strong>gnuplot</strong>, especially in the
+PNG driver.</p>
+
+<p>I've contributed substantial code to the <a
+href="http://www.cdrom.com/pub/png/">PNG</a> library (including the
+chunk support for iTXt, iCCP, sPLT, sCAL and the high-level
+interface via png_read_pmng and png_write_png), and am a credited
+coauthor.</p>
+
+<p>I wrote the @alias and @definfoenclose features of Texinfo.</p>
+
+<p>I designed the Trove classification system used at SourceForge,
+Freecode, and elsewhere.  I'm sort of the architectural grandaddy of
+SourceForge; the lead architect of that system, Drew Streib, lifted a
+lot of idea and even his database schemas from the Trove design
+document.</p>
+
+<p>I wrote the <strong>pic2graph</strong> and
+<strong>eqn2graph</strong> scripts included in groff.  I also wrote the
+<strong>PIC</strong> manual included in the groff distribution.</p>
+
+<p>I wrote the <b>svncutter</b> tool that's part of Subversion
+contrib/.</p>
+
+<p>I wrote the <strong>rbgen</strong> code generator that appears in
+1.3 and later versions of Damian Ivereigh's <a href='http://libredblack.sourceforge.net/'>libredblack</a> library, a neat little bit of code for doing 
+B-trees.</p>
+
+<p>I collaborated with Christian Reis on <strong>bugzilla-submit</strong>.</p>
+
+<p>One way or another, I have a couple meg of code and
+documentation in the core toolset of every general-purpose Linux
+and BSD distribution in existence.</p>
+
+<h1>Packages I No Longer Maintain</h1>
+
+<h2><a href="http://fetchmail.berlios.de/">fetchmail</a></h2>
+
+<p>This is a full-featured, robust and very configurable
+POP2/POP3/APOP/IMAP mail forwarder. It's designed to pick up mail from
+a mail server host and deliver it just as though it had arrived on
+your client machine via SMTP.</p>
+
+<h2><a href="http://bogofilter.sourceforge.net/">bogofilter</a></h2>
+
+<p>A C implementation of a fast Bayesian spam filter along the lines
+suggested by LISP wizard Paul Graham. I wrote this, but passed the
+project lead along in 2003.</p>
+
+<h1>Past Collaborations</h1>
+
+<p>In 1991 I collaborated with Ray Gardner on a simple hypertext
+browser for the Jargon File, called vh for "volks-hypertext".
+Tim Berners-Lee noticed it and sent me email noting that he was
+working on some hypertext things and suggesting we cooperate,
+but never replied to my reply.  A year or so later he invented
+the World Wide Web and made vh thoroughly obsolete.  I have
+withdrawn it.</p>
+
+<p>Years ago, I wrote a lot of code for the nethack game;
+blindfolds were my invention, and my name is still on the nethack
+manual. However, I'm no longer active with the nethack devteam.</p>
+
+<p>I was a senior developer on the <a
+href="http://www.wesnoth.org">Battle For Wesnoth</a> fantasy strategy
+game.</a><p>
+
+</div>
+</body>
+</html>
+
+<!-- img src="graphics/updated.png" align="left" alt="UPDATED"/ -->
+<!-- img src="graphics/new.png" align="left" alt="NEW!"/ -->
+<!--
+Local Variables:
+compile-command: "(cd ~/WWW; ./upload software.html)"
+End:
+-->
+

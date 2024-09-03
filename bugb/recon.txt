@@ -1,0 +1,36 @@
+given a target scope, *.google.com
+
+# subdomain enumeration
+assetfinder google.com -subs-only | tee -a 1
+crtsh -d google.com | tee -a 2
+findomain -t google.com -o | tee -a 3
+subfinder -d google.com | tee -a 4
+github-subdomains -d google.com | tee -a 5
+
+# combine, clean
+(https://github.com/tomnomnom/anew)
+cat 1 2 3 4 5 > raw.txt
+cat raw.txt | anew clean.txt
+
+# get alive subdomains
+(https://github.com/tomnomnom/httprobe)
+cat clean.txt | httprobe | tee -a alive.txt
+
+# screenshot them
+(https://github.com/michenriksen/aquatone)
+cat alive.txt | aquatone
+
+# automated scans
+cat alive.txt | nuclei
+nmap -sVC -T4 google.com
+nikto -host google.om
+
+# get tech stack of domain
+https://www.wappalyzer.com/
+
+# other
+github recon? (sensitive commits)
+google dorking (bug bounty search engine)
+subzy run --targets alivesubs.txt
+socialhunter -f alivesubs.txt
+paramspider -d target.com | qsreplace  '"/><script>confirm(1)</script>' > xss.txt | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "<script>confirm(1)" && echo "$host \033[0;31mVulnerable\n" || echo "$host \033[0;32mNot Vulnerable\n";done
