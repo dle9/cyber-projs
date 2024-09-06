@@ -1,7 +1,8 @@
 # to do after setup
-- sudo xbps-install -u
-- sudo xbps-install git curl wget gcc gdb tmux
+- sudo xbps-install -Suv
+- sudo xbps-install git curl wget gcc gdb tmux xrandr zip unzip
 - nerd fonts + nvchad
+- startup: xrandr --output eDP --output 0.8x0.96
 
 # set up network
 nmcli connection add \
