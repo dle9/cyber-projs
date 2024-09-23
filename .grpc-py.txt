@@ -1,0 +1,53 @@
+pip install grpcio grpcio-tools
+
+# helloworld.proto
+```
+syntax = "proto3";
+
+package helloworld;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
+```
+
+# generate files for it
+```
+python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. example.proto
+```
+
+# server.py
+```
+import grpc
+from concurrent import futures
+import helloworld_pb2
+import helloworld_pb2_grpc
+
+class Greeter(helloworld_pb2_grpc.GreeterServicer):
+    def SayHello(self, request, context):
+        return helloworld_pb2.HelloReply(message=f'Hello, {request.name}!')
+
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    helloworld_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
+    server.add_insecure_port('[::]:50051')
+    server.start()
+    print("Server is running on port 50051...")
+    server.wait_for_termination()
+
+if __name__ == '__main__':
+    serve()
+
+```
