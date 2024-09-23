@@ -1,0 +1,6 @@
+# on REMnux, set up the internet simulator
+- sudo vim /etc/inetsim/inetsim.conf
+- uncomment start service dns
+- uncomment service bind addr
+        - change to 0.0.0.0 (all interfaces)
+- uncomment, change dns default ip to REMnux

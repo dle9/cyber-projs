@@ -1,0 +1,119 @@
+# skeleton
+### header
+%PDF-?
+  ? = version number (1.0-1.7), e.g. %PDF-1.3
+
+### file body
+
+### cross reference table
+...
+xref
+<xref table here>
+...
+
+### trailer
+...
+trailer
+<trailer content here>
+...
+
+### pointer to xref table
+startxref
+<xref pointer val here>
+
+### mark end of file
+%%EOF
+  
+
+# objects
+- name objects: strings starting with /
+  - /Name: alphanumeric, case sensitive
+- dict objects: enclosed in <<>>
+  - <</Index 1>>, <</Index 1
+                  /Count /Some>>
+  - extra whitespace ignored
+- indirect objects
+  - <obj #> <gen # (0*)> obj \n <obj content> \n endobj
+  - ex: 1 0 obj \n 3 \n endobj
+- object reference
+  - <obj #> <obj gen> R
+  - can't be used as a key in a dict
+  - ex: <</Root 1 0 R>>
+- arrays
+  - enclosed in []
+  - [1 2 3 4]
+- stream objects
+  - start and end like indirect objects
+    - 1 0 obj \n stream \n <content> \n endstream \n endobj 
+  - stream parameters stored before the stream, including stream length, compression algo, etc.
+    - 1 0 obj \n <</Length 10>> \n stream...
+- strings
+  - (example string)
+  - escape in octal
+    - (Hell\157 World)
+
+# page content
+- 1 0 obj \n stream \n BT <content> \n ET \n endstream \n endobj
+  - ET,BT= end/begin text
+- syntax: param1 param2 operator
+- ex:
+  1 0 obj
+  % count white space chars and new line chars
+  <</Length 44>>
+  stream
+  BT
+    %<Fontname> <fontsize> <op_setfont>
+    /F1 100 Tf  
+
+    %<xloc> <yloc> <op_movecursor>
+    10 400 Td
+
+    %<string> <op_showtext>
+    (HEllo world!) Tj
+  ET
+  endstream
+  endobj
+
+# tying it together
+### file body
+- sequence of indirect objects
+  - 1 0 obj \n <</Type /Catalog /Pages 2 0 R>> \n endobj
+  - 2 0 obj \n <</Type /Pages /Kids [3 0 R] /Count 1>> endobj
+  - 3 0 obj \n <</Type /Page /Parent 2 0 R /Resources <</Font<</F1<</Type /Font /Subtype /Type1 /BaseFont /Arial>>>> \n /Contents 4 0 R>> endobj 
+  - 4 0 obj <<see page content>>
+
+### trailer content 
+- trailer is a dictionary that refers to a root obj and number of objects (incl obj #0)
+- defines /Root name object that refers to an indirect object in the file body
+  - <</Root 1 0 R /Size 5>>
+  
+### xref tab
+- offsets and EndofLine warning!!!
+  - each object definition in xref table must be 20 chars (including \n, apepnd whitespace if needed)
+...
+xref
+%<starting index> <# objs>
+0 5
+
+%define objects following 10-5-1 (offset- gen # - free/occupied <f/n>) format
+
+%objects (_ just for showing whitespace)
+0000000000_65535_f_
+0000000010_00000_n_
+0000000060_00000_n_
+0000000120_00000_n_
+0000000269_00000_n_
+...
+trailer
+...
+startxref
+%set as xref's offset
+364
+%%EOF
+
+# finishing notes
+- use mutool clean to fix offsets and lengths
+- extract pdf sources with pdftotext --layout
+- stream parameter filters: can be encoded and/or compressed, algos can be cascaded
+  - /Filter /ASCIIHexDecode -> encodes stream in ascii
+  - /Filter /FlateDecode -> zip compression

@@ -1,0 +1,18 @@
+* first pmat lab: 
+- malware is most dangerous when in transit
+- how to transfer malware from host to VM?
+	- add an extension, e.g., ".exe.malware"
+		- off the top of my head: 
+			"curl <download link> -outfile <filepath>/super_safe_app.exe.malware 
+	- malware should be zipped and password encrypted!
+		- standard password is "infected"
+
+# now to download some malware:
+*https://zeltser.com/malware-sample-sources/
+https://github.com/vxunderground/MalwareSourceCode
+https://github.com/ytisf/theZoo
+https://bazaar.abuse.ch/
+
+# open pmat-labs zip folder from huskyhacks. unzip, defang, and run wannacry.exe
+
+# see the changes. now revert to previous snapshot

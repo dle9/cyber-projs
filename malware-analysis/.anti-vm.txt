@@ -1,0 +1,13 @@
+# red pill 
+- only works on single processor machine
+- sidt command 
+	- grabs value of ITDR register 
+
+# no pill 
+- relies on fact that LDT structure is assigned to a processor, not an OS
+	- LDT on host = 0
+	- LDT on VM != 0
+- sgdt or sldt
+
+# query I/O comm port
+- loads magic number 0x564D5868 (VMXh)

@@ -1,0 +1,3 @@
+# virtual function
+- may only be referenced by an offset rather than a call instruction
+	- mov dword ptr[eax], offset off_4061E3

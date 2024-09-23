@@ -1,1 +1,0 @@
-/home/dle/cyber-projs/rust/workspaces/workspace_example/target/debug/bin_crate: /home/dle/cyber-projs/rust/workspaces/workspace_example/bin_crate/src/main.rs /home/dle/cyber-projs/rust/workspaces/workspace_example/lib_crate/src/lib.rs

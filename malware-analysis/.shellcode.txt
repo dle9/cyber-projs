@@ -1,0 +1,10 @@
+# given shellcode with encoding
+%uE83%ueh7...............%u28e
+- perform swap endianess function in cyberchef
+- save output to file > this is the shellcode 
+
+# use shellcode_launcher with just in time debugger to catch the process
+- shellcode_launcher.exe -i <file> -bp
+
+# from shellcode in pdf
+- shellcode_launcher.exe -i <shellcode> -r <pdf> -bp
