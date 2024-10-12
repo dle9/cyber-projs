@@ -1,0 +1,15 @@
+# tools
+jadx, apktool
+
+# android manifest
+- defines key information for the apk - permissions, filters, entry points
+
+# intent filters
+- interprocess communication 
+- intents are broadcasted on a device
+- to receive a broadcasted intent, app creates an intent filter
+- explicit intent: specifies which app to handle it
+- implicit intent: app must be registered to receive the intent
+
+# strings
+R.string.c2 defines string called c2. can be found in jadx /res/values/strings
